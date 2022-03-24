@@ -19,5 +19,5 @@ Developer shell - djfritz - v0.0.1.pre-alpha0
 
 ## versions
 
-* v0.0.1.pre-alpha0
+* v0.0.1-alpha
   * init the project
