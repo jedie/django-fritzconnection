@@ -8,7 +8,7 @@ from dev_shell.utils.assertion import assert_is_file
 import djfritz
 
 
-BASE_PATH = Path(djfritz.__file__).parent.parent.parent
+BASE_PATH = Path(djfritz.__file__).parent.parent
 
 
 def call_run_testserver(*args):

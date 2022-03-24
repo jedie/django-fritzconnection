@@ -10,7 +10,7 @@ from django.test import TestCase
 import djfritz
 
 
-PACKAGE_ROOT = Path(djfritz.__file__).parent.parent.parent
+PACKAGE_ROOT = Path(djfritz.__file__).parent.parent
 
 
 def assert_file_contains_string(file_path, string):
