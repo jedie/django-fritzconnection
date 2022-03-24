@@ -5,12 +5,10 @@ import cmd2
 from dev_shell.base_cmd2_app import DevShellBaseApp, run_cmd2_app
 from dev_shell.command_sets import DevShellBaseCommandSet
 from dev_shell.command_sets.dev_shell_commands import DevShellCommandSet as OriginDevShellCommandSet
-from dev_shell.command_sets.dev_shell_commands import run_linters
 from dev_shell.config import DevShellConfig
 from dev_shell.utils.assertion import assert_is_dir
 from dev_shell.utils.colorful import blue, bright_yellow, print_error
 from dev_shell.utils.subprocess_utils import argv2str, make_relative_path, verbose_check_call
-from poetry_publish.publish import poetry_publish
 
 import djfritz
 from djfritz_project.manage import main
@@ -146,26 +144,7 @@ class DjFritzCommandSet(DevShellBaseCommandSet):
 
 
 class DevShellCommandSet(OriginDevShellCommandSet):
-
-    # TODO:
-    # pyupgrade --exit-zero-even-if-changed --py3-plus --py36-plus --py37-plus --py38-plus
-    # `find . -name "*.py" -type f ! -path "./.tox/*" ! -path "./htmlcov/*" ! -path "*/volumes/*"
-
-    def do_publish(self, statement: cmd2.Statement):
-        """
-        Publish "dev-shell" to PyPi
-        """
-        # don't publish if code style wrong:
-        run_linters()
-
-        # don't publish if test fails:
-        verbose_check_call('pytest', '-x')
-
-        poetry_publish(
-            package_root=PACKAGE_ROOT,
-            version=djfritz.__version__,
-            creole_readme=True,  # don't publish if README.rst is not up-to-date
-        )
+    pass
 
 
 class DevShellApp(DevShellBaseApp):
