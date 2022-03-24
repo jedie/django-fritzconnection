@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-09 19:36+0200\n"
+"PO-Revision-Date: 2021-10-09 19:35+0200\n"
+"Last-Translator: Jens Diemer\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Group Items"
+msgstr "Gegenstände Gruppieren"
+
+msgid "Automatic"
+msgstr "Automatisch"
+
+msgid "No"
+msgstr ""
+
+msgid "ItemModel.verbose_name_plural"
+msgstr "Gegenstände"
+
+msgid "Internals"
+msgstr "Intern"
+
+msgid "Meta"
+msgstr ""
+
+msgid "Basic"
+msgstr ""
+
+msgid "Lent"
+msgstr "Verleih"
+
+msgid "Received"
+msgstr "Erhalt"
+
+msgid "Handed over"
+msgstr "Abgabe"
+
+msgid "BaseModel.id.verbose_name"
+msgstr "ID"
+
+msgid "BaseModel.id.help_text"
+msgstr " "
+
+msgid "BaseModel.user.verbose_name"
+msgstr "Benutzer"
+
+msgid "BaseModel.user.help_text"
+msgstr ""
+"Der Benutzer dem dieser Eintrag gehört und verwalten kann (Wird automatisch "
+"gesetzt)"
+
+msgid "BaseModel.name.verbose_name"
+msgstr "Name"
+
+msgid "BaseModel.name.help_text"
+msgstr " "
+
+msgid "BaseModel.tags.verbose_name"
+msgstr "Tags"
+
+msgid "BaseModel.tags.help_text"
+msgstr " "
+
+msgid "BaseItemAttachmentModel.name.verbose_name"
+msgstr "Name"
+
+msgid "BaseItemAttachmentModel.name.help_text"
+msgstr "Optionalen Namen (Wird automatisch aus dem Dateinamen gesetzt)"
+
+msgid "ItemModel.kind.verbose_name"
+msgstr "Art"
+
+msgid "ItemModel.kind.help_text"
+msgstr "Type / Sorte / Gattung"
+
+msgid "ItemModel.producer.verbose_name"
+msgstr "Hersteller"
+
+msgid "ItemModel.producer.help_text"
+msgstr " "
+
+msgid "ItemModel.description.verbose_name"
+msgstr "Beschreibung"
+
+msgid "ItemModel.description.help_text"
+msgstr " "
+
+msgid "ItemModel.fcc_id.verbose_name"
+msgstr "FCC ID"
+
+msgid "ItemModel.fcc_id.help_text"
+msgstr "Eindeutige Nummer der FCC"
+
+msgid "ItemModel.location.verbose_name"
+msgstr "Standort"
+
+msgid "ItemModel.location.help_text"
+msgstr "Wo ist dieser Gegenstand eingelagert?"
+
+msgid "ItemModel.parent.verbose_name"
+msgstr "Übergeordnet"
+
+msgid "ItemModel.parent.help_text"
+msgstr ""
+"Eingebaut in einem anderen Gegenstand? (e.g.: Grafikkarte eingebaut in "
+"Rechner)"
+
+msgid "ItemModel.lent_to.verbose_name"
+msgstr "Verliehen an"
+
+msgid "ItemModel.lent_to.help_text"
+msgstr " "
+
+msgid "ItemModel.lent_from_date.verbose_name"
+msgstr "Verleih Abgabe Datum"
+
+msgid "ItemModel.lent_from_date.help_text"
+msgstr "Zeitpunkt ab dem dieser Gegenstand verliehen wurde"
+
+msgid "ItemModel.lent_until_date.verbose_name"
+msgstr "Verliehen bis"
+
+msgid "ItemModel.lent_until_date.help_text"
+msgstr "Bis wann sollte der Gegenstand wieder zurück sein?"
+
+msgid "ItemModel.received_from.verbose_name"
+msgstr "Erhalten von"
+
+msgid "ItemModel.received_from.help_text"
+msgstr "Von wem wurde dieser Gegenstand erhalten?"
+
+msgid "ItemModel.received_date.verbose_name"
+msgstr "Erhalten am"
+
+msgid "ItemModel.received_date.help_text"
+msgstr "Wann wurde dieser Gegenstand erhalten?"
+
+msgid "ItemModel.received_price.verbose_name"
+msgstr "Preis"
+
+msgid "ItemModel.received_price.help_text"
+msgstr "Welcher Preis wurde für diesen Gegenstand gezahlt?"
+
+msgid "ItemModel.handed_over_to.verbose_name"
+msgstr "Abgabe an"
+
+msgid "ItemModel.handed_over_to.help_text"
+msgstr "An wem wurde dieser Gegenstand abgegeben?"
+
+msgid "ItemModel.handed_over_date.verbose_name"
+msgstr "Abgabedatum"
+
+msgid "ItemModel.handed_over_date.help_text"
+msgstr "Zeitpunkt der Abgabe"
+
+msgid "ItemModel.handed_over_price.verbose_name"
+msgstr "Abgabepreis"
+
+msgid "ItemModel.handed_over_price.help_text"
+msgstr "Wurde bei der Abgabe Geld eingenommen?"
+
+msgid "ItemModel.verbose_name"
+msgstr "Gegenstand"
+
+msgid "ItemLinkModel.verbose_name"
+msgstr "Link"
+
+msgid "ItemLinkModel.verbose_name_plural"
+msgstr "Links"
+
+msgid "ItemImageModel.image.verbose_name"
+msgstr "Bild"
+
+msgid "ItemImageModel.image.help_text"
+msgstr " "
+
+msgid "ItemImageModel.verbose_name"
+msgstr "Bild"
+
+msgid "ItemImageModel.verbose_name_plural"
+msgstr "Bilder"
+
+msgid "ItemFileModel.file.verbose_name"
+msgstr "Datei"
+
+msgid "ItemFileModel.file.help_text"
+msgstr " "
+
+msgid "ItemFileModel.verbose_name"
+msgstr "Datei"
+
+msgid "ItemFileModel.verbose_name_plural"
+msgstr "Dateien"
+
+msgid "BaseLink.name.verbose_name"
+msgstr "Name"
+
+msgid "BaseLink.name.help_text"
+msgstr " "
+
+msgid "Link.url.verbose_name"
+msgstr "URL"
+
+msgid "Link.url.help_text"
+msgstr " "
+
+msgid "Link.status_code.verbose_name"
+msgstr "Status-Code"
+
+msgid "Link.status_code.help_text"
+msgstr "Der Server meldete diesen Status-Code beim letzten abruf zurück."
+
+msgid "Link.page_title.verbose_name"
+msgstr "Seitentitel"
+
+msgid "Link.page_title.help_text"
+msgstr "Der Seiten-Titel wird automatisch ermittelt."
+
+msgid "LocationModel.description.verbose_name"
+msgstr "Beschreibung"
+
+msgid "LocationModel.description.help_text"
+msgstr " "
+
+msgid "LocationModel.parent.verbose_name"
+msgstr "Übergeordneter Standort"
+
+msgid "LocationModel.parent.help_text"
+msgstr "Standorte können verschachtelt werden. Bsp: Der Karton 12 in Schrank 3"
+
+msgid "LocationModel.verbose_name"
+msgstr "Standort"
+
+msgid "LocationModel.verbose_name_plural"
+msgstr "Standorte"
+
+msgid "MemoModel.description.verbose_name"
+msgstr "Beschreibung"
+
+msgid "MemoModel.description.help_text"
+msgstr " "
+
+msgid "MemoModel.verbose_name"
+msgstr "Memo"
+
+msgid "MemoModel.verbose_name_plural"
+msgstr "Memos"
+
+msgid "MemoLinkModel.verbose_name"
+msgstr "Link"
+
+msgid "MemoLinkModel.verbose_name_plural"
+msgstr "Links"
+
+msgid "MemoImageModel.image.verbose_name"
+msgstr "Bild"
+
+msgid "MemoImageModel.image.help_text"
+msgstr " "
+
+msgid "MemoImageModel.verbose_name"
+msgstr "Bild"
+
+msgid "MemoImageModel.verbose_name_plural"
+msgstr "Bilder"
+
+msgid "MemoFileModel.file.verbose_name"
+msgstr "Datei"
+
+msgid "MemoFileModel.file.help_text"
+msgstr " "
+
+msgid "MemoFileModel.verbose_name"
+msgstr "Datei"
+
+msgid "MemoFileModel.verbose_name_plural"
+msgstr "Dateien"
