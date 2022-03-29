@@ -10,6 +10,7 @@ admin.autodiscover()
 urlpatterns = [  # Don't use i18n_patterns() here
     path('admin/', admin.site.urls),
     re_path(r'^$', RedirectView.as_view(pattern_name='admin:index')),
+    path('', include('djfritz.urls')),
 ]
 
 

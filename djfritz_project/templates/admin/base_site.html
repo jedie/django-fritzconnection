@@ -1,5 +1,5 @@
 {% extends "admin/base.html" %}
-{% load i18n static %}
+{% load i18n static djfritz %}
 
 {% block extrahead %}{{ block.super }}
     <meta name="google" content="notranslate">
@@ -15,8 +15,10 @@
 </h1>
 {% endblock %}
 
-{% block nav-global %}{% endblock %}
-
-{% block footer %}<div id="footer">
-    <a href="https://github.com/jedie/django-fritzconnection">https://github.com/jedie/django-fritzconnection</a>
-</div>{% endblock %}
+{% block footer %}
+<div id="footer" class="submit-row">
+    <a href="https://github.com/jedie/django-fritzconnection">github.com/jedie/django-fritzconnection</a>
+    |
+    <a href="https://github.com/kbr/fritzconnection">github.com/kbr/fritzconnection</a>
+</div>
+{% endblock %}

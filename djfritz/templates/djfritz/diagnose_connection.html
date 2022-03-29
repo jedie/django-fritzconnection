@@ -1,0 +1,41 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+    <table class="table-bordered table-condensed table-striped">
+        <tbody>
+        <tr>
+            <td>Fritz-Connection Version:</td>
+            <td>{{ fritzconnection_version }}</td>
+        </tr>
+        <tr>
+            <td>last connection:</td>
+            <td>{{ last_connection|timesince }}</td>
+        </tr>
+        <tr>
+            <td>model name:</td>
+            <td>{{ modelname }}</td>
+        </tr>
+        <tr>
+            <td>hw-code:</td>
+            <td>{{ hw_code }}</td>
+        </tr>
+        <tr>
+            <td>address:</td>
+            <td>{{ address }}</td>
+        </tr>
+        <tr>
+            <td>FRITZ!OS:</td>
+            <td>{{ system_version }}</td>
+        </tr>
+        <tr>
+            <td>system:</td>
+            <td>{{ system }}</td>
+        </tr>
+        <tr>
+            <td>build:</td>
+            <td>{{ build }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
