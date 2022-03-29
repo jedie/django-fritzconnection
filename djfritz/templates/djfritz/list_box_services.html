@@ -1,34 +1,90 @@
 {% extends "admin/base_site.html" %}
 {% load i18n %}
 
+{% block extrahead %}{{ block.super }}
+<style>
+    .info_block {
+        float: left;
+        margin: 2em;
+    }
+    .info_block table tr.current {
+        background: var(--selected-row);
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-
-{% if service_name %}
-<h2>{{ service_name }} actions:</h2>
-<ul>
-    {% for action_name in service_actions %}
-        <li>{{ action_name }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-
-<h2>{% trans "Services" %}</h2>
-<table class="table-bordered table-condensed table-striped">
-    <thead>
+    <div class="info_block">
+    <h2>{% trans "Services" %}</h2>
+    <table class="table-bordered table-condensed table-striped">
+        <thead>
         <tr>
             <th>{% trans "No." %}</th>
             <th>{% trans "Service Name" %}</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         {% for service_name in services %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>
-                <a href="?service_name={{ service_name }}">{{ service_name }}</a>
-            </td>
-        </tr>
+            <tr{% if service_name == current_service_name %} class="current"{% endif %}>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                    <a href="?service_name={{ service_name }}">{{ service_name }}</a>
+                </td>
+            </tr>
         {% endfor %}
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    </div>
+
+    {% if service_actions %}
+        <div class="info_block">
+        <h2>"{{ current_service_name }}" actions:</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>{% trans "No." %}</th>
+                <th>{% trans "Action Name" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for action_name in service_actions %}
+                <tr{% if action_name == current_action_name %} class="current"{% endif %}>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="?service_name={{ current_service_name }}&action_name={{ action_name }}">
+                            {{ action_name }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    {% endif %}
+
+    {% if action_arguments %}
+        <div class="info_block">
+        <h2>"{{ current_action_name }}" Arguments:</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>{% trans "No." %}</th>
+                <th>{% trans "Argument Name" %}</th>
+                <th>{% trans "Direction" %}</th>
+                <th>{% trans "Data Type" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for argument in action_arguments %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ argument.argument_name }}</td>
+                    <td>{{ argument.direction }}</td>
+                    <td>{{ argument.data_type }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    {% endif %}
 {% endblock %}

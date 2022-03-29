@@ -50,7 +50,27 @@ class ListBoxServicesView(OnlyStaffUserMixin, TemplateView):
             except KeyError:
                 messages.error(self.request, 'Invalid service name')
             else:
-                context['service_name'] = service_name
-                context['service_actions'] = service.actions
+                context['current_service_name'] = service_name
+                actions = service.actions
+                context['service_actions'] = actions.keys()
+                if action_name := self.request.GET.get('action_name'):
+                    try:
+                        action = service.actions[action_name]
+                    except KeyError:
+                        messages.error(self.request, 'Invalid service action name')
+                    else:
+                        context['current_action_name'] = action_name
+                        arguments = []
+                        for argument in action.arguments.values():
+                            var = service.state_variables.get(argument.relatedStateVariable, '')
+                            arguments.append(
+                                {
+                                    'argument_name': argument.name,
+                                    'direction': argument.direction,
+                                    'data_type': var.dataType,
+                                }
+                            )
+
+                        context['action_arguments'] = arguments
 
         return super().get_context_data(**context)
