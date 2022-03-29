@@ -1,0 +1,34 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% if service_name %}
+<h2>{{ service_name }} actions:</h2>
+<ul>
+    {% for action_name in service_actions %}
+        <li>{{ action_name }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h2>{% trans "Services" %}</h2>
+<table class="table-bordered table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>{% trans "No." %}</th>
+            <th>{% trans "Service Name" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for service_name in services %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                <a href="?service_name={{ service_name }}">{{ service_name }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
