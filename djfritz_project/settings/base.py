@@ -49,6 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'reversion',  # https://github.com/etianen/django-reversion
+    'reversion_compare',  # https://github.com/jedie/django-reversion-compare
+    'tagulous',  # https://github.com/radiac/django-tagulous
+    'adminsortable2',  # https://github.com/jrief/django-admin-sortable2
     'bx_django_utils',  # https://github.com/boxine/bx_django_utils
 
     'djfritz.apps.DjFritzConfig',
@@ -89,6 +93,9 @@ TEMPLATES = [
         },
     },
 ]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 # _____________________________________________________________________________
 
@@ -137,6 +144,23 @@ STATIC_ROOT = str(__Path(BASE_PATH, 'static'))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(__Path(BASE_PATH, 'media'))
+
+
+# _____________________________________________________________________________
+# http://radiac.net/projects/django-tagulous/documentation/installation/#settings
+
+TAGULOUS_NAME_MAX_LENGTH = 255
+TAGULOUS_SLUG_MAX_LENGTH = 50
+TAGULOUS_LABEL_MAX_LENGTH = TAGULOUS_NAME_MAX_LENGTH
+TAGULOUS_SLUG_TRUNCATE_UNIQUE = 5
+TAGULOUS_SLUG_ALLOW_UNICODE = False
+
+SERIALIZATION_MODULES = {
+    'xml': 'tagulous.serializers.xml_serializer',
+    'json': 'tagulous.serializers.json',
+    'python': 'tagulous.serializers.python',
+    'yaml': 'tagulous.serializers.pyyaml',
+}
 
 
 # _____________________________________________________________________________

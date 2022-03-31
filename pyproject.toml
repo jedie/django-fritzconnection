@@ -48,6 +48,9 @@ django-debug-toolbar = "*"  # http://django-debug-toolbar.readthedocs.io/en/stab
 django-tools = "*"  # https://github.com/jedie/django-tools/
 bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
 bx_django_utils = "*"  # https://github.com/boxine/bx_django_utils
+django-reversion-compare = "*"  # https://github.com/jedie/django-reversion-compare/
+django-tagulous = "*"  # https://github.com/radiac/django-tagulous
+django-admin-sortable2 = "*"  # https://github.com/jrief/django-admin-sortable2
 
 [tool.poetry.dev-dependencies]
 dev_shell = "*"  # https://github.com/jedie/dev-shell
@@ -125,7 +128,7 @@ DJANGO_SETTINGS_MODULE="djfritz_project.settings.tests"
 # Don't overwrite settings.DEBUG:
 django_debug_mode="keep"
 
-norecursedirs = ".* .git __pycache__ coverage* dist htmlcov volumes"
+norecursedirs = ".* .git __pycache__ coverage* dist htmlcov migrations"
 # sometimes helpfull "addopts" arguments:
 #    -vv
 #    --verbose

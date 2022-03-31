@@ -10,6 +10,10 @@ Current state: **planning**
 
 Features:
 
+* models:
+  * HostModel
+    * "Static" storage for all `FritzHosts().get_hosts_info()` information
+    * Update in Admin via change list tools link and manage command
 * a few "test" views:
   * Get a list of all registered hosts
     * Change the internet access of one host
