@@ -1,0 +1,133 @@
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-31 20:00+0200\n"
+"PO-Revision-Date: 2022-03-31 19:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "BaseModel.id.verbose_name"
+msgstr "ID"
+
+msgid "BaseModel.id.help_text"
+msgstr " "
+
+msgid "BaseModel.tags.verbose_name"
+msgstr "Tags"
+
+msgid "BaseModel.tags.help_text"
+msgstr " "
+
+msgid "HostModel.mac.verbose_name"
+msgstr "Mac"
+
+msgid "HostModel.mac.help_text"
+msgstr " "
+
+msgid "HostModel.name.verbose_name"
+msgstr "Name"
+
+msgid "HostModel.name.help_text"
+msgstr " "
+
+msgid "HostModel.last_status.verbose_name"
+msgstr "Last Status"
+
+msgid "HostModel.last_status.help_text"
+msgstr " "
+
+msgid "HostModel.interface_type.verbose_name"
+msgstr "Interface Type"
+
+msgid "HostModel.interface_type.help_text"
+msgstr " "
+
+msgid "HostModel.address_source.verbose_name"
+msgstr "Address Source"
+
+msgid "HostModel.address_source.help_text"
+msgstr " "
+
+msgid "HostModel.lease_time_remaining.verbose_name"
+msgstr "Lease Time Remaining"
+
+msgid "HostModel.lease_time_remaining.help_text"
+msgstr " "
+
+msgid "HostModel.verbose_name"
+msgstr "Host"
+
+msgid "HostModel.verbose_name_plural"
+msgstr "Hosts"
+
+#, python-brace-format
+msgid ""
+"{created} hosts created, {updated} updated and {unchanged} not changed in "
+"{duration_str}"
+msgstr ""
+
+msgid "Update all hosts"
+msgstr ""
+
+msgid "No."
+msgstr ""
+
+msgid "IP"
+msgstr ""
+
+msgid "MAC"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Active Host"
+msgstr ""
+
+msgid "Interface Type"
+msgstr ""
+
+msgid "Address Source"
+msgstr ""
+
+msgid "Lease Time Remaining"
+msgstr ""
+
+msgid "Disallow WAN access"
+msgstr ""
+
+msgid "Allow WAN access"
+msgstr ""
+
+msgid "disallow"
+msgstr ""
+
+msgid "allow"
+msgstr ""
+
+msgid "Services"
+msgstr ""
+
+msgid "Service Name"
+msgstr ""
+
+msgid "Action Name"
+msgstr ""
+
+msgid "Argument Name"
+msgstr ""
+
+msgid "Direction"
+msgstr ""
+
+msgid "Data Type"
+msgstr ""

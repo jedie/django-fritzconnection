@@ -67,6 +67,7 @@ class DjFritzCommandSet(DevShellBaseCommandSet):
         """
         Make and compile locales message files
         """
+        cwd = PACKAGE_ROOT / 'djfritz'
         call_manage_py(
             'makemessages',
             '--all',
@@ -74,9 +75,9 @@ class DjFritzCommandSet(DevShellBaseCommandSet):
             '--no-obsolete',
             '--ignore=.*',
             '--ignore=htmlcov',
-            '--ignore=volumes',
-            cwd=PACKAGE_ROOT / 'djfritz',
+            cwd=cwd,
         )
+        call_manage_py('compilemessages', cwd=cwd)
 
     def do_fill_verbose_name_translations(self, statement: cmd2.Statement):
         """
