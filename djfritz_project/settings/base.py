@@ -11,26 +11,9 @@ from django.utils.translation import gettext_lazy as _
 ###############################################################################
 
 # Build paths relative to the project root:
-PROJECT_PATH = __Path(__file__).parent.parent.parent
-print(f'PROJECT_PATH:{PROJECT_PATH}')
-
-if __Path('/.dockerenv').is_file():
-    # We are inside a docker container
-    BASE_PATH = __Path('/django_volumes')
-    assert BASE_PATH.is_dir()
-else:
-    # Build paths relative to the current working directory:
-    BASE_PATH = __Path().cwd().resolve()
-
+BASE_PATH = __Path(__file__).parent.parent.parent
 print(f'BASE_PATH:{BASE_PATH}')
-
-# Paths with Django dev. server:
-# BASE_PATH...: .../django-for-runners
-# PROJECT_PATH: .../django-for-runners/src
-#
-# Paths in Docker container:
-# BASE_PATH...: /for_runners_volumes
-# PROJECT_PATH: /usr/local/lib/python3.9/site-packages
+assert __Path(BASE_PATH, 'djfritz_project').is_dir()
 
 ###############################################################################
 
@@ -93,7 +76,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(__Path(PROJECT_PATH, 'djfritz_project', 'templates'))],
+        'DIRS': [str(__Path(BASE_PATH, 'djfritz_project', 'templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

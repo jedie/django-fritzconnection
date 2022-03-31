@@ -58,11 +58,11 @@ def test_poetry_check(package_root=None):
 
 
 class ProjectSettingsTestCase(TestCase):
-    def test_project_path(self):
-        project_path = settings.PROJECT_PATH
-        assert project_path.is_dir()
-        assert Path(project_path, 'djfritz').is_dir()
-        assert Path(project_path, 'djfritz_project').is_dir()
+    def test_base_path(self):
+        base_path = settings.BASE_PATH
+        assert base_path.is_dir()
+        assert Path(base_path, 'djfritz').is_dir()
+        assert Path(base_path, 'djfritz_project').is_dir()
 
     def test_template_dirs(self):
         assert len(settings.TEMPLATES) == 1
