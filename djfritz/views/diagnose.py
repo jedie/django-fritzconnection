@@ -1,13 +1,12 @@
 from django.contrib import messages
 from django.views.generic import TemplateView
 from fritzconnection import __version__ as fc_version
-from fritzconnection.cli.fritzinspection import FritzInspection
 
 from djfritz.fritz_connection import get_fritz_connection
-from djfritz.views.base_views import OnlyStaffUserMixin
+from djfritz.views.base_views import DjangoAdminContextMixin, OnlyStaffUserMixin
 
 
-class FritzBoxConnectionView(OnlyStaffUserMixin, TemplateView):
+class FritzBoxConnectionView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateView):
     title = 'Test FritzBox connection'
     template_name = 'djfritz/diagnose_connection.html'
 
@@ -36,7 +35,7 @@ class FritzBoxConnectionView(OnlyStaffUserMixin, TemplateView):
         return super().get_context_data(**context)
 
 
-class ListBoxServicesView(OnlyStaffUserMixin, TemplateView):
+class ListBoxServicesView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateView):
     title = 'List all FritzBox services'
     template_name = 'djfritz/list_box_services.html'
 
