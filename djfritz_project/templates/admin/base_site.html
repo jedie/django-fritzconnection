@@ -15,6 +15,11 @@
 </h1>
 {% endblock %}
 
+{% block usertools %}
+    {% fritzbox_link %}
+    {{ block.super }}
+{% endblock %}
+
 {% block footer %}
 <div id="footer" class="submit-row">
     <a href="https://github.com/jedie/django-fritzconnection">github.com/jedie/django-fritzconnection</a>
