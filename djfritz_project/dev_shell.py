@@ -43,8 +43,8 @@ def call_manage_py(*args, cwd):
             main(argv=args)
         except SystemExit as err:
             print_error(f'finished with exit code {err}')
-        except BaseException as err:
-            print_error(err)
+        except BaseException:
+            raise
 
 
 @cmd2.with_default_category('django-fritzconnection commands')
