@@ -8,6 +8,15 @@ Web based FritzBox management using Python/Django.
 
 Current state: **planning**
 
+Features:
+
+* a few "test" views:
+  * Get a list of all registered hosts
+    * Change the internet access of one host
+  * Display information about connected FritzBox
+  * List all FritzBox services with actions and action arguments
+
+
 ## Quick start for developers
 
 ```

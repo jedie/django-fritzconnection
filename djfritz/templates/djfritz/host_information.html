@@ -1,0 +1,60 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block extrahead %}{{ block.super }}
+<style>
+    table tr.current {
+        background: var(--selected-row);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% if current_ip %}
+    <p>Selected IP: <strong>{{ current_ip }}</strong></p>
+{% endif %}
+
+{% if disallow_result %}
+    <p>Change WAN access state result: <code>{{ disallow_result }}</code></p>
+{% endif %}
+
+{% if wan_access_state %}
+    <p>WAN access state: <code>{{ wan_access_state }}</code></p>
+{% endif %}
+
+<table class="table-bordered table-condensed table-striped">
+    <thead>
+    <tr>
+        <th>{% trans "No." %}</th>
+        <th>{% trans "IP" %}</th>
+        <th>{% trans "MAC" %}</th>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Active Host" %}</th>
+        <th>{% trans "Interface Type" %}</th>
+        <th>{% trans "Address Source" %}</th>
+        <th>{% trans "Lease Time Remaining" %}</th>
+        <th>{% trans "Disallow WAN access" %}</th>
+        <th>{% trans "Allow WAN access" %}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for host in hosts %}
+        <tr{% if host.ip == current_ip %} class="current"{% endif %}>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                <a href="?ip={{ host.ip }}">{{ host.ip }}</a>
+            </td>
+            <td>{{ host.mac }}</td>
+            <td>{{ host.name }}</td>
+            <td>{{ host.status }}</td>
+            <td>{{ host.interface_type }}</td>
+            <td>{{ host.address_source }}</td>
+            <td>{{ host.lease_time_remaining }}</td>
+            <td><a href="?ip={{ host.ip }}&wan_access=disallow">{% trans "disallow" %}</a></td>
+            <td><a href="?ip={{ host.ip }}&wan_access=allow">{% trans "allow" %}</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
