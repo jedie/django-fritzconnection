@@ -5,17 +5,14 @@
 !.isort.cfg
 !/.travis.yml
 !/.style.yapf
-!.coveralls.yml
 
-# for django-dbbackup
-/backups/
-!/backups/.gitkeep
+# Own "start dev server" script with FritzBox credentials:
+*.sh
 
 # from test projects:
 **/static/*
 **/media/*
 *.sqlite3
-
 
 # Django
 secret.txt
@@ -32,42 +29,9 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-.tox
-.Python
-env/
-build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+publish.log
 
 # Unit test / coverage reports
 db.sqlite3
-coverage_html/
 coverage.xml
-*,cover
-
-# Translations
-*.pot
-
-# Django stuff:
-*.log
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
