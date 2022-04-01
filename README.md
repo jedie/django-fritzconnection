@@ -15,10 +15,12 @@ Features:
     * "Static" storage for all `FritzHosts().get_hosts_info()` information
     * Update in Admin via change list tools link and manage command
 * a few "test" views:
-  * Get a list of all registered hosts
-    * Change the internet access of one host
-  * Display information about connected FritzBox
-  * List all FritzBox services with actions and action arguments
+  * Host information
+    * Get information about registered hosts
+    * Get raw mesh topology
+  * Diagnose
+    * Test FritzBox connection
+    * List all FritzBox services
 
 
 ## Quick start for developers
