@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
 
     'reversion',  # https://github.com/etianen/django-reversion
     'reversion_compare',  # https://github.com/jedie/django-reversion-compare
@@ -60,7 +59,6 @@ INSTALLED_APPS = [
 
 ROOT_URLCONF = 'djfritz_project.urls'
 WSGI_APPLICATION = 'djfritz_project.wsgi.application'
-SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
