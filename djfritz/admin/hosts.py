@@ -12,7 +12,15 @@ class HostModelAdmin(CompareVersionAdmin):
     change_list_template = 'admin/djfritz/hostmodel/change_list.html'
 
     search_fields = ('name', 'tags__name')
-    list_display = ('mac', 'name', 'last_status', 'update_dt', 'interface_type')
+    list_display = (
+        'mac',
+        'ip_v4',
+        'name',
+        'last_status',
+        'create_dt',
+        'update_dt',
+        'interface_type',
+    )
     list_display_links = ('name',)
     list_filter = ('last_status', 'interface_type', 'address_source', 'tags')
     date_hierarchy = 'create_dt'

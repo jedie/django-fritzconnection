@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-31 20:00+0200\n"
+"POT-Creation-Date: 2022-04-01 17:35+0200\n"
 "PO-Revision-Date: 2022-03-31 19:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -32,6 +32,18 @@ msgstr "Mac"
 
 msgid "HostModel.mac.help_text"
 msgstr " "
+
+msgid "HostModel.ip_v4.verbose_name"
+msgstr "IP (v4)"
+
+msgid "HostModel.ip_v4.help_text"
+msgstr "Letzte bekannte IP v4, ermittelt von der FritzBox"
+
+msgid "HostModel.ip_v6.verbose_name"
+msgstr "IP (v6)"
+
+msgid "HostModel.ip_v6.help_text"
+msgstr "(Noch unbenutzt)"
 
 msgid "HostModel.name.verbose_name"
 msgstr "Name"

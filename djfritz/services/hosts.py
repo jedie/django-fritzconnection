@@ -28,6 +28,7 @@ def update_hosts():
             result: CreateOrUpdateResult = create_or_update2(
                 ModelClass=HostModel,
                 lookup={'mac': host['mac']},
+                ip_v4=host['ip'],
                 name=host['name'],
                 last_status=host['status'],
                 interface_type=host['interface_type'] or None,

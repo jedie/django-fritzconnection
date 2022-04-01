@@ -16,6 +16,20 @@ class HostModel(BaseTimetrackingTaggedModel):
         verbose_name=_('HostModel.mac.verbose_name'),
         help_text=_('HostModel.mac.help_text'),
     )
+    ip_v4 = models.GenericIPAddressField(
+        protocol='IPv4',
+        blank=True,
+        null=True,
+        verbose_name=_('HostModel.ip_v4.verbose_name'),
+        help_text=_('HostModel.ip_v4.help_text'),
+    )
+    ip_v6 = models.GenericIPAddressField(
+        protocol='IPv6',
+        blank=True,
+        null=True,
+        verbose_name=_('HostModel.ip_v6.verbose_name'),
+        help_text=_('HostModel.ip_v6.help_text'),
+    )
     name = models.CharField(
         blank=False,
         null=False,
