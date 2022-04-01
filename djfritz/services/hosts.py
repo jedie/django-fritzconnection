@@ -14,6 +14,42 @@ from djfritz.models import HostModel
 logger = logging.getLogger(__name__)
 
 
+def update_host(host: HostModel) -> CreateOrUpdateResult:
+    mac_address: str = host.mac
+
+    fc = get_fritz_connection()
+    fh = FritzHosts(fc=fc)
+    data = fh.get_specific_host_entry(mac_address=mac_address)
+
+    ip_v4 = data['NewIPAddress']
+
+    fhf = FritzHostFilter(fc=fc)
+    wan_access = fhf.get_wan_access_state(ip=ip_v4)
+
+    with reversion.create_revision():
+        result: CreateOrUpdateResult = create_or_update2(
+            ModelClass=HostModel,
+            lookup={'mac': mac_address},
+            ip_v4=ip_v4,
+            name=data['NewHostName'],
+            last_status=data['NewActive'],
+            interface_type=data['NewInterfaceType'] or None,
+            address_source=data['NewAddressSource'],
+            lease_time_remaining=data['NewLeaseTimeRemaining'],
+            wan_access=wan_access,
+        )
+        if result.created:
+            comment = 'Created'
+        elif result.updated_fields:
+            comment = f'Updated: {", ".join(result.updated_fields)}'
+        else:
+            comment = 'unchanged'
+
+        logger.info('%s - %s', comment, result.instance)
+        reversion.set_comment(comment)
+    return result
+
+
 def update_hosts():
     logger.info('start updating hosts...')
     start_time = time.monotonic()
@@ -61,3 +97,26 @@ def update_hosts():
         f'{created} hosts created, {updated} updated and {unchanged} not changed in {duration_str}'
     )
     return message
+
+
+def set_wan_access_state(host: HostModel, allow: bool) -> CreateOrUpdateResult:
+    """
+    Set WAN access state for given "host" instance.
+    """
+    ip_v4: str = host.ip_v4
+    if not ip_v4:
+        raise RuntimeError('Host IP is unknown! Cannot change the WAN access state without IP!')
+
+    fc = get_fritz_connection()
+    fhf = FritzHostFilter(fc=fc)
+    if allow:
+        state = fhf.allow_wan_access(ip=ip_v4)
+    else:
+        state = fhf.disallow_wan_access(ip=ip_v4)
+
+    result: CreateOrUpdateResult = create_or_update2(
+        ModelClass=HostModel,
+        lookup={'mac': host.mac},
+        wan_access=state,
+    )
+    return result

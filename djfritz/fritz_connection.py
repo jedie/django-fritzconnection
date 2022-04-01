@@ -1,8 +1,9 @@
 import logging
+import time
 
 from django.utils import timezone
 from fritzconnection import FritzConnection
-from fritzconnection.core.exceptions import FritzConnectionException
+from fritzconnection.core.exceptions import FritzActionFailedError, FritzConnectionException
 from fritzconnection.lib.fritzbase import AbstractLibraryBase
 
 
@@ -61,27 +62,45 @@ class FritzHostFilter(AbstractLibraryBase):
             return self.WAN_ACCESS_STATE_UNKNOWN
         return state
 
-    def set_wan_access_state(self, ip: str, state: int) -> None:
+    def set_wan_access_state(self, ip: str, allow: bool) -> str:
         """
         Change the internet access for given device’s IP address.
 
-            state == 0 -> access granted
-            state == 1 -> access denied
+            allow is True -> WAN access granted
+            allow is False -> WAN access denied
 
-        Needs authenticated login to FritzBox.
+        (Needs authenticated login to FritzBox.)
         """
-        logger.info('DisallowWANAccessByIP: Set state=%r for ip=%r', state, ip)
-        assert state in (0, 1), 'Unknown state! (Can only be 0 or 1)'
-        self._action('DisallowWANAccessByIP', NewIPv4Address=ip, NewDisallow=state)
+        state_map = {
+            True: (0, self.WAN_ACCESS_STATE_GRANTED),
+            False: (1, self.WAN_ACCESS_STATE_DENIED),
+        }
+        new_disallow, expected_state = state_map[allow]
 
-    def allow_wan_access(self, ip: str) -> None:
+        logger.info('DisallowWANAccessByIP: Set disallow=%r for ip=%r', new_disallow, ip)
+        self._action('DisallowWANAccessByIP', NewIPv4Address=ip, NewDisallow=new_disallow)
+
+        state = None
+        for sec in range(30, 1, -1):
+            state = self.get_wan_access_state(ip=ip)
+            if state != expected_state:
+                logger.info(f'State {state} is not {expected_state}... (max wait {sec}sec.)')
+                time.sleep(1)
+            else:
+                return state
+
+        raise FritzActionFailedError(
+            f'Setting WAN access for {ip} to {expected_state} failed, new state is: {state}'
+        )
+
+    def allow_wan_access(self, ip: str) -> str:
         """
         Set WAN access state to "granted" (Needs to be authenticated)
         """
-        self.set_wan_access_state(ip=ip, state=0)
+        return self.set_wan_access_state(ip=ip, allow=True)
 
-    def disallow_wan_access(self, ip: str) -> None:
+    def disallow_wan_access(self, ip: str) -> str:
         """
         Set WAN access state to "denied" (Needs to be authenticated)
         """
-        self.set_wan_access_state(ip=ip, state=1)
+        return self.set_wan_access_state(ip=ip, allow=False)

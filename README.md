@@ -10,6 +10,8 @@ Current state: **planning**
 
 Features:
 
+* actions:
+  * Change WAN access of a host
 * models:
   * HostModel
     * "Static" storage for all `FritzHosts().get_hosts_info()` information

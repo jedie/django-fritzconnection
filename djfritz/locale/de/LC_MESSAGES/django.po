@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 17:35+0200\n"
+"POT-Creation-Date: 2022-04-01 19:39+0200\n"
 "PO-Revision-Date: 2022-03-31 19:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -75,6 +75,24 @@ msgstr "Lease Time Remaining"
 msgid "HostModel.lease_time_remaining.help_text"
 msgstr " "
 
+msgid "granted"
+msgstr ""
+
+msgid "denied"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid "unknown"
+msgstr ""
+
+msgid "HostModel.wan_access.verbose_name"
+msgstr "WAN access"
+
+msgid "HostModel.wan_access.help_text"
+msgstr "Darf der Client auf das Internet zugreifen?"
+
 msgid "HostModel.verbose_name"
 msgstr "Host"
 
@@ -86,6 +104,15 @@ msgid ""
 "{created} hosts created, {updated} updated and {unchanged} not changed in "
 "{duration_str}"
 msgstr ""
+
+msgid "Update data from FritzBox"
+msgstr ""
+
+msgid "Allow WAN access"
+msgstr "WAN Zugriff erlauben"
+
+msgid "Disallow WAN access"
+msgstr "WAN Zugriff verbieten"
 
 msgid "Update all hosts"
 msgstr ""
@@ -112,12 +139,6 @@ msgid "Address Source"
 msgstr ""
 
 msgid "Lease Time Remaining"
-msgstr ""
-
-msgid "Disallow WAN access"
-msgstr ""
-
-msgid "Allow WAN access"
 msgstr ""
 
 msgid "disallow"

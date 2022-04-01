@@ -1,6 +1,21 @@
 {% extends "admin/change_form_object_tools.html" %}
+{% load i18n admin_urls %}
 
 {% block object-tools-items %}
-TODO: Add update this item link here
+<li>
+    <a href="{% url opts|admin_urlname:'update_host' object_id %}">
+        {% translate "Update data from FritzBox" %}
+    </a>
+</li>
+<li>
+    <a href="{% url opts|admin_urlname:'allow_wan_access' object_id %}">
+        {% translate "Allow WAN access" %}
+    </a>
+</li>
+<li>
+    <a href="{% url opts|admin_urlname:'disallow_wan_access' object_id %}">
+        {% translate "Disallow WAN access" %}
+    </a>
+</li>
 {{ block.super }}
 {% endblock %}
