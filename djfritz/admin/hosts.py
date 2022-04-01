@@ -19,10 +19,10 @@ class HostModelAdmin(CompareVersionAdmin):
         'last_status',
         'create_dt',
         'update_dt',
-        'interface_type',
+        'wan_access',
     )
     list_display_links = ('name',)
-    list_filter = ('last_status', 'interface_type', 'address_source', 'tags')
+    list_filter = ('last_status', 'wan_access', 'interface_type', 'address_source', 'tags')
     date_hierarchy = 'create_dt'
 
     def get_urls(self):

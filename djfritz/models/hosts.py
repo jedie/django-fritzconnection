@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from djfritz.fritz_connection import FritzHostFilter
 from djfritz.models.base import BaseTimetrackingTaggedModel
 
 
@@ -64,6 +65,23 @@ class HostModel(BaseTimetrackingTaggedModel):
         null=False,
         verbose_name=_('HostModel.lease_time_remaining.verbose_name'),
         help_text=_('HostModel.lease_time_remaining.help_text'),
+    )
+
+    WAN_ACCESS_STATE_CHOICES = [
+        (FritzHostFilter.WAN_ACCESS_STATE_GRANTED, _('granted')),
+        (FritzHostFilter.WAN_ACCESS_STATE_DENIED, _('denied')),
+        (FritzHostFilter.WAN_ACCESS_STATE_ERROR, _('error')),
+        (FritzHostFilter.WAN_ACCESS_STATE_UNKNOWN, _('unknown')),
+    ]
+    WAN_ACCESS_STATE_CHOICES_DICT = dict(WAN_ACCESS_STATE_CHOICES)
+
+    wan_access = models.CharField(
+        max_length=max(len(key) for key in WAN_ACCESS_STATE_CHOICES_DICT.keys()),
+        choices=WAN_ACCESS_STATE_CHOICES,
+        default=FritzHostFilter.WAN_ACCESS_STATE_UNKNOWN,
+        editable=False,
+        verbose_name=_('HostModel.wan_access.verbose_name'),
+        help_text=_('HostModel.wan_access.help_text'),
     )
 
     def __str__(self):

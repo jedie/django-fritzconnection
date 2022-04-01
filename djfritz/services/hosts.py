@@ -7,7 +7,7 @@ from bx_django_utils.models.manipulate import CreateOrUpdateResult, create_or_up
 from django.utils.translation import gettext as _
 from fritzconnection.lib.fritzhosts import FritzHosts
 
-from djfritz.fritz_connection import get_fritz_connection
+from djfritz.fritz_connection import FritzHostFilter, get_fritz_connection
 from djfritz.models import HostModel
 
 
@@ -19,21 +19,29 @@ def update_hosts():
     start_time = time.monotonic()
     fc = get_fritz_connection()
     fh = FritzHosts(fc=fc)
+    fhf = FritzHostFilter(fc=fc)
     hosts = fh.get_hosts_info()
+
     created = 0
     updated = 0
     unchanged = 0
     for host in hosts:
+
+        ip_v4 = host['ip']
+        wan_access = fhf.get_wan_access_state(ip=ip_v4)
+        logger.info('WAN access state for %r is: %r', ip_v4, wan_access)
+
         with reversion.create_revision():
             result: CreateOrUpdateResult = create_or_update2(
                 ModelClass=HostModel,
                 lookup={'mac': host['mac']},
-                ip_v4=host['ip'],
+                ip_v4=ip_v4,
                 name=host['name'],
                 last_status=host['status'],
                 interface_type=host['interface_type'] or None,
                 address_source=host['address_source'],
                 lease_time_remaining=host['lease_time_remaining'],
+                wan_access=wan_access,
             )
             if result.created:
                 created += 1
