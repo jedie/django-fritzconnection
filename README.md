@@ -4,11 +4,14 @@
 ![Python Versions](https://img.shields.io/pypi/pyversions/django-fritzconnection)
 ![License GPL V3+](https://img.shields.io/pypi/l/django-fritzconnection)
 
-Web based FritzBox management using Python/Django.
+Web based FritzBox management using Python/Django and the great [fritzconnection](https://github.com/kbr/fritzconnection) library.
+
+The destination is Web based management of "WAN access" for hosts groups.
+The idea is to collect hosts, group them and be able to quick change WAN access for all hosts of a group...
 
 Current state: **early development stage**
 
-Features:
+Existing features:
 
 * actions:
   * Change WAN access of a host
