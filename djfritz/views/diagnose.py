@@ -43,7 +43,8 @@ class ListBoxServicesView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateV
         fc = get_fritz_connection()
         context['services'] = fc.services
 
-        if service_name := self.request.GET.get('service_name'):
+        service_name = self.request.GET.get('service_name')
+        if service_name:
             try:
                 service = fc.services[service_name]
             except KeyError:
@@ -52,7 +53,8 @@ class ListBoxServicesView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateV
                 context['current_service_name'] = service_name
                 actions = service.actions
                 context['service_actions'] = actions.keys()
-                if action_name := self.request.GET.get('action_name'):
+                action_name = self.request.GET.get('action_name')
+                if action_name:
                     try:
                         action = service.actions[action_name]
                     except KeyError:
