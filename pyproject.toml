@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-fritzconnection"
-version = "0.0.2-alpha"
+version = "0.0.2"
 description = "Web based FritzBox management using Python/Django."
 authors = ["JensDiemer <git@jensdiemer.de>"]
 homepage = "https://github.com/jedie/django-fritzconnection"
@@ -19,6 +19,7 @@ classifiers = [
     'Intended Audience :: End Users/Desktop',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
@@ -39,7 +40,8 @@ readme='README.md'
 
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4.0.0"
+# Keep Python 3.7 until Yunohost contains a newer Python Version ;)
+python = ">=3.7,<4.0.0"
 django = "*"
 fritzconnection = "*"  # https://github.com/kbr/fritzconnection
 colorlog = "*"  # https://github.com/borntyping/python-colorlog
@@ -161,7 +163,7 @@ addopts = """
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = px310,py39,py38
+envlist = px310,py39,py38,py37
 skip_missing_interpreters = True
 
 [testenv]
