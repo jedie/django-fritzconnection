@@ -6,7 +6,7 @@
 
 Web based FritzBox management using Python/Django.
 
-Current state: **planning**
+Current state: **early development stage**
 
 Features:
 
@@ -23,6 +23,14 @@ Features:
   * Diagnose
     * Test FritzBox connection
     * List all FritzBox services
+
+
+[![Install django-fritzconnection with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fritzconnection)
+
+> *This package allows you to install django-fritzconnection quickly and simply on a YunoHost server.
+If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
+
+Pull requests welcome ;)
 
 
 ## Quick start for developers
