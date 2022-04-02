@@ -40,7 +40,7 @@ Pull requests welcome ;)
 ~$ cd django-fritzconnection
 ~/django-fritzconnection$ ./devshell.py
 ...
-Developer shell - djfritz - v0.0.2.rc0
+Developer shell - djfritz - v0.0.2.rc1
 ...
 
 (djfritz) run_testserver
@@ -48,9 +48,9 @@ Developer shell - djfritz - v0.0.2.rc0
 
 ## versions
 
-* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.0.2.rc0...main)
+* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.0.2.rc1...main)
   * TBC
-* [v0.0.2.rc0 - 02.04.2022](https://github.com/jedie/django-fritzconnection/compare/v0.0.1-alpha...v0.0.2.rc0)
+* [v0.0.2.rc1 - 02.04.2022](https://github.com/jedie/django-fritzconnection/compare/v0.0.1-alpha...v0.0.2.rc1)
   * Store Host information
   * Possible to set WAN access for one host
 * v0.0.1-alpha - 24.03.2022
