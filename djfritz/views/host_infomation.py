@@ -15,12 +15,14 @@ class HostInformationView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateV
 
         fh = FritzHosts(fc=fc)
         context['hosts'] = sorted(fh.get_hosts_info(), key=lambda x: (not x['status'], x['ip']))
-        if ip := self.request.GET.get('ip'):
+        ip = self.request.GET.get('ip')
+        if ip:
             context['current_ip'] = ip
 
             fhf = FritzHostFilter(fc=fc)
 
-            if wan_access := self.request.GET.get('wan_access'):
+            wan_access = self.request.GET.get('wan_access')
+            if wan_access:
                 # Change Internet access for one IP address
                 if wan_access == 'disallow':
                     disallow_wan_access = 1
