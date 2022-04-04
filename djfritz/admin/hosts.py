@@ -22,18 +22,19 @@ class HostModelAdmin(CompareVersionAdmin):
 
     search_fields = ('name', 'tags__name')
     list_display = (
-        'mac',
-        'ip_v4',
         'name',
-        'last_status',
-        'create_dt',
-        'update_dt',
         'wan_access',
+        'last_status',
+        'update_dt',
+        'ip_v4',
+        'mac',
+        'create_dt',
     )
     list_display_links = ('name',)
     list_filter = ('last_status', 'wan_access', 'interface_type', 'address_source', 'tags')
     date_hierarchy = 'create_dt'
     readonly_fields = ('wan_access',)
+    ordering = ('-last_status', '-update_dt')
 
     def get_urls(self):
         urls = super().get_urls()
