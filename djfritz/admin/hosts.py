@@ -5,7 +5,9 @@ from bx_django_utils.models.manipulate import CreateOrUpdateResult
 from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
 from django.urls import path, reverse
+from django.utils.translation import gettext_lazy as _
 from fritzconnection.core.exceptions import FritzConnectionException
 from reversion_compare.admin import CompareVersionAdmin
 
@@ -20,20 +22,33 @@ logger = logging.getLogger(__name__)
 class HostModelAdmin(CompareVersionAdmin):
     change_list_template = 'admin/djfritz/hostmodel/change_list.html'
 
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.prefetch_related('tags')
+        return qs
+
+    @admin.display(ordering='name', description=_('HostModel.name.verbose_name'))
+    def verbose_name(self, obj):
+        return render_to_string(
+            template_name='admin/djfritz/hostmodel/column_verbose_name.html',
+            context={'obj': obj},
+        )
+
     search_fields = ('name', 'tags__name')
     list_display = (
-        'mac',
-        'ip_v4',
-        'name',
-        'last_status',
-        'create_dt',
-        'update_dt',
+        'verbose_name',
         'wan_access',
+        'last_status',
+        'update_dt',
+        'ip_v4',
+        'mac',
+        'create_dt',
     )
-    list_display_links = ('name',)
+    list_display_links = ('verbose_name',)
     list_filter = ('last_status', 'wan_access', 'interface_type', 'address_source', 'tags')
     date_hierarchy = 'create_dt'
     readonly_fields = ('wan_access',)
+    ordering = ('-last_status', '-update_dt')
 
     def get_urls(self):
         urls = super().get_urls()
