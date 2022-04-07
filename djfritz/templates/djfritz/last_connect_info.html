@@ -1,0 +1,56 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block extrahead %}{{ block.super }}
+<style>
+    table td.faulty {
+        color: var(--body-quiet-color);
+        font-weight: lighter;
+    }
+    table td.correct {
+        color: var(--body-loud-color);
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<table class="table-bordered table-condensed table-striped">
+    <thead>
+    <tr>
+        <th>{% trans "No." %}</th>
+        <th>{% trans "IP" %}</th>
+        <th>{% trans "MAC" %}</th>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Lease Time Remaining" %}</th>
+        <th>{% trans "Interface Type" %}</th>
+        <th>{% trans "Last Connected Timestamp" %}</th>
+        <th>{% trans "Last Connected" %}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for entry in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ entry.host.ip_v4 }}</td>
+            <td>{{ entry.mac_address }}</td>
+            <td>
+                {% if entry.host %}
+                    <a href="{{ entry.host.get_change_url }}">{{ entry.host.name }}</a>
+                {% else %}
+                    <i>({% trans "unknown hosts" %})</i>
+                {% endif %}
+            </td>
+            <td>{{ entry.host.lease_time_remaining }}</td>
+            <td>{{ entry.host.interface_type }}</td>
+            <td class="{% if entry.faulty_timestamp %}faulty{% else %}correct{% endif %}">
+                {{ entry.last_connected }}
+            </td>
+            <td class="{% if entry.faulty_timestamp %}faulty{% else %}correct{% endif %}">
+                {{ entry.last_connected_dt }} ({{ entry.last_connected_dt|timesince }})
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

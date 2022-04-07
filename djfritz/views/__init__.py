@@ -1,7 +1,7 @@
 from bx_django_utils.view_utils.dynamic_menu_urls import DynamicViewMenu
 
 from djfritz.views.diagnose import FritzBoxConnectionView, ListBoxServicesView
-from djfritz.views.host_infomation import HostInformationView, MeshTopologyView
+from djfritz.views.host_infomation import HostInformationView, LastConnectInfoView, MeshTopologyView
 
 
 dynamic_view_menu = DynamicViewMenu()
@@ -15,6 +15,7 @@ dynamic_view_menu.add_views(
             {
                 'views': (
                     (HostInformationView, 'host_information'),
+                    (LastConnectInfoView, 'last_connect_info'),
                     (MeshTopologyView, 'mesh_information'),
                 )
             },
