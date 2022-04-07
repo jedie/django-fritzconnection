@@ -15,7 +15,7 @@ dynamic_view_menu.add_views(
             {
                 'views': (
                     (HostInformationView, 'host_information'),
-                    (MeshTopologyView, 'mest_information'),
+                    (MeshTopologyView, 'mesh_information'),
                 )
             },
         ),
