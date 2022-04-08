@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 19:39+0200\n"
-"PO-Revision-Date: 2022-03-31 20:00+0200\n"
+"POT-Creation-Date: 2022-04-08 15:22+0200\n"
+"PO-Revision-Date: 2022-04-08 15:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -14,6 +14,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
+
+msgid "HostModel.name.verbose_name"
+msgstr "Name"
 
 msgid "BaseModel.id.verbose_name"
 msgstr "ID"
@@ -44,9 +47,6 @@ msgstr "IP (v6)"
 
 msgid "HostModel.ip_v6.help_text"
 msgstr "(unused, yet)"
-
-msgid "HostModel.name.verbose_name"
-msgstr "Name"
 
 msgid "HostModel.name.help_text"
 msgstr " "
@@ -93,11 +93,29 @@ msgstr "WAN access"
 msgid "HostModel.wan_access.help_text"
 msgstr "Is the client allowed to access the Internet?"
 
+msgid "HostModel.group.verbose_name"
+msgstr "Group"
+
+msgid "HostModel.group.help_text"
+msgstr " "
+
 msgid "HostModel.verbose_name"
 msgstr "Host"
 
 msgid "HostModel.verbose_name_plural"
 msgstr "Hosts"
+
+msgid "HostGroupModel.name.verbose_name"
+msgstr "Name"
+
+msgid "HostGroupModel.name.help_text"
+msgstr " "
+
+msgid "HostGroupModel.verbose_name"
+msgstr "Host-Group"
+
+msgid "HostGroupModel.verbose_name_plural"
+msgstr "Host-Groups"
 
 #, python-brace-format
 msgid ""
@@ -147,6 +165,15 @@ msgstr ""
 msgid "allow"
 msgstr ""
 
+msgid "Last Connected Timestamp"
+msgstr ""
+
+msgid "Last Connected"
+msgstr ""
+
+msgid "unknown hosts"
+msgstr ""
+
 msgid "Services"
 msgstr ""
 
@@ -163,4 +190,10 @@ msgid "Direction"
 msgstr ""
 
 msgid "Data Type"
+msgstr ""
+
+msgid "(Warning: Default username! Please set a own one!)"
+msgstr ""
+
+msgid "(Please set the FritzBox password!)"
 msgstr ""

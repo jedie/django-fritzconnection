@@ -1,10 +1,9 @@
-from django.contrib.admin.utils import quote
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from djfritz.fritz_connection import FritzHostFilter
 from djfritz.models.base import BaseTimetrackingTaggedModel
+from djfritz.models.hosts_groups import HostGroupModel
 
 
 class HostModel(BaseTimetrackingTaggedModel):
@@ -86,16 +85,17 @@ class HostModel(BaseTimetrackingTaggedModel):
         help_text=_('HostModel.wan_access.help_text'),
     )
 
+    group = models.ForeignKey(
+        to=HostGroupModel,
+        on_delete=models.PROTECT,
+        related_name='hosts',
+        null=True,
+        verbose_name=_('HostModel.group.verbose_name'),
+        help_text=_('HostModel.group.help_text'),
+    )
+
     def __str__(self):
         return f'Host "{self.name}" ({self.mac})'
-
-    def get_change_url(self):
-        opts = self._meta
-        url = reverse(
-            f'admin:{opts.app_label}_{opts.model_name}_change',
-            args=(quote(self.pk),),
-        )
-        return url
 
     class Meta:
         verbose_name = _('HostModel.verbose_name')
