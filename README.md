@@ -30,8 +30,7 @@ Existing features:
 
 [![Install django-fritzconnection with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=django-fritzconnection)
 
-> *This package allows you to install django-fritzconnection quickly and simply on a YunoHost server.
-If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.*
+> [django-fritzconnection_ynh](https://github.com/YunoHost-Apps/django-fritzconnection_ynh) allows you to install django-fritzconnection quickly and simply on a YunoHost server. If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/install) to learn how to install it.
 
 Pull requests welcome ;)
 
