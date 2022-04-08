@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.admin.utils import unquote
 from django.db.models import Count
 from django.http import HttpResponseRedirect
@@ -22,9 +23,12 @@ class GroupManagementView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateV
             host_group = get_object_or_404(HostGroupModel, pk=group_pk)
             hosts_qs = host_group.hosts.all()
             for host in hosts_qs:
-                set_wan_access_with_messages(
-                    request=request, host=host, allow=wan_access == 'allow'
-                )
+                if not host.ip_v4:
+                    messages.info(request, f'Skip {host} because IP address not set')
+                else:
+                    set_wan_access_with_messages(
+                        request=request, host=host, allow=wan_access == 'allow'
+                    )
 
             return HttpResponseRedirect(request.path)
 

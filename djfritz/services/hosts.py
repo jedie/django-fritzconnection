@@ -138,8 +138,6 @@ def set_wan_access_with_messages(request, host: HostModel, allow: bool) -> None:
     else:
         if result.updated_fields:
             host.refresh_from_db()
-            messages.success(
-                request, f'{host} WAN access state changed to: {host.wan_access}'
-            )
+            messages.success(request, f'{host} WAN access state changed to: {host.wan_access}')
         else:
             messages.info(request, f'{host} WAN access state unchanged.')
