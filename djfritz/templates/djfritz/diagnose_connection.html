@@ -5,16 +5,28 @@
     <table class="table-bordered table-condensed table-striped">
         <tbody>
         <tr>
-            <td>Fritz-Connection Version:</td>
-            <td>{{ fritzconnection_version }}</td>
+            <td>model name:</td>
+            <td>{{ modelname }}</td>
         </tr>
         <tr>
             <td>last connection:</td>
             <td>{{ last_connection|timesince }}</td>
         </tr>
         <tr>
-            <td>model name:</td>
-            <td>{{ modelname }}</td>
+            <td>FRITZ_USERNAME:</td>
+            <td>{{ fritz_username }}</td>
+        </tr>
+        <tr>
+            <td>FRITZ_PASSWORD:</td>
+            <td>{{ fritz_password }}</td>
+        </tr>
+        <tr>
+            <td>FRITZ!OS:</td>
+            <td>{{ system_version }}</td>
+        </tr>
+        <tr>
+            <td>Fritz-Connection Version:</td>
+            <td>{{ fritzconnection_version }}</td>
         </tr>
         <tr>
             <td>hw-code:</td>
@@ -23,10 +35,6 @@
         <tr>
             <td>address:</td>
             <td>{{ address }}</td>
-        </tr>
-        <tr>
-            <td>FRITZ!OS:</td>
-            <td>{{ system_version }}</td>
         </tr>
         <tr>
             <td>system:</td>
