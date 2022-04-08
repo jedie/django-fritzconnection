@@ -1,7 +1,9 @@
 from bx_py_utils.anonymize import anonymize
 from django.contrib import messages
+from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 from fritzconnection import __version__ as fc_version
+from fritzconnection.core.fritzconnection import FRITZ_USERNAME
 
 from djfritz.fritz_connection import get_fritz_connection
 from djfritz.views.base_views import DjangoAdminContextMixin, OnlyStaffUserMixin
@@ -13,6 +15,16 @@ class FritzBoxConnectionView(OnlyStaffUserMixin, DjangoAdminContextMixin, Templa
 
     def get_context_data(self, **context):
         fc = get_fritz_connection()
+
+        fritz_username = fc.soaper.user
+        if fritz_username == FRITZ_USERNAME:
+            context['username_info'] = _('(Warning: Default username! Please set a own one!)')
+
+        fritz_password = anonymize(fc.soaper.password)
+        if fritz_password:
+            context['fritz_password'] = fritz_password
+        else:
+            context['password_info'] = _('(Please set the FritzBox password!)')
 
         context.update(
             dict(
