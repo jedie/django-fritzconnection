@@ -71,7 +71,9 @@ See also: [Issues #5](https://github.com/jedie/django-fritzconnection/issues/5)
 
 ## versions
 
-* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.0.2.rc1...main)
+* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.0.2...main)
+  * NEW: 'List "last connect" information about hosts' view
+  * Display `FRITZ_USERNAME` and `FRITZ_PASSWORD` (anonymized) on connection info page
   * TBC
 * [v0.0.2 - 04.04.2022](https://github.com/jedie/django-fritzconnection/compare/v0.0.1-alpha...v0.0.2)
   * Store Host information
