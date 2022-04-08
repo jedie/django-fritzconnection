@@ -49,6 +49,25 @@ Developer shell - djfritz - v0.0.2
 (djfritz) run_testserver
 ```
 
+# FritzBox Credentials
+
+Some of the FritzBox API requests needs a login. Currently the only way to store FritzBox Credentials is to add them into the environment.
+
+Shell script work-a-round for developing, e.g.:
+
+```
+#!/bin/bash
+
+(
+    set -ex
+    export FRITZ_USERNAME="<username>"
+    export FRITZ_PASSWORD="<password>"
+    
+    ./devshell.py run_testserver
+)
+```
+See also: [Issues #5](https://github.com/jedie/django-fritzconnection/issues/5)
+
 ## versions
 
 * [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.0.2.rc1...main)
