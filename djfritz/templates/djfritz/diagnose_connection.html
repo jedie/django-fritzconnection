@@ -1,6 +1,14 @@
 {% extends "admin/base_site.html" %}
 {% load i18n %}
 
+{% block extrahead %}{{ block.super }}
+<style>
+    code.info {
+        background: var(--primary);
+    }
+</style>
+{% endblock %}
+
 {% block content %}
     <table class="table-bordered table-condensed table-striped">
         <tbody>
@@ -14,11 +22,17 @@
         </tr>
         <tr>
             <td>FRITZ_USERNAME:</td>
-            <td>{{ fritz_username }}</td>
+            <td>
+                "<code class="info">{{ fritz_username }}</code>"
+                {% if username_info %}<p>{{ username_info }}</p>{% endif %}
+            </td>
         </tr>
         <tr>
             <td>FRITZ_PASSWORD:</td>
-            <td>{{ fritz_password }}</td>
+            <td>
+                "<code class="info">{{ fritz_password }}</code>"
+                {% if password_info %}<p>{{ password_info }}</p>{% endif %}
+            </td>
         </tr>
         <tr>
             <td>FRITZ!OS:</td>
