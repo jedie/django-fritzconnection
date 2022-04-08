@@ -4,7 +4,9 @@ import time
 import reversion
 from bx_django_utils.humanize.time import human_timedelta
 from bx_django_utils.models.manipulate import CreateOrUpdateResult, create_or_update2
+from django.contrib import messages
 from django.utils.translation import gettext as _
+from fritzconnection.core.exceptions import FritzConnectionException
 from fritzconnection.lib.fritzhosts import FritzHosts
 
 from djfritz.fritz_connection import FritzHostFilter, get_fritz_connection
@@ -120,3 +122,21 @@ def set_wan_access_state(host: HostModel, allow: bool) -> CreateOrUpdateResult:
         wan_access=state,
     )
     return result
+
+
+def set_wan_access_with_messages(request, host: HostModel, allow: bool) -> None:
+    host_name = host.name
+    try:
+        result: CreateOrUpdateResult = set_wan_access_state(host=host, allow=allow)
+    except FritzConnectionException as err:
+        msg = f'Error set a new WAN access state to {host_name!r}: {err}'
+        logger.exception(msg)
+        messages.error(request, msg)
+    else:
+        if result.updated_fields:
+            host.refresh_from_db()
+            messages.success(
+                request, f'{host_name!r} WAN access state changed to: {host.wan_access}'
+            )
+        else:
+            messages.info(request, f'{host_name!r} WAN access state unchanged.')

@@ -6,19 +6,21 @@
 
 Web based FritzBox management using Python/Django and the great [fritzconnection](https://github.com/kbr/fritzconnection) library.
 
-The destination is Web based management of "WAN access" for hosts groups.
-The idea is to collect hosts, group them and be able to quick change WAN access for all hosts of a group...
+The basic idea is to block/unblock Internet access to a group of devices as easily as possible.
 
 Current state: **early development stage**
 
 Existing features:
 
 * actions:
-  * Change WAN access of a host
+  * Change WAN access of a host or for all host of a group
 * models:
-  * HostModel
+  * HostModel - A host/device that is/was connected to your FritzBox
     * "Static" storage for all `FritzHosts().get_hosts_info()` information
     * Update in Admin via change list tools link and manage command
+  * HostGroupModel - Collect host/device into groups to manage "WAN access"
+    * Every group are listed on the front page
+    * Allow/Disallow "WAN access" for all hosts of a group with one click
 * a few "test" views:
   * Host information
     * Get information about registered hosts
@@ -63,7 +65,7 @@ Shell script work-a-round for developing, e.g.:
     set -ex
     export FRITZ_USERNAME="<username>"
     export FRITZ_PASSWORD="<password>"
-    
+
     ./devshell.py run_testserver
 )
 ```

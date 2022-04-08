@@ -1,0 +1,76 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block extrahead %}{{ block.super }}
+<style>
+div.group * {
+    padding: 0;
+    margin: 0;
+}
+div.group {
+    min-width: 13em;
+    float: left;
+    margin: 1em;
+    padding: 1em;
+    text-align: center;
+    background-color: var(--darkened-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+ul.actions {
+    font-size: 10px;
+    font-weight: bold;
+}
+ul.actions li {
+    list-style: none;
+	padding: 0;
+    margin: 1.5em;
+}
+ul.actions a {
+    border-radius: 15px;
+    padding: 0.6em 2em;
+    background: var(--object-tools-bg);
+    color: var(--object-tools-fg);
+    font-weight: 400;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+ul.actions a:focus, ul.actions a:hover {
+    background-color: var(--object-tools-hover-bg);
+}
+ul.actions a:focus{
+    text-decoration: none;
+}
+ul.hosts li {
+    display: inline;
+    list-style: none;
+  	padding: 0px;
+}
+ul.hosts li::after {
+    content: ", ";
+}
+ul.hosts li:last-child:after {
+    content: "";
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% for host_group in groups %}
+    <div class="group">
+        <h2>{{ host_group }} ({{ host_group.num_hosts }} host(s))</h2>
+        <ul class="actions">
+            <li><a href="?group={{ host_group.pk }}&wan_access=disallow">{% trans "disallow" %}</a></li>
+            <li><a href="?group={{ host_group.pk }}&wan_access=allow">{% trans "allow" %}</a></li>
+        </ul>
+        {% for host in host_group.hosts.all %}
+            <ul class="hosts">
+                <li>{{ host.name }} ({{ host.wan_access }})</li>
+            </ul>
+        {% endfor %}
+    </div>
+{% endfor %}
+{% endblock %}
+
+
