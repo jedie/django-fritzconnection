@@ -8,11 +8,10 @@ from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
-from fritzconnection.core.exceptions import FritzConnectionException
 from reversion_compare.admin import CompareVersionAdmin
 
 from djfritz.models.hosts import HostModel
-from djfritz.services.hosts import set_wan_access_state, update_host, update_hosts
+from djfritz.services.hosts import set_wan_access_with_messages, update_host, update_hosts
 
 
 logger = logging.getLogger(__name__)
@@ -107,21 +106,9 @@ class HostModelAdmin(CompareVersionAdmin):
         return self.redirect2change(obj)
 
     def set_wan_access_state(self, request, object_id, allow: bool):
-        obj = self.get_object_or_404(object_id)
-        try:
-            result: CreateOrUpdateResult = set_wan_access_state(host=obj, allow=allow)
-        except FritzConnectionException as err:
-            msg = f'Error set a new WAN access state: {err}'
-            logger.exception(msg)
-            messages.error(request, msg)
-        else:
-            if result.updated_fields:
-                obj.refresh_from_db()
-                messages.success(request, f'WAN access state changed to: {obj.wan_access}')
-            else:
-                messages.info(request, 'WAN access state unchanged.')
-
-        return self.redirect2change(obj)
+        host: HostModel = self.get_object_or_404(object_id)
+        set_wan_access_with_messages(request=request, host=host, allow=allow)
+        return self.redirect2change(host)
 
     def allow_wan_access_view(self, request, object_id, extra_context=None):
         logger.info('Allow WAN access to %r', object_id)

@@ -8,7 +8,7 @@ from django.views.generic import RedirectView
 admin.autodiscover()
 
 urlpatterns = [  # Don't use i18n_patterns() here
-    path('', RedirectView.as_view(pattern_name='admin:index')),
+    path('', RedirectView.as_view(pattern_name='djfritz:group_management')),
     path('admin/', admin.site.urls),
     path('', include('djfritz.urls')),
 ]
