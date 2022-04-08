@@ -129,18 +129,15 @@ def set_wan_access_state(host: HostModel, allow: bool) -> CreateOrUpdateResult:
 
 
 def set_wan_access_with_messages(request, host: HostModel, allow: bool) -> None:
-    host_name = host.name
     try:
         result: CreateOrUpdateResult = set_wan_access_state(host=host, allow=allow)
     except FritzConnectionException as err:
-        msg = f'Error set a new WAN access state to {host_name!r}: {err}'
+        msg = f'Error set a new WAN access state to {host}: {err}'
         logger.exception(msg)
         messages.error(request, msg)
     else:
         if result.updated_fields:
             host.refresh_from_db()
-            messages.success(
-                request, f'{host_name!r} WAN access state changed to: {host.wan_access}'
-            )
+            messages.success(request, f'{host} WAN access state changed to: {host.wan_access}')
         else:
-            messages.info(request, f'{host_name!r} WAN access state unchanged.')
+            messages.info(request, f'{host} WAN access state unchanged.')
