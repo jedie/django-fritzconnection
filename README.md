@@ -53,6 +53,8 @@ Developer shell - djfritz - v0.0.2
 
 Some of the FritzBox API requests needs a login. Currently the only way to store FritzBox Credentials is to add them into the environment.
 
+Error message if login credentials are missing is: `Unable to perform operation. 401 Unauthorized`
+
 Shell script work-a-round for developing, e.g.:
 
 ```
