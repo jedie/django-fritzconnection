@@ -44,7 +44,7 @@ Pull requests welcome ;)
 ~$ cd django-fritzconnection
 ~/django-fritzconnection$ ./devshell.py
 ...
-Developer shell - djfritz - v0.0.2
+Developer shell - djfritz - v0.0.3
 ...
 
 (djfritz) run_testserver
@@ -73,10 +73,13 @@ See also: [Issues #5](https://github.com/jedie/django-fritzconnection/issues/5)
 
 ## versions
 
-* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.0.2...main)
+* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.0.3...main)
+  * TBC
+* [v0.0.3 - 08.04.2022](https://github.com/jedie/django-fritzconnection/compare/v0.0.2...v0.0.3)
+  * NEW: 'Manage host WAN access via host-groups'
+  * NEW: Add "host group" model to collect hosts into groups
   * NEW: 'List "last connect" information about hosts' view
   * Display `FRITZ_USERNAME` and `FRITZ_PASSWORD` (anonymized) on connection info page
-  * TBC
 * [v0.0.2 - 04.04.2022](https://github.com/jedie/django-fritzconnection/compare/v0.0.1-alpha...v0.0.2)
   * Store Host information
   * Possible to set WAN access for one host

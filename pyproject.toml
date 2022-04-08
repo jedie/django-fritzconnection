@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-fritzconnection"
-version = "0.0.3.rc0"
+version = "0.0.3"
 description = "Web based FritzBox management using Python/Django."
 authors = ["JensDiemer <git@jensdiemer.de>"]
 homepage = "https://github.com/jedie/django-fritzconnection"
@@ -11,8 +11,7 @@ packages = [
 keywords=['fritzbox','django', 'fritzconnect']
 classifiers = [
     # http://pypi.python.org/pypi?%3Aaction=list_classifiers
-    'Development Status :: 3 - Alpha',
-#    'Development Status :: 4 - Beta',
+    'Development Status :: 4 - Beta',
 #    'Development Status :: 5 - Production/Stable',
     'Environment :: Web Environment',
     'Intended Audience :: End Users/Desktop',
