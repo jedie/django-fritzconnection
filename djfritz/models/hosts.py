@@ -90,6 +90,7 @@ class HostModel(BaseTimetrackingTaggedModel):
         on_delete=models.PROTECT,
         related_name='hosts',
         null=True,
+        blank=True,
         verbose_name=_('HostModel.group.verbose_name'),
         help_text=_('HostModel.group.help_text'),
     )
