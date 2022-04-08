@@ -1,3 +1,4 @@
+from bx_py_utils.anonymize import anonymize
 from django.contrib import messages
 from django.views.generic import TemplateView
 from fritzconnection import __version__ as fc_version
@@ -12,6 +13,13 @@ class FritzBoxConnectionView(OnlyStaffUserMixin, DjangoAdminContextMixin, Templa
 
     def get_context_data(self, **context):
         fc = get_fritz_connection()
+
+        context.update(
+            dict(
+                fritz_username=fc.soaper.user,
+                fritz_password=anonymize(fc.soaper.password),
+            )
+        )
 
         system_info = fc.device_manager.system_info
         if system_info:
