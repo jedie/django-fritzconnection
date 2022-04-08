@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
+from fritzconnection.core.exceptions import FritzLookUpError
 from reversion_compare.admin import CompareVersionAdmin
 
 from djfritz.models.hosts import HostModel
@@ -98,11 +99,15 @@ class HostModelAdmin(CompareVersionAdmin):
 
     def update_host_view(self, request, object_id, extra_context=None):
         obj = self.get_object_or_404(object_id)
-        result: CreateOrUpdateResult = update_host(host=obj)
-        if result.updated_fields:
-            messages.success(request, f'Updated: {", ".join(result.updated_fields)}')
+        try:
+            result: CreateOrUpdateResult = update_host(host=obj)
+        except FritzLookUpError as err:
+            messages.error(request, f'Error updating {obj}: {err}')
         else:
-            messages.info(request, 'No changed, all values up-to-date')
+            if result.updated_fields:
+                messages.success(request, f'Updated: {", ".join(result.updated_fields)}')
+            else:
+                messages.info(request, 'No changed, all values up-to-date')
         return self.redirect2change(obj)
 
     def set_wan_access_state(self, request, object_id, allow: bool):

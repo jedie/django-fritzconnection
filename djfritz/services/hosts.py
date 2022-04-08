@@ -6,7 +6,7 @@ from bx_django_utils.humanize.time import human_timedelta
 from bx_django_utils.models.manipulate import CreateOrUpdateResult, create_or_update2
 from django.contrib import messages
 from django.utils.translation import gettext as _
-from fritzconnection.core.exceptions import FritzConnectionException
+from fritzconnection.core.exceptions import FritzConnectionException, FritzLookUpError
 from fritzconnection.lib.fritzhosts import FritzHosts
 
 from djfritz.fritz_connection import FritzHostFilter, get_fritz_connection
@@ -21,7 +21,11 @@ def update_host(host: HostModel) -> CreateOrUpdateResult:
 
     fc = get_fritz_connection()
     fh = FritzHosts(fc=fc)
-    data = fh.get_specific_host_entry(mac_address=mac_address)
+    try:
+        data = fh.get_specific_host_entry(mac_address=mac_address)
+    except FritzLookUpError as err:
+        logger.exception('Error updating %s: %s', host, err)
+        raise
 
     ip_v4 = data['NewIPAddress']
 
