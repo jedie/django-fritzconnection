@@ -37,6 +37,23 @@ Existing features:
 Pull requests welcome ;)
 
 
+## Screenshots
+
+[more screenshots](https://github.com/jedie/jedie.github.io/tree/master/screenshots/django-fritzconnection)
+
+----
+
+![Group Management](https://raw.githubusercontent.com/jedie/jedie.github.io/master/screenshots/django-fritzconnection/v0.1.0.rc1%20-%20Group%20Management.png)
+
+----
+
+![Host Change List](https://raw.githubusercontent.com/jedie/jedie.github.io/master/screenshots/django-fritzconnection/v0.0.2%20-%20hosts%20change%20list.png)
+
+----
+
+[more screenshots](https://github.com/jedie/jedie.github.io/tree/master/screenshots/django-fritzconnection)
+
+
 ## Quick start for developers
 
 ```
@@ -50,7 +67,7 @@ Developer shell - djfritz - v0.1.0.rc1
 (djfritz) run_testserver
 ```
 
-# FritzBox Credentials
+## FritzBox Credentials
 
 Some of the FritzBox API requests needs a login. Currently the only way to store FritzBox Credentials is to add them into the environment.
 
