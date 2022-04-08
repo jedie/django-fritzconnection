@@ -61,7 +61,7 @@ Pull requests welcome ;)
 ~$ cd django-fritzconnection
 ~/django-fritzconnection$ ./devshell.py
 ...
-Developer shell - djfritz - v0.1.0.rc1
+Developer shell - djfritz - v0.1.0
 ...
 
 (djfritz) run_testserver
@@ -90,9 +90,9 @@ See also: [Issues #5](https://github.com/jedie/django-fritzconnection/issues/5)
 
 ## versions
 
-* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.1.0.rc1...main)
+* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.1.0...main)
   * TBC
-* [v0.1.0.rc1 - 08.04.2022](https://github.com/jedie/django-fritzconnection/compare/v0.0.2...v0.1.0.rc1)
+* [v0.1.0 - 08.04.2022](https://github.com/jedie/django-fritzconnection/compare/v0.0.2...v0.1.0)
   * NEW: 'Manage host WAN access via host-groups'
   * NEW: Add "host group" model to collect hosts into groups
   * NEW: 'List "last connect" information about hosts' view
