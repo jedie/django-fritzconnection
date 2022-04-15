@@ -44,11 +44,11 @@ tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>
 
 [[package]]
 name = "beautifulsoup4"
-version = "4.10.0"
+version = "4.11.1"
 description = "Screen-scraping library"
 category = "dev"
 optional = false
-python-versions = ">3.0.0"
+python-versions = ">=3.6.0"
 
 [package.dependencies]
 soupsieve = ">1.2"
@@ -82,20 +82,23 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "bleach"
-version = "4.1.0"
+version = "5.0.0"
 description = "An easy safelist-based HTML-sanitizing tool."
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.dependencies]
-packaging = "*"
 six = ">=1.9.0"
 webencodings = "*"
 
+[package.extras]
+css = ["tinycss2 (>=1.1.0)"]
+dev = ["pip-tools (==6.5.1)", "pytest (==7.1.1)", "flake8 (==4.0.1)", "tox (==3.24.5)", "sphinx (==4.3.2)", "twine (==4.0.0)", "wheel (==0.37.1)", "hashin (==0.17.0)", "black (==22.3.0)", "mypy (==0.942)"]
+
 [[package]]
 name = "bx-django-utils"
-version = "20"
+version = "21"
 description = "Various Django utility functions"
 category = "main"
 optional = false
@@ -108,7 +111,7 @@ python-stdnum = "*"
 
 [[package]]
 name = "bx-py-utils"
-version = "60"
+version = "61"
 description = "Various Python utility functions"
 category = "main"
 optional = false
@@ -158,7 +161,7 @@ importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [[package]]
 name = "cmd2"
-version = "2.4.0"
+version = "2.4.1"
 description = "cmd2 - quickly build feature-rich and user-friendly interactive command line applications in Python"
 category = "dev"
 optional = false
@@ -322,7 +325,7 @@ python-versions = "*"
 
 [[package]]
 name = "django"
-version = "3.2.12"
+version = "3.2.13"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
@@ -487,7 +490,7 @@ python-versions = "*"
 
 [[package]]
 name = "icdiff"
-version = "2.0.4"
+version = "2.0.5"
 description = "improved colored diff"
 category = "main"
 optional = false
@@ -541,14 +544,14 @@ plugins = ["setuptools"]
 
 [[package]]
 name = "jeepney"
-version = "0.7.1"
+version = "0.8.0"
 description = "Low-level, pure Python DBus protocol wrapper."
 category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.extras]
-test = ["pytest", "pytest-trio", "pytest-asyncio", "testpath", "trio", "async-timeout"]
+test = ["pytest", "pytest-trio", "pytest-asyncio (>=0.17)", "testpath", "trio", "async-timeout"]
 trio = ["trio", "async-generator"]
 
 [[package]]
@@ -593,7 +596,7 @@ python-versions = "*"
 
 [[package]]
 name = "model-bakery"
-version = "1.4.0"
+version = "1.5.0"
 description = "Smart object creation facility for Django."
 category = "dev"
 optional = false
@@ -614,7 +617,7 @@ python-versions = "*"
 name = "packaging"
 version = "21.3"
 description = "Core utilities for Python packages"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -729,14 +732,14 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "pyparsing"
-version = "3.0.7"
-description = "Python parsing module"
-category = "main"
+version = "3.0.8"
+description = "pyparsing module - Classes and methods to define and execute parsing grammars"
+category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.6.8"
 
 [package.extras]
-diagrams = ["jinja2", "railroad-diagrams"]
+diagrams = ["railroad-diagrams", "jinja2"]
 
 [[package]]
 name = "pyperclip"
@@ -892,7 +895,7 @@ python-versions = "*"
 
 [[package]]
 name = "pyupgrade"
-version = "2.31.1"
+version = "2.32.0"
 description = "A tool to automatically upgrade syntax for newer versions."
 category = "dev"
 optional = false
@@ -967,16 +970,16 @@ idna2008 = ["idna"]
 
 [[package]]
 name = "rich"
-version = "12.0.1"
+version = "12.2.0"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 category = "dev"
 optional = false
-python-versions = ">=3.6.2,<4.0.0"
+python-versions = ">=3.6.3,<4.0.0"
 
 [package.dependencies]
 commonmark = ">=0.9.0,<0.10.0"
 pygments = ">=2.6.0,<3.0.0"
-typing-extensions = {version = ">=3.7.4,<5.0", markers = "python_version < \"3.8\""}
+typing-extensions = {version = ">=4.0.0,<5.0", markers = "python_version < \"3.9\""}
 
 [package.extras]
 jupyter = ["ipywidgets (>=7.5.1,<8.0.0)"]
@@ -1003,7 +1006,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "soupsieve"
-version = "2.3.1"
+version = "2.3.2.post1"
 description = "A modern CSS selector implementation for Beautiful Soup."
 category = "dev"
 optional = false
@@ -1043,7 +1046,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "tox"
-version = "3.24.5"
+version = "3.25.0"
 description = "tox is a generic virtualenv management and test command line tool"
 category = "dev"
 optional = false
@@ -1114,7 +1117,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
 [[package]]
 name = "virtualenv"
-version = "20.14.0"
+version = "20.14.1"
 description = "Virtual Python Environment builder"
 category = "dev"
 optional = false
@@ -1149,15 +1152,15 @@ python-versions = "*"
 
 [[package]]
 name = "zipp"
-version = "3.7.0"
+version = "3.8.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
-testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
+docs = ["sphinx", "jaraco.packaging (>=9)", "rst.linker (>=1.9)"]
+testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)"]
 
 [metadata]
 lock-version = "1.1"
@@ -1182,8 +1185,8 @@ attrs = [
     {file = "attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
 ]
 beautifulsoup4 = [
-    {file = "beautifulsoup4-4.10.0-py3-none-any.whl", hash = "sha256:9a315ce70049920ea4572a4055bc4bd700c940521d36fc858205ad4fcde149bf"},
-    {file = "beautifulsoup4-4.10.0.tar.gz", hash = "sha256:c23ad23c521d818955a4151a67d81580319d4bf548d3d49f4223ae041ff98891"},
+    {file = "beautifulsoup4-4.11.1-py3-none-any.whl", hash = "sha256:58d5c3d29f5a36ffeb94f02f0d786cd53014cf9b3b3951d42e0080d8a9498d30"},
+    {file = "beautifulsoup4-4.11.1.tar.gz", hash = "sha256:ad9aa55b65ef2808eb405f46cf74df7fcb7044d5cbc26487f96eb2ef2e436693"},
 ]
 black = [
     {file = "black-22.3.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:2497f9c2386572e28921fa8bec7be3e51de6801f7459dffd6e62492531c47e09"},
@@ -1211,16 +1214,16 @@ black = [
     {file = "black-22.3.0.tar.gz", hash = "sha256:35020b8886c022ced9282b51b5a875b6d1ab0c387b31a065b84db7c33085ca79"},
 ]
 bleach = [
-    {file = "bleach-4.1.0-py2.py3-none-any.whl", hash = "sha256:4d2651ab93271d1129ac9cbc679f524565cc8a1b791909c4a51eac4446a15994"},
-    {file = "bleach-4.1.0.tar.gz", hash = "sha256:0900d8b37eba61a802ee40ac0061f8c2b5dee29c1927dd1d233e075ebf5a71da"},
+    {file = "bleach-5.0.0-py3-none-any.whl", hash = "sha256:08a1fe86d253b5c88c92cc3d810fd8048a16d15762e1e5b74d502256e5926aa1"},
+    {file = "bleach-5.0.0.tar.gz", hash = "sha256:c6d6cc054bdc9c83b48b8083e236e5f00f238428666d2ce2e083eaa5fd568565"},
 ]
 bx-django-utils = [
-    {file = "bx_django_utils-20-py3-none-any.whl", hash = "sha256:7daf89de453cfaff49117dc24a1c2408fcc91279cd11554e0c16683095cec8b3"},
-    {file = "bx_django_utils-20.tar.gz", hash = "sha256:6a5be502414a63fbd462c0f29a1403def436b89450a1325a24fa1233a5410ada"},
+    {file = "bx_django_utils-21-py3-none-any.whl", hash = "sha256:414ada254464b6db851a4eed20460e3d6d78c749459419cbadc7341019d69379"},
+    {file = "bx_django_utils-21.tar.gz", hash = "sha256:ccd90e09c5f334d848508b9ba0fe1857291548cfb49a41cc56d3c78744773951"},
 ]
 bx-py-utils = [
-    {file = "bx_py_utils-60-py3-none-any.whl", hash = "sha256:e321f7275aaf36829fc193023b1d0daca17415aaf74632915de2c202ecc26bd8"},
-    {file = "bx_py_utils-60.tar.gz", hash = "sha256:d3395a9f72d2e2633b1e322ff8608204601e14eb3f6dc5d346953002a309ffcf"},
+    {file = "bx_py_utils-61-py3-none-any.whl", hash = "sha256:8af6c2ab7396452f689441c4cf2ea2b26a7d3cc1349041e333ce441ca1c8261b"},
+    {file = "bx_py_utils-61.tar.gz", hash = "sha256:34be9906ad6629d28e2d22290de575a4a600a49625455ec758c8b02adadb44f2"},
 ]
 certifi = [
     {file = "certifi-2021.10.8-py2.py3-none-any.whl", hash = "sha256:d62a0163eb4c2344ac042ab2bdf75399a71a2d8c7d47eac2e2ee91b9d6339569"},
@@ -1287,8 +1290,8 @@ click = [
     {file = "click-8.1.2.tar.gz", hash = "sha256:479707fe14d9ec9a0757618b7a100a0ae4c4e236fac5b7f80ca68028141a1a72"},
 ]
 cmd2 = [
-    {file = "cmd2-2.4.0-py3-none-any.whl", hash = "sha256:6fe6d46099edaf4a99163c191aeb4babfd7e4dfbac6009f423ecc8370895b58f"},
-    {file = "cmd2-2.4.0.tar.gz", hash = "sha256:090909ab6c8ecee40813cec759e61dd6e70c8227a1a8e96082f5f2b0d394bc77"},
+    {file = "cmd2-2.4.1-py3-none-any.whl", hash = "sha256:e6f49b0854b6aec2f20073bae99f1deede16c24b36fde682045d73c80c4cfb51"},
+    {file = "cmd2-2.4.1.tar.gz", hash = "sha256:f3b0467daca18fca0dc7838de7726a72ab64127a018a377a86a6ed8ebfdbb25f"},
 ]
 cmd2-ext-test = [
     {file = "cmd2-ext-test-2.0.0.tar.gz", hash = "sha256:b9373ea27bab2e297041ed2dac4491dc919ae56153d5f0addeb440eeb851a5a6"},
@@ -1392,8 +1395,8 @@ distlib = [
     {file = "distlib-0.3.4.zip", hash = "sha256:e4b58818180336dc9c529bfb9a0b58728ffc09ad92027a3f30b7cd91e3458579"},
 ]
 django = [
-    {file = "Django-3.2.12-py3-none-any.whl", hash = "sha256:9b06c289f9ba3a8abea16c9c9505f25107809fb933676f6c891ded270039d965"},
-    {file = "Django-3.2.12.tar.gz", hash = "sha256:9772e6935703e59e993960832d66a614cf0233a1c5123bc6224ecc6ad69e41e2"},
+    {file = "Django-3.2.13-py3-none-any.whl", hash = "sha256:b896ca61edc079eb6bbaa15cf6071eb69d6aac08cce5211583cfb41515644fdf"},
+    {file = "Django-3.2.13.tar.gz", hash = "sha256:6d93497a0a9bf6ba0e0b1a29cccdc40efbfc76297255b1309b3a884a688ec4b6"},
 ]
 django-admin-sortable2 = [
     {file = "django-admin-sortable2-1.0.4.tar.gz", hash = "sha256:f96044003176c6684c5f969792ca833a505d654fa0f7b24232a0a610e4332a53"},
@@ -1457,7 +1460,7 @@ gnureadline = [
     {file = "gnureadline-8.0.0.tar.gz", hash = "sha256:61eef72ed02dad415ede49752e972a1d2bd8c35c1e4464565d7effd806c99476"},
 ]
 icdiff = [
-    {file = "icdiff-2.0.4.tar.gz", hash = "sha256:c72572e5ce087bc7a7748af2664764d4a805897caeefb665bdc12677fefb2212"},
+    {file = "icdiff-2.0.5.tar.gz", hash = "sha256:35d24b728e48b7e0a12bdb69386d3bfc7eef4fe922d0ac1cd70d6e5c11630bae"},
 ]
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
@@ -1476,8 +1479,8 @@ isort = [
     {file = "isort-5.10.1.tar.gz", hash = "sha256:e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"},
 ]
 jeepney = [
-    {file = "jeepney-0.7.1-py3-none-any.whl", hash = "sha256:1b5a0ea5c0e7b166b2f5895b91a08c14de8915afda4407fb5022a195224958ac"},
-    {file = "jeepney-0.7.1.tar.gz", hash = "sha256:fa9e232dfa0c498bd0b8a3a73b8d8a31978304dcef0515adc859d4e096f96f4f"},
+    {file = "jeepney-0.8.0-py3-none-any.whl", hash = "sha256:c0a454ad016ca575060802ee4d590dd912e35c122fa04e70306de3d076cce755"},
+    {file = "jeepney-0.8.0.tar.gz", hash = "sha256:5efe48d255973902f6badc3ce55e2aa6c5c3b3bc642059ef3a91247bcfcc5806"},
 ]
 keyring = [
     {file = "keyring-23.5.0-py3-none-any.whl", hash = "sha256:b0d28928ac3ec8e42ef4cc227822647a19f1d544f21f96457965dc01cf555261"},
@@ -1551,8 +1554,8 @@ mccabe = [
     {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
 ]
 model-bakery = [
-    {file = "model_bakery-1.4.0-py2.py3-none-any.whl", hash = "sha256:a89befaae667380f5e2352981d45fed36747941f5c3e9dffa962fc6ba8d661d1"},
-    {file = "model_bakery-1.4.0.tar.gz", hash = "sha256:c29fb821c81cda2c37dfbdcb1dd2218cda179ecb96c6edb6cd9cdaa146706d92"},
+    {file = "model_bakery-1.5.0-py2.py3-none-any.whl", hash = "sha256:e4e09e1c536e3b7d5e7a827d4d1ccd4540dea56062d766b506d86067d3a94dea"},
+    {file = "model_bakery-1.5.0.tar.gz", hash = "sha256:ed533de56df7af4f08f786f82532802f994e2ef01d8366ec4fe6d588585d8ac7"},
 ]
 mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
@@ -1607,8 +1610,8 @@ pygments = [
     {file = "Pygments-2.11.2.tar.gz", hash = "sha256:4e426f72023d88d03b2fa258de560726ce890ff3b630f88c21cbb8b2503b8c6a"},
 ]
 pyparsing = [
-    {file = "pyparsing-3.0.7-py3-none-any.whl", hash = "sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484"},
-    {file = "pyparsing-3.0.7.tar.gz", hash = "sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea"},
+    {file = "pyparsing-3.0.8-py3-none-any.whl", hash = "sha256:ef7b523f6356f763771559412c0d7134753f037822dad1b16945b7b846f7ad06"},
+    {file = "pyparsing-3.0.8.tar.gz", hash = "sha256:7bf433498c016c4314268d95df76c81b842a4cb2b276fa3312cfb1e1d85f6954"},
 ]
 pyperclip = [
     {file = "pyperclip-1.8.2.tar.gz", hash = "sha256:105254a8b04934f0bc84e9c24eb360a591aaf6535c9def5f29d92af107a9bf57"},
@@ -1658,8 +1661,8 @@ pytz = [
     {file = "pytz-2022.1.tar.gz", hash = "sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7"},
 ]
 pyupgrade = [
-    {file = "pyupgrade-2.31.1-py2.py3-none-any.whl", hash = "sha256:4060a7c20c79d373a3dcf34566b275c6de6cd2b034ad22465d3263fb0de82648"},
-    {file = "pyupgrade-2.31.1.tar.gz", hash = "sha256:22e0ad6dd39c4381805cb059f1e691b6315c62c0ebcec98a5f29d22cd186a72a"},
+    {file = "pyupgrade-2.32.0-py2.py3-none-any.whl", hash = "sha256:f45d4afb6ccdf7b0cea757958d0a11306324052668d9ff99d2bcb06bda46c00d"},
+    {file = "pyupgrade-2.32.0.tar.gz", hash = "sha256:6878116d364b72f0c0011dd62dfe96425041a5f753da298b6eacde0f9fd9c004"},
 ]
 pywin32-ctypes = [
     {file = "pywin32-ctypes-0.2.0.tar.gz", hash = "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942"},
@@ -1682,8 +1685,8 @@ rfc3986 = [
     {file = "rfc3986-2.0.0.tar.gz", hash = "sha256:97aacf9dbd4bfd829baad6e6309fa6573aaf1be3f6fa735c8ab05e46cecb261c"},
 ]
 rich = [
-    {file = "rich-12.0.1-py3-none-any.whl", hash = "sha256:ce5c714e984a2d185399e4e1dd1f8b2feacb7cecfc576f1522425643a36a57ea"},
-    {file = "rich-12.0.1.tar.gz", hash = "sha256:3fba9dd15ebe048e2795a02ac19baee79dc12cc50b074ef70f2958cd651b59a9"},
+    {file = "rich-12.2.0-py3-none-any.whl", hash = "sha256:c50f3d253bc6a9bb9c79d61a26d510d74abdf1b16881260fab5edfc3edfb082f"},
+    {file = "rich-12.2.0.tar.gz", hash = "sha256:ea74bc9dad9589d8eea3e3fd0b136d8bf6e428888955f215824c2894f0da8b47"},
 ]
 secretstorage = [
     {file = "SecretStorage-3.3.1-py3-none-any.whl", hash = "sha256:422d82c36172d88d6a0ed5afdec956514b189ddbfb72fefab0c8a1cee4eaf71f"},
@@ -1694,8 +1697,8 @@ six = [
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
 soupsieve = [
-    {file = "soupsieve-2.3.1-py3-none-any.whl", hash = "sha256:1a3cca2617c6b38c0343ed661b1fa5de5637f257d4fe22bd9f1338010a1efefb"},
-    {file = "soupsieve-2.3.1.tar.gz", hash = "sha256:b8d49b1cd4f037c7082a9683dfa1801aa2597fb11c3a1155b7a5b94829b4f1f9"},
+    {file = "soupsieve-2.3.2.post1-py3-none-any.whl", hash = "sha256:3b2503d3c7084a42b1ebd08116e5f81aadfaea95863628c80a3b774a11b7c759"},
+    {file = "soupsieve-2.3.2.post1.tar.gz", hash = "sha256:fc53893b3da2c33de295667a0e19f078c14bf86544af307354de5fcf12a3f30d"},
 ]
 sqlparse = [
     {file = "sqlparse-0.4.2-py3-none-any.whl", hash = "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"},
@@ -1714,8 +1717,8 @@ tomli = [
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
 ]
 tox = [
-    {file = "tox-3.24.5-py2.py3-none-any.whl", hash = "sha256:be3362472a33094bce26727f5f771ca0facf6dafa217f65875314e9a6600c95c"},
-    {file = "tox-3.24.5.tar.gz", hash = "sha256:67e0e32c90e278251fea45b696d0fef3879089ccbe979b0c556d35d5a70e2993"},
+    {file = "tox-3.25.0-py2.py3-none-any.whl", hash = "sha256:0805727eb4d6b049de304977dfc9ce315a1938e6619c3ab9f38682bb04662a5a"},
+    {file = "tox-3.25.0.tar.gz", hash = "sha256:37888f3092aa4e9f835fc8cc6dadbaaa0782651c41ef359e3a5743fcb0308160"},
 ]
 twine = [
     {file = "twine-4.0.0-py3-none-any.whl", hash = "sha256:6f7496cf14a3a8903474552d5271c79c71916519edb42554f23f42a8563498a9"},
@@ -1756,8 +1759,8 @@ urllib3 = [
     {file = "urllib3-1.26.9.tar.gz", hash = "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"},
 ]
 virtualenv = [
-    {file = "virtualenv-20.14.0-py2.py3-none-any.whl", hash = "sha256:1e8588f35e8b42c6ec6841a13c5e88239de1e6e4e4cedfd3916b306dc826ec66"},
-    {file = "virtualenv-20.14.0.tar.gz", hash = "sha256:8e5b402037287126e81ccde9432b95a8be5b19d36584f64957060a3488c11ca8"},
+    {file = "virtualenv-20.14.1-py2.py3-none-any.whl", hash = "sha256:e617f16e25b42eb4f6e74096b9c9e37713cf10bf30168fb4a739f3fa8f898a3a"},
+    {file = "virtualenv-20.14.1.tar.gz", hash = "sha256:ef589a79795589aada0c1c5b319486797c03b67ac3984c48c669c0e4f50df3a5"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
@@ -1768,6 +1771,6 @@ webencodings = [
     {file = "webencodings-0.5.1.tar.gz", hash = "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"},
 ]
 zipp = [
-    {file = "zipp-3.7.0-py3-none-any.whl", hash = "sha256:b47250dd24f92b7dd6a0a8fc5244da14608f3ca90a5efcd37a3b1642fac9a375"},
-    {file = "zipp-3.7.0.tar.gz", hash = "sha256:9f50f446828eb9d45b267433fd3e9da8d801f614129124863f9c51ebceafb87d"},
+    {file = "zipp-3.8.0-py3-none-any.whl", hash = "sha256:c4f6e5bbf48e74f7a38e7cc5b0480ff42b0ae5178957d564d18932525d5cf099"},
+    {file = "zipp-3.8.0.tar.gz", hash = "sha256:56bf8aadb83c24db6c4b577e13de374ccfb67da2078beba1d037c17980bf43ad"},
 ]
