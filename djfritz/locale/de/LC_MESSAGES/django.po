@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-08 15:22+0200\n"
+"POT-Creation-Date: 2022-05-11 10:49+0200\n"
 "PO-Revision-Date: 2022-04-08 15:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,6 +14,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
+
+msgid "unique name"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
 
 msgid "HostModel.name.verbose_name"
 msgstr "Name"
@@ -135,6 +144,12 @@ msgstr "WAN Zugriff verbieten"
 msgid "Update all hosts"
 msgstr ""
 
+msgid "disallow"
+msgstr ""
+
+msgid "allow"
+msgstr ""
+
 msgid "No."
 msgstr ""
 
@@ -157,12 +172,6 @@ msgid "Address Source"
 msgstr ""
 
 msgid "Lease Time Remaining"
-msgstr ""
-
-msgid "disallow"
-msgstr ""
-
-msgid "allow"
 msgstr ""
 
 msgid "Last Connected Timestamp"

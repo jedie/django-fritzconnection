@@ -3,6 +3,7 @@ from uuid import UUID
 
 from bx_django_utils.models.manipulate import CreateOrUpdateResult
 from django.contrib import admin, messages
+from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
@@ -16,6 +17,33 @@ from djfritz.services.hosts import set_wan_access_with_messages, update_host, up
 
 
 logger = logging.getLogger(__name__)
+
+
+class NameUniquenessFilter(admin.SimpleListFilter):
+    title = _('unique name')
+    parameter_name = 'uniqueness'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value():
+            data = (
+                queryset.values('name')
+                .order_by('name')
+                .annotate(name_count=Count('name'))
+                .filter(name_count=1)
+            )
+            unique_names = {entry['name'] for entry in data}
+
+        if self.value() == 'yes':
+            return queryset.filter(name__in=unique_names)
+
+        if self.value() == 'no':
+            return queryset.exclude(name__in=unique_names)
 
 
 @admin.register(HostModel)
@@ -45,7 +73,15 @@ class HostModelAdmin(CompareVersionAdmin):
         'create_dt',
     )
     list_display_links = ('verbose_name',)
-    list_filter = ('last_status', 'wan_access', 'interface_type', 'address_source', 'group', 'tags')
+    list_filter = (
+        'last_status',
+        'wan_access',
+        'interface_type',
+        'address_source',
+        'group',
+        'tags',
+        NameUniquenessFilter,
+    )
     date_hierarchy = 'create_dt'
     readonly_fields = ('wan_access',)
     ordering = ('-last_status', '-update_dt')
