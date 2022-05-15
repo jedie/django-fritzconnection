@@ -1,0 +1,414 @@
+<div class="" id="content">
+ <h1>
+  Select Host to change
+ </h1>
+ <div id="content-main">
+  <ul class="object-tools">
+   <li>
+    <a href="/admin/djfritz/hostmodel/update_hosts">
+     Update all hosts
+    </a>
+   </li>
+   <li>
+    <a class="recoverlink" href="/admin/djfritz/hostmodel/recover/">
+     Recover deleted Hosts
+    </a>
+   </li>
+   <li>
+    <a class="addlink" href="/admin/djfritz/hostmodel/add/">
+     Add Host
+    </a>
+   </li>
+  </ul>
+  <div class="module filtered" id="changelist">
+   <div class="changelist-form-container">
+    <div id="toolbar">
+     <form id="changelist-search" method="get">
+      <div>
+       <!-- DIV needed for valid HTML -->
+       <label for="searchbar">
+        <img alt="Search" src="/static/admin/img/search.svg"/>
+       </label>
+       <input autofocus="" id="searchbar" name="q" size="40" type="text" value=""/>
+       <input type="submit" value="Search"/>
+      </div>
+     </form>
+    </div>
+    <div class="xfull">
+     <ul class="toplinks">
+      <li class="date-back">
+       <a href="?create_dt__year=2000">
+        ‹ 2000
+       </a>
+      </li>
+      <li>
+       <a href="?create_dt__day=1&create_dt__month=1&create_dt__year=2000">
+        January 1
+       </a>
+      </li>
+     </ul>
+     <br class="clear"/>
+    </div>
+    <form id="changelist-form" method="post" novalidate="">
+     MockedCsrfTokenNode
+     <div class="actions">
+      <label>
+       Action:
+       <select name="action" required="">
+        <option selected="" value="">
+         ---------
+        </option>
+        <option value="delete_selected">
+         Delete selected Hosts
+        </option>
+        <option value="host_name_info">
+         Get host name info
+        </option>
+       </select>
+      </label>
+      <input class="select-across" name="select_across" type="hidden" value="0"/>
+      <button class="button" name="index" title="Run the selected action" type="submit" value="0">
+       Go
+      </button>
+      <span class="action-counter" data-actions-icnt="4">
+       0 of 4 selected
+      </span>
+     </div>
+     <div class="results">
+      <table id="result_list">
+       <thead>
+        <tr>
+         <th class="action-checkbox-column" scope="col">
+          <div class="text">
+           <span>
+            <input id="action-toggle" type="checkbox"/>
+           </span>
+          </div>
+          <div class="clear">
+          </div>
+         </th>
+         <th class="sortable column-verbose_name" scope="col">
+          <div class="text">
+           <a href="?o=1.-3.-4">
+            Name
+           </a>
+          </div>
+          <div class="clear">
+          </div>
+         </th>
+         <th class="sortable column-wan_access" scope="col">
+          <div class="text">
+           <a href="?o=2.-3.-4">
+            WAN access
+           </a>
+          </div>
+          <div class="clear">
+          </div>
+         </th>
+         <th class="sortable column-last_status sorted descending" scope="col">
+          <div class="sortoptions">
+           <a class="sortremove" href="?o=-4" title="Remove from sorting">
+           </a>
+           <span class="sortpriority" title="Sorting priority: 1">
+            1
+           </span>
+           <a class="toggle descending" href="?o=3.-4" title="Toggle sorting">
+           </a>
+          </div>
+          <div class="text">
+           <a href="?o=3.-4">
+            Last Status
+           </a>
+          </div>
+          <div class="clear">
+          </div>
+         </th>
+         <th class="sortable column-update_dt sorted descending" scope="col">
+          <div class="sortoptions">
+           <a class="sortremove" href="?o=-3" title="Remove from sorting">
+           </a>
+           <span class="sortpriority" title="Sorting priority: 2">
+            2
+           </span>
+           <a class="toggle descending" href="?o=-3.4" title="Toggle sorting">
+           </a>
+          </div>
+          <div class="text">
+           <a href="?o=4.-3">
+            Last update
+           </a>
+          </div>
+          <div class="clear">
+          </div>
+         </th>
+         <th class="sortable column-ip_v4" scope="col">
+          <div class="text">
+           <a href="?o=5.-3.-4">
+            IP (v4)
+           </a>
+          </div>
+          <div class="clear">
+          </div>
+         </th>
+         <th class="sortable column-mac" scope="col">
+          <div class="text">
+           <a href="?o=6.-3.-4">
+            Mac
+           </a>
+          </div>
+          <div class="clear">
+          </div>
+         </th>
+         <th class="sortable column-create_dt" scope="col">
+          <div class="text">
+           <a href="?o=7.-3.-4">
+            Create date
+           </a>
+          </div>
+          <div class="clear">
+          </div>
+         </th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td class="action-checkbox">
+          <input class="action-select" name="_selected_action" type="checkbox" value="00000000-1111-0000-0000-000000000004"/>
+         </td>
+         <th class="field-verbose_name">
+          <a href="/admin/djfritz/hostmodel/00000000-1111-0000-0000-000000000004/change/">
+           double_name
+           <br/>
+           <small>
+           </small>
+          </a>
+         </th>
+         <td class="field-wan_access">
+          unknown
+         </td>
+         <td class="field-last_status">
+          <img alt="True" src="/static/admin/img/icon-yes.svg"/>
+         </td>
+         <td class="field-update_dt nowrap">
+          Jan. 1, 2000, 1:04 a.m.
+         </td>
+         <td class="field-ip_v4">
+          -
+         </td>
+         <td class="field-mac">
+          AB:CD:EF:12:00:04
+         </td>
+         <td class="field-create_dt nowrap">
+          Jan. 1, 2000, 1:04 a.m.
+         </td>
+        </tr>
+        <tr>
+         <td class="action-checkbox">
+          <input class="action-select" name="_selected_action" type="checkbox" value="00000000-1111-0000-0000-000000000003"/>
+         </td>
+         <th class="field-verbose_name">
+          <a href="/admin/djfritz/hostmodel/00000000-1111-0000-0000-000000000003/change/">
+           double_name
+           <br/>
+           <small>
+           </small>
+          </a>
+         </th>
+         <td class="field-wan_access">
+          unknown
+         </td>
+         <td class="field-last_status">
+          <img alt="True" src="/static/admin/img/icon-yes.svg"/>
+         </td>
+         <td class="field-update_dt nowrap">
+          Jan. 1, 2000, 1:03 a.m.
+         </td>
+         <td class="field-ip_v4">
+          -
+         </td>
+         <td class="field-mac">
+          AB:CD:EF:12:00:03
+         </td>
+         <td class="field-create_dt nowrap">
+          Jan. 1, 2000, 1:03 a.m.
+         </td>
+        </tr>
+        <tr>
+         <td class="action-checkbox">
+          <input class="action-select" name="_selected_action" type="checkbox" value="00000000-1111-0000-0000-000000000002"/>
+         </td>
+         <th class="field-verbose_name">
+          <a href="/admin/djfritz/hostmodel/00000000-1111-0000-0000-000000000002/change/">
+           unique_name2
+           <br/>
+           <small>
+           </small>
+          </a>
+         </th>
+         <td class="field-wan_access">
+          unknown
+         </td>
+         <td class="field-last_status">
+          <img alt="True" src="/static/admin/img/icon-yes.svg"/>
+         </td>
+         <td class="field-update_dt nowrap">
+          Jan. 1, 2000, 1:02 a.m.
+         </td>
+         <td class="field-ip_v4">
+          -
+         </td>
+         <td class="field-mac">
+          AB:CD:EF:12:00:02
+         </td>
+         <td class="field-create_dt nowrap">
+          Jan. 1, 2000, 1:02 a.m.
+         </td>
+        </tr>
+        <tr>
+         <td class="action-checkbox">
+          <input class="action-select" name="_selected_action" type="checkbox" value="00000000-1111-0000-0000-000000000001"/>
+         </td>
+         <th class="field-verbose_name">
+          <a href="/admin/djfritz/hostmodel/00000000-1111-0000-0000-000000000001/change/">
+           unique_name1
+           <br/>
+           <small>
+           </small>
+          </a>
+         </th>
+         <td class="field-wan_access">
+          unknown
+         </td>
+         <td class="field-last_status">
+          <img alt="True" src="/static/admin/img/icon-yes.svg"/>
+         </td>
+         <td class="field-update_dt nowrap">
+          Jan. 1, 2000, 1:01 a.m.
+         </td>
+         <td class="field-ip_v4">
+          -
+         </td>
+         <td class="field-mac">
+          AB:CD:EF:12:00:01
+         </td>
+         <td class="field-create_dt nowrap">
+          Jan. 1, 2000, 1:01 a.m.
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="paginator">
+      4 Hosts
+     </p>
+    </form>
+   </div>
+   <div id="changelist-filter">
+    <h2>
+     Filter
+    </h2>
+    <h3>
+     By Last Status
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+     <li>
+      <a href="?last_status__exact=1" title="Yes">
+       Yes
+      </a>
+     </li>
+     <li>
+      <a href="?last_status__exact=0" title="No">
+       No
+      </a>
+     </li>
+    </ul>
+    <h3>
+     By WAN access
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+     <li>
+      <a href="?wan_access__exact=granted" title="granted">
+       granted
+      </a>
+     </li>
+     <li>
+      <a href="?wan_access__exact=denied" title="denied">
+       denied
+      </a>
+     </li>
+     <li>
+      <a href="?wan_access__exact=error" title="error">
+       error
+      </a>
+     </li>
+     <li>
+      <a href="?wan_access__exact=unknown" title="unknown">
+       unknown
+      </a>
+     </li>
+    </ul>
+    <h3>
+     By Interface Type
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+     <li>
+      <a href="?interface_type__isnull=True" title="-">
+       -
+      </a>
+     </li>
+    </ul>
+    <h3>
+     By Address Source
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+     <li>
+      <a href="?address_source=DHCP" title="DHCP">
+       DHCP
+      </a>
+     </li>
+    </ul>
+    <h3>
+     By unique name
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+     <li>
+      <a href="?uniqueness=yes" title="Yes">
+       Yes
+      </a>
+     </li>
+     <li>
+      <a href="?uniqueness=no" title="No">
+       No
+      </a>
+     </li>
+    </ul>
+   </div>
+  </div>
+ </div>
+ <br class="clear"/>
+</div>
