@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-fritzconnection"
-version = "0.1.0"
+version = "0.2.0"
 description = "Web based FritzBox management using Python/Django."
 authors = ["JensDiemer <git@jensdiemer.de>"]
 homepage = "https://github.com/jedie/django-fritzconnection"

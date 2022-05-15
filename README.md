@@ -90,8 +90,11 @@ See also: [Issues #5](https://github.com/jedie/django-fritzconnection/issues/5)
 
 ## versions
 
-* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.1.0...main)
+* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.2.0...main)
   * TBC
+* [v0.2.0 - 15.05.2022](https://github.com/jedie/django-fritzconnection/compare/v0.1.0...v0.2.0)
+  * NEW: Hosts admin action to ping all IPs from selected hosts
+  * NEW: "unique host name" change list filter
 * [v0.1.0 - 08.04.2022](https://github.com/jedie/django-fritzconnection/compare/v0.0.2...v0.1.0)
   * NEW: 'Manage host WAN access via host-groups'
   * NEW: Add "host group" model to collect hosts into groups
