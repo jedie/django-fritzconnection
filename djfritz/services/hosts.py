@@ -1,7 +1,13 @@
+import asyncio
 import logging
+import shutil
+import socket
 import time
+from asyncio import StreamReader
+from asyncio.subprocess import Process
 
 import reversion
+from asgiref.sync import async_to_sync, sync_to_async
 from bx_django_utils.humanize.time import human_timedelta
 from bx_django_utils.models.manipulate import CreateOrUpdateResult, create_or_update2
 from django.contrib import messages
@@ -141,3 +147,72 @@ def set_wan_access_with_messages(request, host: HostModel, allow: bool) -> None:
             messages.success(request, f'{host} WAN access state changed to: {host.wan_access}')
         else:
             messages.info(request, f'{host} WAN access state unchanged.')
+
+
+class SubprocessPing:
+    ping_bin = None
+
+    async def __call__(self, ip_address, count=1, timeout=1):
+        if not self.ping_bin:
+            self.ping_bin = shutil.which('ping')
+            logger.info('Set ping executeable to: %r', self.ping_bin)
+            if not self.ping_bin:
+                raise FileNotFoundError('Executeable "ping" not found!')
+
+        args = [self.ping_bin, '-c', str(count), '-W', str(timeout), ip_address]
+        logger.info('Call ping: %r', args)
+
+        process: Process = await asyncio.create_subprocess_exec(
+            *args,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.STDOUT,
+        )
+
+        returncode = await process.wait()
+        logger.info('ping %r return code: %r', ip_address, returncode)
+
+        stdout: StreamReader = process.stdout
+        output = await stdout.read()
+        output = output.decode('utf-8').strip()
+        logger.info('ping %r output: %s', ip_address, output)
+
+        @sync_to_async
+        def get_mac_addresses(ip_address):
+            return sorted(HostModel.objects.filter(ip_v4=ip_address).values_list('mac', flat=True))
+
+        mac_addresses = await get_mac_addresses(ip_address)
+
+        data = {
+            'ip_address': ip_address,
+            'mac_addresses': mac_addresses,
+            'returncode': returncode,
+            'output': output,
+        }
+        return data
+
+
+subprocess_ping = SubprocessPing()
+
+
+@async_to_sync
+async def collect_host_info(names):
+    async def collect(name):
+        logger.info('Collect info for: %r', name)
+        entry = {'name': name}
+        try:
+            fqdn = socket.getfqdn(name)
+            entry['fqdn'] = fqdn
+
+            (name, aliaslist, addresslist) = socket.gethostbyname_ex(fqdn)
+            entry['aliaslist'] = aliaslist
+
+            entry['ping_info'] = await asyncio.gather(
+                *[subprocess_ping(ip_address, count=1, timeout=3) for ip_address in addresslist]
+            )
+        except Exception as err:
+            logger.exception('%r error: %s', name, err)
+            entry['error'] = err
+        return entry
+
+    data = await asyncio.gather(*[collect(name) for name in names])
+    return data
