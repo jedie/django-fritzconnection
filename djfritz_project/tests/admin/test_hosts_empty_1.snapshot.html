@@ -1,0 +1,147 @@
+<div class="" id="content">
+ <h1>
+  Select Host to change
+ </h1>
+ <div id="content-main">
+  <ul class="object-tools">
+   <li>
+    <a href="/admin/djfritz/hostmodel/update_hosts">
+     Update all hosts
+    </a>
+   </li>
+   <li>
+    <a class="recoverlink" href="/admin/djfritz/hostmodel/recover/">
+     Recover deleted Hosts
+    </a>
+   </li>
+   <li>
+    <a class="addlink" href="/admin/djfritz/hostmodel/add/">
+     Add Host
+    </a>
+   </li>
+  </ul>
+  <div class="module filtered" id="changelist">
+   <div class="changelist-form-container">
+    <div id="toolbar">
+     <form id="changelist-search" method="get">
+      <div>
+       <!-- DIV needed for valid HTML -->
+       <label for="searchbar">
+        <img alt="Search" src="/static/admin/img/search.svg"/>
+       </label>
+       <input autofocus="" id="searchbar" name="q" size="40" type="text" value=""/>
+       <input type="submit" value="Search"/>
+      </div>
+     </form>
+    </div>
+    <div class="xfull">
+     <ul class="toplinks">
+     </ul>
+     <br class="clear"/>
+    </div>
+    <form id="changelist-form" method="post" novalidate="">
+     MockedCsrfTokenNode
+     <p class="paginator">
+      0 Hosts
+     </p>
+    </form>
+   </div>
+   <div id="changelist-filter">
+    <h2>
+     Filter
+    </h2>
+    <h3>
+     By Last Status
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+     <li>
+      <a href="?last_status__exact=1" title="Yes">
+       Yes
+      </a>
+     </li>
+     <li>
+      <a href="?last_status__exact=0" title="No">
+       No
+      </a>
+     </li>
+    </ul>
+    <h3>
+     By WAN access
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+     <li>
+      <a href="?wan_access__exact=granted" title="granted">
+       granted
+      </a>
+     </li>
+     <li>
+      <a href="?wan_access__exact=denied" title="denied">
+       denied
+      </a>
+     </li>
+     <li>
+      <a href="?wan_access__exact=error" title="error">
+       error
+      </a>
+     </li>
+     <li>
+      <a href="?wan_access__exact=unknown" title="unknown">
+       unknown
+      </a>
+     </li>
+    </ul>
+    <h3>
+     By Interface Type
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+    </ul>
+    <h3>
+     By Address Source
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+    </ul>
+    <h3>
+     By unique name
+    </h3>
+    <ul>
+     <li class="selected">
+      <a href="?" title="All">
+       All
+      </a>
+     </li>
+     <li>
+      <a href="?uniqueness=yes" title="Yes">
+       Yes
+      </a>
+     </li>
+     <li>
+      <a href="?uniqueness=no" title="No">
+       No
+      </a>
+     </li>
+    </ul>
+   </div>
+  </div>
+ </div>
+ <br class="clear"/>
+</div>
