@@ -162,12 +162,19 @@ addopts = """
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = px310,py39,py38,py37
+envlist = py{38,39,310}-django{2.2,3.2,4.0}
 skip_missing_interpreters = True
 
 [testenv]
 passenv = *
-whitelist_externals = pytest
+deps =
+    django2.2: django>=2.2,<2.3
+    django3.2: django>=3.2,<3.3
+    django4.0: django>=4.0,<4.1
+whitelist_externals =
+    poetry
 commands =
-    pytest djfritz djfritz_project
+    python --version
+    poetry run django-admin --version
+    python devshell.py pytest
 """

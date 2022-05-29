@@ -12,15 +12,16 @@ on:
 
 jobs:
   test:
-    name: 'Python ${{ matrix.python-version }} on ${{ matrix.os }}'
+    name: '${{ matrix.os }} Python ${{ matrix.python-version }} Django ${{ matrix.django }}'
     runs-on: ${{ matrix.os }}
     env:
       PYTHONUNBUFFERED: 1
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.9", "3.8", "3.7"]
-        os: [ubuntu-latest] # TODO: macOS-latest, windows-latest
+        os: [ubuntu-latest] # TODO: macOS-latest, windows-latest ;)
+        python-version: ["3.10", "3.9", "3.8"]
+        django: ["2.2", "3.2", "4.0"]
     steps:
     - uses: actions/checkout@v2
       with:
@@ -41,10 +42,13 @@ jobs:
       run: |
         python3 devshell.py list_venv_packages
 
-    - name: 'Run tests with Python v${{ matrix.python-version }}'
+    - name: 'List all tox test environments'
       run: |
-        python3 devshell.py pytest -vv
+        python3 devshell.py tox --listenvs
+
+    - name: 'Run tests on ${{ matrix.os }} with Python ${{ matrix.python-version }} Django ${{ matrix.django }}'
+      run: |
+        python3 devshell.py tox -e python-django${{ matrix.django }}
 
     - name: 'Upload coverage report'
-      if: matrix.os == 'ubuntu-latest'
       run: bash <(curl -s https://codecov.io/bash)
