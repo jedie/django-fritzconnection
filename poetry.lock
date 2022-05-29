@@ -298,7 +298,7 @@ test = ["airium (>=0.2.3)", "bandit (>=1.7.1)", "black (>=21.7b1)", "codespell (
 
 [[package]]
 name = "dev-shell"
-version = "0.4.0"
+version = "0.5.0"
 description = "Devloper shell for easy startup..."
 category = "dev"
 optional = false
@@ -400,7 +400,7 @@ Django = ">=2.2"
 
 [[package]]
 name = "django-tools"
-version = "0.49.0"
+version = "0.50.0"
 description = "miscellaneous tools for Django based projects"
 category = "main"
 optional = false
@@ -1402,8 +1402,8 @@ darker = [
     {file = "darker-1.5.0.tar.gz", hash = "sha256:a23a917b9abee0725ba68da5f564ed25dd4e63eab6dc5a43d9e2f88b7c19899e"},
 ]
 dev-shell = [
-    {file = "dev-shell-0.4.0.tar.gz", hash = "sha256:c2c0a57a03724178d52965e1abde4f5c7e00521db2cfb5a3fbbba39ae2ac48d4"},
-    {file = "dev_shell-0.4.0-py3-none-any.whl", hash = "sha256:550c19c92ca47798b6c039c6664a93c56c298787e4170b4b9e3b0bc3343a9e11"},
+    {file = "dev-shell-0.5.0.tar.gz", hash = "sha256:b90a31d4fb988a82975ceec8480efcbb31e6052db664cc341ee5a89522bdaf2d"},
+    {file = "dev_shell-0.5.0-py3-none-any.whl", hash = "sha256:07af6a0b6817e4a0d9ec0a3f419e3d5b744f87fb45a5867769e233b73d7d776a"},
 ]
 diff-match-patch = [
     {file = "diff-match-patch-20200713.tar.gz", hash = "sha256:da6f5a01aa586df23dfc89f3827e1cafbb5420be9d87769eeb079ddfd9477a18"},
@@ -1438,8 +1438,8 @@ django-tagulous = [
     {file = "django_tagulous-1.3.3-py3-none-any.whl", hash = "sha256:ad3bb85f4cce83a47e4c0257143229cb92a294defa02fe661823b0442b35d478"},
 ]
 django-tools = [
-    {file = "django-tools-0.49.0.tar.gz", hash = "sha256:9da6d5610576a34219be3dea9c7c2207669e5c916d89987011843ded772ece0a"},
-    {file = "django_tools-0.49.0-py3-none-any.whl", hash = "sha256:a27c32cff98cd82dde23ab2f05fb9e06a32aaeb8357e96f1ec02a634b6619170"},
+    {file = "django-tools-0.50.0.tar.gz", hash = "sha256:c53805b60f6745d9d3a729d2b0add72eb27284362e0aef73d72b1a69704e4357"},
+    {file = "django_tools-0.50.0-py3-none-any.whl", hash = "sha256:4ce9f524ba08d2071a762dc66e7f85ac1664b41cc8fa0ce686a651c1610b3d67"},
 ]
 docopt = [
     {file = "docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"},
