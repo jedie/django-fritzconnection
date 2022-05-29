@@ -36,19 +36,19 @@ jobs:
 
     - name: 'Bootstrap'
       run: |
-        python3 devshell.py quit
+        ./devshell.py quit
 
     - name: 'List installed packages'
       run: |
-        python3 devshell.py list_venv_packages
+        ./devshell.py list_venv_packages
 
     - name: 'List all tox test environments'
       run: |
-        python3 devshell.py tox --listenvs
+        ./devshell.py tox --listenvs
 
     - name: 'Run tests on ${{ matrix.os }} with Python ${{ matrix.python-version }} Django ${{ matrix.django }}'
       run: |
-        python3 devshell.py tox -e python-django${{ matrix.django }}
+        ./devshell.py tox -e python-django${{ matrix.django }}
 
     - name: 'Upload coverage report'
       run: bash <(curl -s https://codecov.io/bash)
