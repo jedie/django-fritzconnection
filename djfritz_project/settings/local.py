@@ -53,11 +53,12 @@ DEFAULT_USERPASS = 'test'
 DEFAULT_USEREMAIL = 'nobody@local.intranet'
 
 MIDDLEWARE = MIDDLEWARE.copy()
-MIDDLEWARE.append('djfritz_project.tests.middleware.AlwaysLoggedInAsSuperUser')
+MIDDLEWARE.append('django_tools.middlewares.local_auto_login.AlwaysLoggedInAsSuperUserMiddleware')
 
 # _____________________________________________________________________________
 # Django-Debug-Toolbar
 
+INSTALLED_APPS.copy()
 INSTALLED_APPS += ['debug_toolbar']
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 

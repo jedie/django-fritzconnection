@@ -5,6 +5,7 @@ from pathlib import Path
 
 from django.conf import settings
 from django.core import checks
+from django.core.cache import cache
 from django.test import TestCase
 
 import djfritz
@@ -48,7 +49,7 @@ def test_poetry_check(package_root=None):
 
     output = subprocess.check_output(
         [poerty_bin, 'check'],
-        universal_newlines=True,
+        text=True,
         env=os.environ,
         stderr=subprocess.STDOUT,
         cwd=str(package_root),
@@ -84,3 +85,18 @@ class ProjectSettingsTestCase(TestCase):
                 print(issue)
             print('=' * 100)
             raise AssertionError('There are check issues!')
+
+    def test_cache(self):
+        # django cache should work in tests, because some tests "depends" on it
+        cache_key = 'a-cache-key'
+        assert cache.get(cache_key) is None
+        cache.set(cache_key, 'the cache content', timeout=1)
+        assert cache.get(cache_key) == 'the cache content'
+        cache.delete(cache_key)
+        assert cache.get(cache_key) is None
+
+    def test_settings(self):
+        assert settings.SETTINGS_MODULE == 'djfritz_project.settings.tests'
+        middlewares = [entry.rsplit('.', 1)[-1] for entry in settings.MIDDLEWARE]
+        assert 'AlwaysLoggedInAsSuperUserMiddleware' not in middlewares
+        assert 'DebugToolbarMiddleware' not in middlewares

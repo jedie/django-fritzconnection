@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import include, static
+from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import RedirectView
@@ -12,10 +12,6 @@ urlpatterns = [  # Don't use i18n_patterns() here
     path('admin/', admin.site.urls),
     path('', include('djfritz.urls')),
 ]
-
-
-if settings.SERVE_FILES:
-    urlpatterns += static.static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 if settings.DEBUG:
