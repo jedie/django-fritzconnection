@@ -90,7 +90,10 @@ See also: [Issues #5](https://github.com/jedie/django-fritzconnection/issues/5)
 
 ## versions
 
-* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.2.0...main)
+* [*dev*](https://github.com/jedie/django-fritzconnection/compare/v0.3.0rc1...main)
+  * Replace `DynamicViewMenu` with `bx_django_utils.admin_extra_views`
+  * Use RunServerCommand from django-tools
+  * Update test/CI setup
   * TBC
 * [v0.2.0 - 15.05.2022](https://github.com/jedie/django-fritzconnection/compare/v0.1.0...v0.2.0)
   * NEW: Hosts admin action to ping all IPs from selected hosts
