@@ -41,19 +41,21 @@ SECRET_KEY = __SECRET_FILE.open('r').read().strip()
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    #
     'reversion',  # https://github.com/etianen/django-reversion
     'reversion_compare',  # https://github.com/jedie/django-reversion-compare
     'tagulous',  # https://github.com/radiac/django-tagulous
     'adminsortable2',  # https://github.com/jrief/django-admin-sortable2
     'bx_django_utils',  # https://github.com/boxine/bx_django_utils
-
+    #
+    'bx_django_utils.admin_extra_views.apps.AdminExtraViewsAppConfig',
+    'bx_django_utils.admin_extra_views.admin_config.CustomAdminConfig',
+    #
     'djfritz.apps.DjFritzConfig',
 ]
 

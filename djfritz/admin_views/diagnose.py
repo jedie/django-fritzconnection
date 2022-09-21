@@ -1,3 +1,6 @@
+from bx_django_utils.admin_extra_views.base_view import AdminExtraViewMixin
+from bx_django_utils.admin_extra_views.datatypes import AdminExtraMeta
+from bx_django_utils.admin_extra_views.registry import register_admin_view
 from bx_py_utils.anonymize import anonymize
 from django.contrib import messages
 from django.utils.translation import gettext as _
@@ -5,16 +8,20 @@ from django.views.generic import TemplateView
 from fritzconnection import __version__ as fc_version
 from fritzconnection.core.fritzconnection import FRITZ_USERNAME
 
+from djfritz.admin_views.base_views import DjangoAdminContextMixin, diagnose_app
 from djfritz.fritz_connection import get_fritz_connection
-from djfritz.views.base_views import DjangoAdminContextMixin, OnlyStaffUserMixin
 
 
-class FritzBoxConnectionView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateView):
-    title = 'Test FritzBox connection'
+@register_admin_view(pseudo_app=diagnose_app)
+class FritzBoxConnectionView(AdminExtraViewMixin, DjangoAdminContextMixin, TemplateView):
+    meta = AdminExtraMeta(name='Test FritzBox connection')
     template_name = 'djfritz/diagnose_connection.html'
 
     def get_context_data(self, **context):
         fc = get_fritz_connection()
+        if not fc:
+            messages.error(self.request, 'No Connection to FritzBox!')
+            return context
 
         fritz_username = fc.soaper.user
         if fritz_username == FRITZ_USERNAME:
@@ -49,18 +56,23 @@ class FritzBoxConnectionView(OnlyStaffUserMixin, DjangoAdminContextMixin, Templa
                 last_connection=get_fritz_connection.last_connection,
                 modelname=fc.modelname,
                 address=fc.soaper.address,
-                system_version=fc.system_version
+                system_version=fc.system_version,
             )
         )
         return super().get_context_data(**context)
 
 
-class ListBoxServicesView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateView):
-    title = 'List all FritzBox services'
+@register_admin_view(pseudo_app=diagnose_app)
+class ListBoxServicesView(AdminExtraViewMixin, DjangoAdminContextMixin, TemplateView):
+    meta = AdminExtraMeta(name='List all FritzBox services')
     template_name = 'djfritz/list_box_services.html'
 
     def get_context_data(self, **context):
         fc = get_fritz_connection()
+        if not fc:
+            messages.error(self.request, 'No Connection to FritzBox!')
+            return context
+
         context['services'] = fc.services
 
         service_name = self.request.GET.get('service_name')
