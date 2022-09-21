@@ -26,12 +26,12 @@ class RunTestServerTestCase(TestCase):
     def test_run_testserver(self):
         output = call_run_testserver('--help')
         assert 'usage: manage.py run_testserver' in output
-        assert 'Run Django dev. Server' in output
         assert 'Optional port number, or ipaddr:port' in output
 
     def test_pass_wrong_addrport(self):
         output = call_run_testserver('not-ip:no-port')
-        assert "call 'runserver' command with" in output
+        assert 'not-ip:no-port' in output
+        assert 'Call "runserver" addrport:\'not-ip:no-port\' ' in output
         assert (
             'CommandError: "not-ip:no-port" is not a valid port number or address:port pair.'
         ) in output

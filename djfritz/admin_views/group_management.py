@@ -1,3 +1,6 @@
+from bx_django_utils.admin_extra_views.base_view import AdminExtraViewMixin
+from bx_django_utils.admin_extra_views.datatypes import AdminExtraMeta
+from bx_django_utils.admin_extra_views.registry import register_admin_view
 from django.contrib import messages
 from django.contrib.admin.utils import unquote
 from django.db.models import Count
@@ -5,12 +8,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
+from djfritz.admin_views.base_views import DjangoAdminContextMixin, management_app
 from djfritz.models import HostGroupModel
 from djfritz.services.hosts import set_wan_access_with_messages
-from djfritz.views.base_views import DjangoAdminContextMixin, OnlyStaffUserMixin
 
 
-class GroupManagementView(OnlyStaffUserMixin, DjangoAdminContextMixin, TemplateView):
+@register_admin_view(pseudo_app=management_app)
+class GroupManagementView(AdminExtraViewMixin, DjangoAdminContextMixin, TemplateView):
+    meta = AdminExtraMeta(name='Manage host WAN access via host-groups')
+
     title = 'Manage host WAN access via host-groups'
     template_name = 'djfritz/group_management.html'
 

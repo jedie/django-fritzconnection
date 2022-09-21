@@ -1,0 +1,8 @@
+[
+    "/admin/diagnose/list-all-fritzbox-services/",
+    "/admin/diagnose/test-fritzbox-connection/",
+    "/admin/host-information/get-information-about-registered-hosts/",
+    "/admin/host-information/get-raw-mesh-topology/",
+    "/admin/host-information/list-last-connect-information-about-hosts/",
+    "/admin/management/manage-host-wan-access-via-host-groups/"
+]

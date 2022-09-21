@@ -1,9 +1,10 @@
+from unittest import mock
 from unittest.mock import MagicMock, patch
 
 from django.template.defaulttags import CsrfTokenNode
+from fritzconnection.core.exceptions import FritzConnectionException
 
-from djfritz import context_processors
-from djfritz.templatetags import djfritz
+from djfritz import context_processors, fritz_connection
 
 
 class MocksBase:
@@ -34,5 +35,9 @@ class DefaultMocks(MocksBase):
 class NoFritzBoxMocks(MocksBase):
     def __init__(self):
         self.mocks = [
-            patch.object(djfritz, 'get_fritz_connection', return_value=None),
+            mock.patch.object(
+                fritz_connection,
+                'FritzConnection',
+                side_effect=FritzConnectionException('test mock'),
+            )
         ]
