@@ -1,7 +1,7 @@
 # django-fritzconnection
 
 [![tests](https://github.com/jedie/django-fritzconnection/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/jedie/django-fritzconnection/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/github/jedie/django_fritzconnection/branch/main/graph/badge.svg)](https://app.codecov.io/github/jedie/django_fritzconnection)
+[![codecov](https://codecov.io/github/jedie/django-fritzconnection/branch/main/graph/badge.svg)](https://app.codecov.io/github/jedie/django-fritzconnection)
 [![django-fritzconnection @ PyPi](https://img.shields.io/pypi/v/django-fritzconnection?label=django-fritzconnection%20%40%20PyPi)](https://pypi.org/project/django-fritzconnection/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/django-fritzconnection)](https://github.com/jedie/django-fritzconnection/blob/main/pyproject.toml)
 [![License GPL-3.0-or-later](https://img.shields.io/pypi/l/django-fritzconnection)](https://github.com/jedie/django-fritzconnection/blob/main/LICENSE)
