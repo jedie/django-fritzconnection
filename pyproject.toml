@@ -158,9 +158,7 @@ commands_pre =
     pip install -U pip-tools
     pip-sync requirements.dev.txt
 commands =
-    django32: {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer
-    django41: {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer --shuffle --parallel
-    django42: {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer --shuffle --parallel
+    {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer --shuffle --parallel
 """
 
 

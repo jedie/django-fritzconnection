@@ -106,6 +106,7 @@ See also git tags: https://github.com/jedie/manageprojects/tags
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
 * [v0.3.0rc2](https://github.com/jedie/django-fritzconnection/compare/v0.2.0...v0.3.0rc2)
+  * 2023-11-28 - fix tox config
   * 2023-11-28 - Revert deletion of AUTHORS and LICENSE and remove obsolete snapshot file
   * 2023-11-28 - Remove different Django version from test matrix: Just use the newest release
   * 2023-11-28 - Fix tests
