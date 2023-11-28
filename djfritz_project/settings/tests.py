@@ -1,8 +1,17 @@
-# flake8: noqa: E405, F403
+# flake8: noqa: E405
+"""
+    Settings used to run tests
+"""
+from djfritz_project.settings.prod import *  # noqa
+from djfritz_project.tests.utilities import deny_any_real_request
 
-import requests_mock
 
-from djfritz_project.settings.base import *
+# _____________________________________________________________________________
+# Manage Django Project
+
+INSTALLED_APPS.append('manage_django_project')
+
+# _____________________________________________________________________________
 
 
 DATABASES = {
@@ -12,33 +21,24 @@ DATABASES = {
     }
 }
 
-SECRET_KEY = 'No individual secret... But this settings should only be used in tests ;)'
+SECRET_KEY = 'This is not a individual secret string, because this is only used for tests ;)'
 
-# Run the tests as on production: Without DBEUG:
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ('127.0.0.1', '0.0.0.0', 'localhost')
+# Speedup tests by change the Password hasher:
+PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',)
 
-
-###################################################################################################
-# Deny any not mocked requests
+# _____________________________________________________________________________
 
 
-def _unmocked_requests_error_message(request, response):
-    raise RuntimeError(
-        f'Unmocked request to {request.url} in tests, wrap with requests_mock.mock()!'
-    )
+# All tests should use django-override-storage!
+# Set root to not existing path, so that wrong tests will fail:
+STATIC_ROOT = '/not/exists/static/'
+MEDIA_ROOT = '/not/exists/media/'
 
 
-fallback_mocker = requests_mock.Mocker()
-fallback_mocker.get(requests_mock.ANY, content=_unmocked_requests_error_message)
-fallback_mocker.__enter__()
+# _____________________________________________________________________________
 
 
-###################################################################################################
-
-
-LOGGING['formatters']['colored']['format'] = (
-    '%(log_color)s%(name)s %(levelname)8s %(cut_path)s:%(lineno)-3s %(message)s'
-)
+# Raise SystemExit on any request from test code:
+deny_any_real_request()

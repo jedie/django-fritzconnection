@@ -1,13 +1,33 @@
-import logging
-import time
+from __future__ import annotations
 
+import logging
+import tempfile
+import time
+from pathlib import Path
+from typing import Any
+
+from django.conf import settings
 from django.utils import timezone
-from fritzconnection import FritzConnection
+from fritzconnection import FritzConnection as OriginFritzConnection
 from fritzconnection.core.exceptions import FritzActionFailedError, FritzConnectionException
 from fritzconnection.lib.fritzbase import AbstractLibraryBase
 
 
 logger = logging.getLogger(__name__)
+
+
+class FritzConnection(OriginFritzConnection):
+    def call_action(
+        self, service_name: str, action_name: str, *, arguments: dict | None = None, **kwargs
+    ) -> dict[str, Any]:
+        logger.info(
+            'call_action: service_name=%r action_name=%r arguments=%r kwargs=%r',
+            service_name,
+            action_name,
+            arguments,
+            kwargs,
+        )
+        return super().call_action(service_name, action_name, arguments=arguments, **kwargs)
 
 
 class LazyFritzConnection:
@@ -16,12 +36,31 @@ class LazyFritzConnection:
 
     def __call__(self) -> FritzConnection:
         if self.fc is None:
+            cache_directory = Path(tempfile.gettempdir(), 'FritzConnectionCache')
+            cache_directory.mkdir(exist_ok=True)
+
+            cache_format = 'json' if settings.DEBUG else 'pickle'
+
+            logger.info(
+                'Connection to FritzBox... (cache_directory="%s" cache_format=%r)', cache_directory, cache_format
+            )
+
+            start_time = time.monotonic()
             try:
-                self.fc = FritzConnection()
+                self.fc = FritzConnection(
+                    use_cache=True,
+                    cache_directory=cache_directory,
+                    cache_format=cache_format,
+                )
             except FritzConnectionException as err:
                 logger.error('Can not connect to FritzBox: %s', err)
             else:
+                duration = time.monotonic() - start_time
+                logger.info('Connected to %r %s in %.2fsec.', self.fc.modelname, self.fc.soaper.address, duration)
                 self.last_connection = timezone.now()
+        else:
+            logger.debug('Reusing FritzBox connection instance.')
+        print(f'{self.fc=}', type(self.fc))
         return self.fc
 
 
@@ -55,6 +94,7 @@ class FritzHostFilter(AbstractLibraryBase):
 
         Needs authenticated login to FritzBox.
         """
+        assert ip
         raw_state = self._action('GetWANAccessByIP', NewIPv4Address=ip)
         state = raw_state['NewWANAccess']
         logger.info('GetWANAccessByIP: ip=%r has state=%r (Raw: %r)', ip, state, raw_state)

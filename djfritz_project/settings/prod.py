@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'bx_django_utils.admin_extra_views.apps.AdminExtraViewsAppConfig',
     'bx_django_utils.admin_extra_views.admin_config.CustomAdminConfig',
     #
-    'djfritz.apps.DjFritzConfig',
+    'djfritz.apps.AppConfig',
 ]
 
 ROOT_URLCONF = 'djfritz_project.urls'
@@ -132,7 +132,6 @@ LANGUAGES = [
     ('en', _('English')),
 ]
 USE_I18N = True
-USE_L10N = True
 TIME_ZONE = 'Europe/Paris'
 USE_TZ = True
 

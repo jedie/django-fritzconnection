@@ -1,28 +1,37 @@
-from unittest import mock
 from unittest.mock import MagicMock, patch
 
+from bx_py_utils.test_utils.context_managers import MassContextManager
 from django.template.defaulttags import CsrfTokenNode
-from fritzconnection.core.exceptions import FritzConnectionException
+from urllib3.exceptions import ProtocolError
 
-from djfritz import context_processors, fritz_connection
-
-
-class MocksBase:
-    mocks = None  # Should be set in __init__ !
-
-    def __enter__(self):
-        assert self.mocks
-        for mock in self.mocks:
-            mock.__enter__()
-
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        for mock in self.mocks:
-            mock.__exit__(exc_type, exc_val, exc_tb)
+from djfritz import context_processors
 
 
-class DefaultMocks(MocksBase):
+class DenyCallError(SystemExit):
+    pass
+
+
+class DenyCall:
+    def __init__(self, func_name):
+        self.func_name = func_name
+
+    def __call__(self, *args, **kwargs):
+        raise DenyCallError(f'Deny {self.func_name} call with: {args=} {kwargs=}')
+
+
+class DenyAnyRealRequestContextManager(MassContextManager):
+    mocks = (
+        patch('socket.create_connection', DenyCall('socket create_connection()')),
+        patch('urllib3.util.connection.create_connection', DenyCall('urllib3 create_connection()')),
+    )
+
+
+def deny_any_real_request():
+    cm = DenyAnyRealRequestContextManager()
+    cm.__enter__()
+
+
+class DefaultMocks(MassContextManager):
     def __init__(self):
         version_mock = MagicMock()
         version_mock.__str__.return_value = 'MockedVersion'
@@ -32,12 +41,11 @@ class DefaultMocks(MocksBase):
         ]
 
 
-class NoFritzBoxMocks(MocksBase):
+class NoFritzBoxConnection(MassContextManager):
     def __init__(self):
         self.mocks = [
-            mock.patch.object(
-                fritz_connection,
-                'FritzConnection',
-                side_effect=FritzConnectionException('test mock'),
-            )
+            patch(
+                'urllib3.util.connection.create_connection',
+                side_effect=ProtocolError('<Mocked urllib3 in tests>'),
+            ),
         ]

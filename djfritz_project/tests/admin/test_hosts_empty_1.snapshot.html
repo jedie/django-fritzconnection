@@ -29,16 +29,13 @@
        <label for="searchbar">
         <img alt="Search" src="/static/admin/img/search.svg"/>
        </label>
-       <input autofocus="" id="searchbar" name="q" size="40" type="text" value=""/>
+       <input id="searchbar" name="q" size="40" type="text" value=""/>
        <input type="submit" value="Search"/>
       </div>
      </form>
     </div>
-    <div class="xfull">
-     <ul class="toplinks">
-     </ul>
-     <br class="clear"/>
-    </div>
+    <nav class="toplinks">
+    </nav>
     <form id="changelist-form" method="post" novalidate="">
      MockedCsrfTokenNode
      <p class="paginator">
@@ -50,96 +47,106 @@
     <h2>
      Filter
     </h2>
-    <h3>
-     By Last Status
-    </h3>
-    <ul>
-     <li class="selected">
-      <a href="?" title="All">
-       All
-      </a>
-     </li>
-     <li>
-      <a href="?last_status__exact=1" title="Yes">
-       Yes
-      </a>
-     </li>
-     <li>
-      <a href="?last_status__exact=0" title="No">
-       No
-      </a>
-     </li>
-    </ul>
-    <h3>
-     By WAN access
-    </h3>
-    <ul>
-     <li class="selected">
-      <a href="?" title="All">
-       All
-      </a>
-     </li>
-     <li>
-      <a href="?wan_access__exact=granted" title="granted">
-       granted
-      </a>
-     </li>
-     <li>
-      <a href="?wan_access__exact=denied" title="denied">
-       denied
-      </a>
-     </li>
-     <li>
-      <a href="?wan_access__exact=error" title="error">
-       error
-      </a>
-     </li>
-     <li>
-      <a href="?wan_access__exact=unknown" title="unknown">
-       unknown
-      </a>
-     </li>
-    </ul>
-    <h3>
-     By Interface Type
-    </h3>
-    <ul>
-     <li class="selected">
-      <a href="?" title="All">
-       All
-      </a>
-     </li>
-    </ul>
-    <h3>
-     By Address Source
-    </h3>
-    <ul>
-     <li class="selected">
-      <a href="?" title="All">
-       All
-      </a>
-     </li>
-    </ul>
-    <h3>
-     By unique name
-    </h3>
-    <ul>
-     <li class="selected">
-      <a href="?" title="All">
-       All
-      </a>
-     </li>
-     <li>
-      <a href="?uniqueness=yes" title="Yes">
-       Yes
-      </a>
-     </li>
-     <li>
-      <a href="?uniqueness=no" title="No">
-       No
-      </a>
-     </li>
-    </ul>
+    <details data-filter-title="Last Status" open="">
+     <summary>
+      By Last Status
+     </summary>
+     <ul>
+      <li class="selected">
+       <a href="?">
+        All
+       </a>
+      </li>
+      <li>
+       <a href="?last_status__exact=1">
+        Yes
+       </a>
+      </li>
+      <li>
+       <a href="?last_status__exact=0">
+        No
+       </a>
+      </li>
+     </ul>
+    </details>
+    <details data-filter-title="WAN access" open="">
+     <summary>
+      By WAN access
+     </summary>
+     <ul>
+      <li class="selected">
+       <a href="?">
+        All
+       </a>
+      </li>
+      <li>
+       <a href="?wan_access__exact=granted">
+        granted
+       </a>
+      </li>
+      <li>
+       <a href="?wan_access__exact=denied">
+        denied
+       </a>
+      </li>
+      <li>
+       <a href="?wan_access__exact=error">
+        error
+       </a>
+      </li>
+      <li>
+       <a href="?wan_access__exact=unknown">
+        unknown
+       </a>
+      </li>
+     </ul>
+    </details>
+    <details data-filter-title="Interface Type" open="">
+     <summary>
+      By Interface Type
+     </summary>
+     <ul>
+      <li class="selected">
+       <a href="?">
+        All
+       </a>
+      </li>
+     </ul>
+    </details>
+    <details data-filter-title="Address Source" open="">
+     <summary>
+      By Address Source
+     </summary>
+     <ul>
+      <li class="selected">
+       <a href="?">
+        All
+       </a>
+      </li>
+     </ul>
+    </details>
+    <details data-filter-title="unique name" open="">
+     <summary>
+      By unique name
+     </summary>
+     <ul>
+      <li class="selected">
+       <a href="?">
+        All
+       </a>
+      </li>
+      <li>
+       <a href="?uniqueness=yes">
+        Yes
+       </a>
+      </li>
+      <li>
+       <a href="?uniqueness=no">
+        No
+       </a>
+      </li>
+     </ul>
+    </details>
    </div>
   </div>
  </div>
