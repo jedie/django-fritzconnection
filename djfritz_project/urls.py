@@ -1,6 +1,6 @@
 from bx_django_utils.admin_extra_views.registry import extra_view_registry
 from django.conf import settings
-from django.conf.urls import include
+from django.urls import include
 from django.contrib import admin
 from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseRedirect

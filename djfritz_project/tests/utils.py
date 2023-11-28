@@ -17,16 +17,16 @@ class ForRunnersCommandTestCase(DjangoCommandMixin, TestCase):
         django_fritzconnection_path = Path(self.django_fritzconnection_bin)
         return self.call_manage_py(
             cmd=cmd,
-            manage_dir=str(django_fritzconnection_path.parent),
-            manage_py=django_fritzconnection_path.name,  # Python 3.5 needs str()
-            **kwargs
+            manage_dir=django_fritzconnection_path.parent,
+            manage_py=django_fritzconnection_path.name,
+            **kwargs,
         )
 
     def _call_manage(self, cmd, **kwargs):
         manage_path = Path(self.manage_bin)
         return self.call_manage_py(
             cmd=cmd,
-            manage_dir=str(manage_path.parent),
-            manage_py=manage_path.name,  # Python 3.5 needs str()
-            **kwargs
+            manage_dir=manage_path.parent,
+            manage_py=manage_path.name,
+            **kwargs,
         )
