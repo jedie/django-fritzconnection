@@ -1,55 +1,65 @@
-import logging
-
-from bx_django_utils.test_utils.html_assertion import (
-    HtmlAssertionMixin,
-    assert_html_response_snapshot,
-)
+from bx_django_utils.test_utils.html_assertion import HtmlAssertionMixin
 from django.contrib.auth.models import User
 from django.test import TestCase
+from model_bakery import baker
 
-from djfritz.fritz_connection import get_fritz_connection
-from djfritz_project.tests.utilities import DefaultMocks, NoFritzBoxMocks
+from djfritz import __version__
 
 
-class AdminTests(HtmlAssertionMixin, TestCase):
+class AdminAnonymousTests(HtmlAssertionMixin, TestCase):
+    """
+    Anonymous will be redirected to the login page.
+    """
+
     def test_login_en(self):
-        response = self.client.get('/admin/', secure=True, HTTP_ACCEPT_LANGUAGE='en')
-        self.assertRedirects(
-            response, expected_url='/admin/login/?next=/admin/', fetch_redirect_response=False
-        )
+        response = self.client.get("/en/admin/", HTTP_ACCEPT_LANGUAGE="en")
+        self.assertRedirects(response, expected_url="/en/admin/login/?next=/en/admin/")
 
     def test_login_de(self):
-        response = self.client.get('/admin/', secure=True, HTTP_ACCEPT_LANGUAGE='de')
-        self.assertRedirects(
-            response, expected_url='/admin/login/?next=/admin/', fetch_redirect_response=False
+        response = self.client.get("/de/admin/", HTTP_ACCEPT_LANGUAGE="de")
+        self.assertRedirects(response, expected_url="/de/admin/login/?next=/de/admin/")
+
+
+class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
+    """
+    Some basics test with the django admin
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.superuser = baker.make(
+            User, username='superuser', is_staff=True, is_active=True, is_superuser=True
+        )
+        cls.staffuser = baker.make(
+            User, username='staff_test_user', is_staff=True, is_active=True, is_superuser=False
         )
 
-    def test_index_redirect(self):
-        response = self.client.get('/', secure=True)
-        self.assertRedirects(
+    def test_staff_admin_index(self):
+        self.client.force_login(self.staffuser)
+
+        response = self.client.get("/en/admin/", HTTP_ACCEPT_LANGUAGE="en")
+        self.assert_html_parts(
             response,
-            expected_url='/admin/login/?next=%2Fadmin%2Fmanagement%2Fmanage-host-wan-access-via-host-groups%2F',
-            fetch_redirect_response=False,
+            parts=(
+                f"<title>Site administration | django-fritzconnection v{__version__}</title>",
+                "<h1>Site administration</h1>",
+                "<strong>staff_test_user</strong>",
+                "<p>You don’t have permission to view or edit anything.</p>",
+            ),
         )
+        self.assertTemplateUsed(response, template_name="admin/index.html")
 
-        with self.assertLogs('django.request', level=logging.WARNING):
-            response = self.client.get(
-                '/admin/management/manage-host-wan-access-via-host-groups/', secure=True
-            )
-        self.assertEqual(response.status_code, 403)
-
-    def test_admin_index_page(self):
-        self.client.force_login(User.objects.create_superuser(username='foobar'))
-        with NoFritzBoxMocks(), DefaultMocks():
-            assert get_fritz_connection() is None  # Mock works?
-
-            response = self.client.get('/admin/', secure=True)
-            self.assertEqual(response.status_code, 200)
-            self.assert_html_parts(
-                response,
-                parts=(
-                    '<title>Site administration | django-fritzconnection vMockedVersion</title>',
-                    '<a href="/admin/diagnose/list-all-fritzbox-services/">List all FritzBox services</a>',
-                ),
-            )
-            assert_html_response_snapshot(response, validate=False)
+    def test_superuser_admin_index(self):
+        self.client.force_login(self.superuser)
+        response = self.client.get("/en/admin/", HTTP_ACCEPT_LANGUAGE="en")
+        self.assert_html_parts(
+            response,
+            parts=(
+                "django_fritzconnection",
+                "<strong>superuser</strong>",
+                "Site administration",
+                "/admin/auth/group/add/",
+                "/admin/auth/user/add/",
+            ),
+        )
+        self.assertTemplateUsed(response, template_name="admin/index.html")

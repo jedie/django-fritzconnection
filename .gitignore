@@ -1,37 +1,30 @@
 .*
+*.egg-info
+__pycache__
+/dist/
+/coverage.*
+*.orig
+
 !.github
+!.editorconfig
 !.flake8
 !.gitignore
-!.isort.cfg
-!/.travis.yml
-!/.style.yapf
+!.gitkeep
 
-# Own "start dev server" script with FritzBox credentials:
-*.sh
+# for django-dbbackup
+/backups/
+!/backups/.gitkeep
 
 # from test projects:
-**/static/*
-**/media/*
+/static/
+/media/
 *.sqlite3
+*.json
+
+# Include "ignored" *.json:
+!**/fixtures/*.json
 
 # Django
 secret.txt
 
-# Coverage HTML Report files:
-htmlcov
-
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# C extensions
-*.so
-
-# Distribution / packaging
-dist/
-publish.log
-
-# Unit test / coverage reports
-db.sqlite3
-coverage.xml
+*.sh

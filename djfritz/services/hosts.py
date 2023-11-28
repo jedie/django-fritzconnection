@@ -76,8 +76,13 @@ def update_hosts():
     for host in hosts:
 
         ip_v4 = host['ip']
-        wan_access = fhf.get_wan_access_state(ip=ip_v4)
-        logger.info('WAN access state for %r is: %r', ip_v4, wan_access)
+        try:
+            wan_access = fhf.get_wan_access_state(ip=ip_v4)
+        except FritzConnectionException as err:
+            logger.exception('Error getting WAN access state for %r: %s', ip_v4, err)
+            wan_access = FritzHostFilter.WAN_ACCESS_STATE_UNKNOWN
+        else:
+            logger.info('WAN access state for %r is: %r', ip_v4, wan_access)
 
         with reversion.create_revision():
             result: CreateOrUpdateResult = create_or_update2(

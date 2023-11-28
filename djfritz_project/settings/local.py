@@ -6,7 +6,7 @@
 
 import sys as __sys
 
-from djfritz_project.settings.base import *  # noqa
+from djfritz_project.settings.prod import *  # noqa
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -54,6 +54,11 @@ DEFAULT_USEREMAIL = 'nobody@local.intranet'
 
 MIDDLEWARE = MIDDLEWARE.copy()
 MIDDLEWARE.append('djfritz_project.tests.middleware.AlwaysLoggedInAsSuperUser')
+
+# _____________________________________________________________________________
+# Manage Django Project
+
+INSTALLED_APPS.append('manage_django_project')
 
 # _____________________________________________________________________________
 # Django-Debug-Toolbar

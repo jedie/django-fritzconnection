@@ -1,8 +1,10 @@
 # django-fritzconnection
 
-![django-fritzconnection @ PyPi](https://img.shields.io/pypi/v/django-fritzconnection?label=django-fritzconnection%20%40%20PyPi)
-![Python Versions](https://img.shields.io/pypi/pyversions/django-fritzconnection)
-![License GPL V3+](https://img.shields.io/pypi/l/django-fritzconnection)
+[![tests](https://github.com/jedie/django-fritzconnection/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/jedie/django-fritzconnection/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/github/jedie/django_fritzconnection/branch/main/graph/badge.svg)](https://app.codecov.io/github/jedie/django_fritzconnection)
+[![django-fritzconnection @ PyPi](https://img.shields.io/pypi/v/django-fritzconnection?label=django-fritzconnection%20%40%20PyPi)](https://pypi.org/project/django-fritzconnection/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/django-fritzconnection)](https://github.com/jedie/django-fritzconnection/blob/main/pyproject.toml)
+[![License GPL-3.0-or-later](https://img.shields.io/pypi/l/django-fritzconnection)](https://github.com/jedie/django-fritzconnection/blob/main/LICENSE)
 
 Web based FritzBox management using Python/Django and the great [fritzconnection](https://github.com/kbr/fritzconnection) library.
 
@@ -59,12 +61,7 @@ Pull requests welcome ;)
 ```
 ~$ git clone https://github.com/jedie/django-fritzconnection.git
 ~$ cd django-fritzconnection
-~/django-fritzconnection$ ./devshell.py
-...
-Developer shell - djfritz - v0.1.0
-...
-
-(djfritz) run_testserver
+~/django-fritzconnection$ ./manage.py
 ```
 
 ## FritzBox Credentials
@@ -83,7 +80,7 @@ Shell script work-a-round for developing, e.g.:
     export FRITZ_USERNAME="<username>"
     export FRITZ_PASSWORD="<password>"
 
-    ./devshell.py run_testserver
+    ./devshell.py run_dev_server
 )
 ```
 See also: [Issues #5](https://github.com/jedie/django-fritzconnection/issues/5)

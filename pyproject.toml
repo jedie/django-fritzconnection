@@ -1,175 +1,195 @@
-[tool.poetry]
+[project]
 name = "django-fritzconnection"
-version = "0.3.0rc1"
+dynamic = ["version"]
 description = "Web based FritzBox management using Python/Django."
-authors = ["JensDiemer <git@jensdiemer.de>"]
-homepage = "https://github.com/jedie/django-fritzconnection"
-packages = [
-    { include = "djfritz" },
-    { include = "djfritz_project" },
+license = {text = "GPL-3.0-or-later"}
+readme = "README.md"
+authors = [
+    {name = 'Jens Diemer', email = 'django-fritzconnection@jensdiemer.de'}
 ]
-keywords=['fritzbox','django', 'fritzconnect']
-classifiers = [
-    # http://pypi.python.org/pypi?%3Aaction=list_classifiers
-    'Development Status :: 4 - Beta',
-#    'Development Status :: 5 - Production/Stable',
-    'Environment :: Web Environment',
-    'Intended Audience :: End Users/Desktop',
-    'Intended Audience :: Developers',
-    'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
-    'Programming Language :: Python :: 3.10',
-    'Programming Language :: Python :: 3 :: Only',
-    'Framework :: Django',
-    'Topic :: Database :: Front-Ends',
-    'Topic :: Documentation',
-    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-    'Topic :: Internet :: WWW/HTTP :: Site Management',
-    'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
-    'Operating System :: OS Independent',
+requires-python = ">=3.9,<4" # Keep Python 3.9 until Yunohost contains a newer Python Version ;)
+dependencies = [
+    "fritzconnection",  # https://github.com/kbr/fritzconnection
+    "django-reversion-compare",  # https://github.com/jedie/django-reversion-compare/
+    "django-tagulous",  # https://github.com/radiac/django-tagulous
+    "django-admin-sortable2",  # https://github.com/jrief/django-admin-sortable2
+
+    "colorlog",  # https://github.com/borntyping/python-colorlog
+    "gunicorn",  # https://github.com/benoimyproject.wsgitc/gunicorn
+
+    "django",
+    "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
+    "bx_py_utils",  # https://github.com/boxine/bx_py_utils
+    "bx_django_utils",  # https://github.com/boxine/bx_django_utils
+    "django-axes",  # https://github.com/jazzband/django-axes
 ]
-include = ['AUTHORS', 'LICENSE', 'README.md']
-readme='README.md'
+[project.optional-dependencies]
+dev = [
+    "cmd2-ext-test",  # https://github.com/python-cmd2/cmd2/tree/master/plugins/ext_test
+    "beautifulsoup4",  # https://pypi.org/project/beautifulsoup4/
 
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/jedie/django-fritzconnection/issues"
+    "manage_django_project>=0.6.4",  # https://github.com/jedie/manage_django_project
+    "tblib",   # https://github.com/ionelmc/python-tblib
+    "pip-tools",  # https://github.com/jazzband/pip-tools/
+    "tox",  # https://github.com/tox-dev/tox
+    "coverage",  # https://github.com/nedbat/coveragepy
+    "autopep8",  # https://github.com/hhatto/autopep8
+    "pyupgrade",  # https://github.com/asottile/pyupgrade
+    "flake8",  # https://github.com/pycqa/flake8
+    "pyflakes",  # https://github.com/PyCQA/pyflakes
+    "codespell",  # https://github.com/codespell-project/codespell
+    "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
+    "safety",  # https://github.com/pyupio/safety
+    "mypy",  # https://github.com/python/mypy
+    "twine",  # https://github.com/pypa/twine
+
+    # https://github.com/akaihola/darker
+    # https://github.com/ikamensh/flynt
+    # https://github.com/pycqa/isort
+    # https://github.com/pygments/pygments
+    "darker[flynt, isort, color]",
+
+    "tomli",  # https://github.com/hukkin/tomli
+    # tomli only needed for Python <3.11, but see bug:
+    # https://github.com/pypa/pip/issues/9644#issuecomment-1456583402
+    #"tomli;python_version<\"3.11\"",  # https://github.com/hukkin/tomli
+
+    # Work-a-round for:
+    # https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
+    "typing-extensions>=3.10",
+
+    "model_bakery",  # https://github.com/model-bakers/model_bakery
+    "requests-mock",
+    "django-override-storage",  # https://github.com/danifus/django-override-storage
+]
+django32=["django>=3.2,<3.3"]
+django41=["django>=4.1,<4.2"]
+django42=["django>=4.2,<4.3"]
+
+[project.urls]
+Documentation = "https://github.com/jedie/django-fritzconnection"
+Source = "https://github.com/jedie/django-fritzconnection"
 
 
-[tool.poetry.dependencies]
-# Keep Python 3.7 until Yunohost contains a newer Python Version ;)
-python = ">=3.7,<4.0.0"
-django = "*"
-fritzconnection = "*"  # https://github.com/kbr/fritzconnection
-colorlog = "*"  # https://github.com/borntyping/python-colorlog
-django-debug-toolbar = "*"  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
-django-tools = "*"  # https://github.com/jedie/django-tools/
-bx_py_utils = "*"  # https://github.com/boxine/bx_py_utils
-bx_django_utils = "*"  # https://github.com/boxine/bx_django_utils
-django-reversion-compare = "*"  # https://github.com/jedie/django-reversion-compare/
-django-tagulous = "*"  # https://github.com/radiac/django-tagulous
-django-admin-sortable2 = "*"  # https://github.com/jrief/django-admin-sortable2
+[project.scripts]
+# Must be set in ./manage.py and PROJECT_SHELL_SCRIPT:
+djfritz_project = "djfritz_project.__main__:main"
 
-[tool.poetry.dev-dependencies]
-dev_shell = "*"  # https://github.com/jedie/dev-shell
-poetry-publish = "*"  # https://github.com/jedie/poetry-publish
-cmd2_ext_test = "*"
-tox = "*"
-pytest = "*"
-pytest-randomly = "*"
-pytest-cov = "*"
-pytest-django = "*"
-pytest-darker = "*"  # https://github.com/akaihola/pytest-darker
-# TODO: pytest-mypy = "*"
-requests-mock = "*"
-coveralls = "*"
-isort = "*"
-flake8 = "*"
-flynt = "*"
-darker = "*"  # https://github.com/akaihola/darker
-pyupgrade = "*"
-model_bakery = "*"  # https://github.com/model-bakers/model_bakery
-beautifulsoup4 = "*"
-lxml = "*"
+[manage_django_project]
+module_name="djfritz_project"
 
+# Django settings used for all commands except test/coverage/tox:
+local_settings='djfritz_project.settings.local'
 
-[tool.poetry.scripts]
-devshell = 'djfritz_project.dev_shell:devshell_cmdloop'
-run_testserver = 'djfritz_project.manage:start_test_server'
+# Django settings used for test/coverage/tox commands:
+test_settings='djfritz_project.settings.tests'
 
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["djfritz*", "djfritz_project*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "djfritz.__version__"}
 
 
 [tool.darker]
 src = ['.']
 revision = "origin/main..."
-line_length = 100
+line_length = 119
 verbose = true
+color = true
 skip_string_normalization = true
 diff = false
 check = false
 stdout = false
 isort = true
+flynt = true
 lint = [
     "flake8",
 ]
 log_level = "INFO"
 
 
-[tool.flynt]
-line_length = 100
-
-
 [tool.isort]
 # https://pycqa.github.io/isort/docs/configuration/config_files/#pyprojecttoml-preferred-format
 atomic=true
 profile='black'
-line_length=100
-skip_glob=[".*", "*/htmlcov/*","*/migrations/*"]
-known_first_party=["djfritz","djfritz_project","djfritz_tests"]
+skip_glob=['.*', '*/htmlcov/*','*/migrations/*']
+known_first_party=['django_fritzconnection']
+line_length=119
 lines_after_imports=2
 
 
 [tool.coverage.run]
-omit = [".*"]
+branch = true
+parallel = true
+concurrency = ["multiprocessing"]
+source = ['.']
+command_line = '-m djfritz_project test --shuffle --parallel --buffer'
+
+[tool.coverage.report]
+omit = ['.*', '*/tests/*', '*/migrations/*']
+skip_empty = true
+fail_under = 30
+show_missing = true
+exclude_lines = [
+    'if self.debug:',
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'if __name__ == .__main__.:',
+]
 
 
-[tool.pytest.ini_options]
-# https://docs.pytest.org/en/latest/customize.html#pyproject-toml
-minversion = "6.0"
-DJANGO_SETTINGS_MODULE="djfritz_project.settings.tests"
-
-# Don't overwrite settings.DEBUG:
-django_debug_mode="keep"
-
-norecursedirs = ".* .git __pycache__ coverage* dist htmlcov migrations"
-# sometimes helpfull "addopts" arguments:
-#    -vv
-#    --verbose
-#    --capture=no
-#    --trace-config
-#    --full-trace
-#    -p no:warnings
-addopts = """
-    --reuse-db
-    --nomigrations
-    --cov=.
-    --cov-report term-missing
-    --cov-report html
-    --cov-report xml
-    --no-cov-on-fail
-    --showlocals
-    --darker
-    --doctest-modules
-    --failed-first
-    --last-failed-no-failures all
-    --new-first
-    -p no:randomly
-"""
-# TODO: --mypy
-
-
-[tool.tox]
-# https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini
+[tool.tox]  # https://tox.wiki/en/latest/config.html#pyproject-toml
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{38,39,310}-django{3.2,4.0}
+envlist = py{312,311,310,39}-django{42,41,32}
 skip_missing_interpreters = True
 
 [testenv]
 passenv = *
-deps =
-    django3.2: django>=3.2,<3.3
-    django4.0: django>=4.0,<4.1
-whitelist_externals =
-    poetry
+skip_install = true
+commands_pre =
+    pip install -U pip-tools
+    django32: pip-sync requirements.django32.txt
+    django41: pip-sync requirements.django41.txt
+    django42: pip-sync requirements.django42.txt
 commands =
-    python --version
-    poetry run django-admin --version
-    python devshell.py pytest
+    django32: {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer
+    django41: {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer --shuffle --parallel
+    django42: {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer --shuffle --parallel
 """
+
+
+[tool.mypy]
+warn_unused_configs = true
+ignore_missing_imports = true
+allow_redefinition = true  # https://github.com/python/mypy/issues/7165
+show_error_codes = true
+plugins = []
+exclude = ['.venv', 'tests', 'migrations']
+
+
+[manageprojects] # https://github.com/jedie/manageprojects
+initial_revision = "de04870"
+initial_date = 2023-11-26T21:01:51+01:00
+cookiecutter_template = "https://github.com/jedie/cookiecutter_templates/"
+cookiecutter_directory = "managed-django-project"
+
+[manageprojects.cookiecutter_context.cookiecutter]
+full_name = "Jens Diemer"
+github_username = "jedie"
+author_email = "django-fritzconnection@jensdiemer.de"
+project_name = "django-fritzconnection"
+package_name = "django_fritzconnection"
+package_version = "0.3.0rc1"
+package_description = "Web based FritzBox management using Python/Django."
+package_url = "https://github.com/jedie/django-fritzconnection"
+license = "GPL-3.0-or-later"
+_template = "https://github.com/jedie/cookiecutter_templates/"
