@@ -1,10 +1,9 @@
 from bx_django_utils.admin_extra_views.registry import extra_view_registry
 from django.conf import settings
-from django.urls import include
 from django.contrib import admin
 from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseRedirect
-from django.urls import path, reverse
+from django.urls import include, path, reverse
 from django.views.generic import RedirectView
 
 from djfritz.admin_views.group_management import GroupManagementView

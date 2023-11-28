@@ -39,7 +39,7 @@ class LazyFritzConnection:
                 logger.error('Can not connect to FritzBox: %s', err)
             else:
                 duration = time.monotonic() - start_time
-                logger.info(f'Connected to %r %s in %.2fsec.', self.fc.modelname, self.fc.soaper.address, duration)
+                logger.info('Connected to %r %s in %.2fsec.', self.fc.modelname, self.fc.soaper.address, duration)
                 self.last_connection = timezone.now()
         else:
             logger.debug('Reusing FritzBox connection instance.')

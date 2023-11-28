@@ -1,4 +1,3 @@
-from unittest import mock
 from unittest.mock import MagicMock, patch
 
 from django.template.defaulttags import CsrfTokenNode
@@ -35,7 +34,7 @@ class DefaultMocks(MocksBase):
 class NoFritzBoxMocks(MocksBase):
     def __init__(self):
         self.mocks = [
-            mock.patch.object(
+            patch.object(
                 fritz_connection,
                 'FritzConnection',
                 side_effect=FritzConnectionException('test mock'),
