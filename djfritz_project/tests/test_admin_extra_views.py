@@ -5,7 +5,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from djfritz.fritz_connection import get_fritz_connection
-from djfritz_project.tests.utilities import NoFritzBoxMocks
+from djfritz_project.tests.utilities import NoFritzBoxConnection
 
 
 @override_settings(SECURE_SSL_REDIRECT=False)
@@ -28,8 +28,8 @@ class AdminExtraViewsTestCase(TestCase):
         superuser = User.objects.create_superuser(username='foobar')
         self.client.force_login(superuser)
 
-        with NoFritzBoxMocks():
-            assert get_fritz_connection() is None  # Mock works?
+        with NoFritzBoxConnection():
+            self.assertIs(get_fritz_connection(), None)  # Mock works?
 
             all_urls = []
             for url in iter_admin_extra_views_urls():

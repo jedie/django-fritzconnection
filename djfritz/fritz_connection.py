@@ -60,6 +60,7 @@ class LazyFritzConnection:
                 self.last_connection = timezone.now()
         else:
             logger.debug('Reusing FritzBox connection instance.')
+        print(f'{self.fc=}', type(self.fc))
         return self.fc
 
 

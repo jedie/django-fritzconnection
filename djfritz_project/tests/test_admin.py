@@ -4,6 +4,7 @@ from django.test import TestCase
 from model_bakery import baker
 
 from djfritz import __version__
+from djfritz_project.tests.utilities import NoFritzBoxConnection
 
 
 class AdminAnonymousTests(HtmlAssertionMixin, TestCase):
@@ -11,13 +12,15 @@ class AdminAnonymousTests(HtmlAssertionMixin, TestCase):
     Anonymous will be redirected to the login page.
     """
 
-    def test_login_en(self):
-        response = self.client.get("/en/admin/", headers={"accept-language": "en"})
-        self.assertRedirects(response, expected_url="/en/admin/login/?next=/en/admin/")
-
-    def test_login_de(self):
-        response = self.client.get("/de/admin/", headers={"accept-language": "de"})
-        self.assertRedirects(response, expected_url="/de/admin/login/?next=/de/admin/")
+    def test_login(self):
+        response = self.client.get('/admin/', secure=False, follow=False)
+        self.assertRedirects(
+            response, status_code=301, expected_url='https://testserver/admin/', fetch_redirect_response=False
+        )
+        response = self.client.get('/admin/', secure=True, follow=False)
+        self.assertRedirects(
+            response, status_code=302, expected_url='/admin/login/?next=/admin/', fetch_redirect_response=False
+        )
 
 
 class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
@@ -33,29 +36,32 @@ class AdminLoggedinTests(HtmlAssertionMixin, TestCase):
     def test_staff_admin_index(self):
         self.client.force_login(self.staffuser)
 
-        response = self.client.get("/en/admin/", headers={"accept-language": "en"})
+        with NoFritzBoxConnection():
+            response = self.client.get('/admin/', secure=True, follow=False)
         self.assert_html_parts(
             response,
             parts=(
-                f"<title>Site administration | django-fritzconnection v{__version__}</title>",
-                "<h1>Site administration</h1>",
-                "<strong>staff_test_user</strong>",
-                "<p>You don’t have permission to view or edit anything.</p>",
+                f'<title>Site administration | django-fritzconnection v{__version__}</title>',
+                '<h1>Site administration</h1>',
+                '<strong>staff_test_user</strong>',
+                '<a href="/admin/diagnose/test-fritzbox-connection/">Test FritzBox connection</a>',
             ),
         )
-        self.assertTemplateUsed(response, template_name="admin/index.html")
+        self.assertTemplateUsed(response, template_name='admin/index.html')
 
     def test_superuser_admin_index(self):
         self.client.force_login(self.superuser)
-        response = self.client.get("/en/admin/", headers={"accept-language": "en"})
+
+        with NoFritzBoxConnection():
+            response = self.client.get('/admin/', secure=True, follow=False)
         self.assert_html_parts(
             response,
             parts=(
-                "django_fritzconnection",
-                "<strong>superuser</strong>",
-                "Site administration",
-                "/admin/auth/group/add/",
-                "/admin/auth/user/add/",
+                f'<title>Site administration | django-fritzconnection v{__version__}</title>',
+                '<strong>superuser</strong>',
+                'Site administration',
+                '/admin/auth/group/add/',
+                '/admin/auth/user/add/',
             ),
         )
-        self.assertTemplateUsed(response, template_name="admin/index.html")
+        self.assertTemplateUsed(response, template_name='admin/index.html')

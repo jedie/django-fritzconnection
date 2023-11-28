@@ -3,6 +3,7 @@
     Settings used to run tests
 """
 from djfritz_project.settings.prod import *  # noqa
+from djfritz_project.tests.utilities import deny_any_real_request
 
 
 # _____________________________________________________________________________
@@ -29,11 +30,15 @@ PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',)
 
 # _____________________________________________________________________________
 
-# Skip download map via geotiler in djfritz.gpx_tools.gpxpy2map.generate_map
-MAP_DOWNLOAD = False
-
 
 # All tests should use django-override-storage!
 # Set root to not existing path, so that wrong tests will fail:
 STATIC_ROOT = '/not/exists/static/'
 MEDIA_ROOT = '/not/exists/media/'
+
+
+# _____________________________________________________________________________
+
+
+# Raise SystemExit on any request from test code:
+deny_any_real_request()

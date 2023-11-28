@@ -12,7 +12,7 @@ from django.utils import timezone
 from model_bakery import baker
 
 from djfritz.models import HostModel
-from djfritz_project.tests.utilities import DefaultMocks, NoFritzBoxMocks
+from djfritz_project.tests.utilities import DefaultMocks, NoFritzBoxConnection
 
 
 class AdminHostsTests1(HtmlAssertionMixin, TestCase):
@@ -36,7 +36,7 @@ class AdminHostsTests2(HtmlAssertionMixin, TestCase):
     def test_empty(self):
         self.client.force_login(user=self.super_user)
 
-        with DefaultMocks(), NoFritzBoxMocks():
+        with DefaultMocks(), NoFritzBoxConnection():
             response = self.client.get('/admin/djfritz/hostmodel/', secure=True)
 
         assert response.status_code == 200
@@ -90,7 +90,7 @@ class AdminHostsTests2(HtmlAssertionMixin, TestCase):
         ###########################################################################################
         # List all:
 
-        with DefaultMocks(), NoFritzBoxMocks():
+        with DefaultMocks(), NoFritzBoxConnection():
             response = self.client.get('/admin/djfritz/hostmodel/', secure=True)
         self.assert_html_parts(
             response,
@@ -107,7 +107,7 @@ class AdminHostsTests2(HtmlAssertionMixin, TestCase):
         ###########################################################################################
         # List only unique entries:
 
-        with DefaultMocks(), NoFritzBoxMocks():
+        with DefaultMocks(), NoFritzBoxConnection():
             response = self.client.get('/admin/djfritz/hostmodel/?uniqueness=yes', secure=True)
         self.assert_html_parts(
             response,
@@ -123,7 +123,7 @@ class AdminHostsTests2(HtmlAssertionMixin, TestCase):
         ###########################################################################################
         # List only unique entries:
 
-        with DefaultMocks(), NoFritzBoxMocks():
+        with DefaultMocks(), NoFritzBoxConnection():
             response = self.client.get('/admin/djfritz/hostmodel/?uniqueness=no', secure=True)
         self.assert_html_parts(
             response,
