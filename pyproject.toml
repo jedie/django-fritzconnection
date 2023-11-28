@@ -9,6 +9,7 @@ authors = [
 ]
 requires-python = ">=3.9,<4" # Keep Python 3.9 until Yunohost contains a newer Python Version ;)
 dependencies = [
+    "django",  # https://www.djangoproject.com/download/
     "fritzconnection",  # https://github.com/kbr/fritzconnection
     "django-reversion-compare",  # https://github.com/jedie/django-reversion-compare/
     "django-tagulous",  # https://github.com/radiac/django-tagulous
@@ -63,9 +64,6 @@ dev = [
     "requests-mock",
     "django-override-storage",  # https://github.com/danifus/django-override-storage
 ]
-django32=["django>=3.2,<3.3"]
-django41=["django>=4.1,<4.2"]
-django42=["django>=4.2,<4.3"]
 
 [project.urls]
 Documentation = "https://github.com/jedie/django-fritzconnection"
@@ -150,7 +148,7 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310,39}-django{42,41,32}
+envlist = py{312,311,310,39}
 skip_missing_interpreters = True
 
 [testenv]
@@ -158,9 +156,7 @@ passenv = *
 skip_install = true
 commands_pre =
     pip install -U pip-tools
-    django32: pip-sync requirements.django32.txt
-    django41: pip-sync requirements.django41.txt
-    django42: pip-sync requirements.django42.txt
+    pip-sync requirements.dev.txt
 commands =
     django32: {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer
     django41: {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer --shuffle --parallel
