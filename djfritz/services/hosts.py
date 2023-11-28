@@ -34,6 +34,9 @@ def update_host(host: HostModel) -> CreateOrUpdateResult:
         raise
 
     ip_v4 = data['NewIPAddress']
+    if not ip_v4:
+        logger.warning('No IP from: %r', data)
+        raise FritzLookUpError('Host IP is unknown! Cannot update host without IP!')
 
     fhf = FritzHostFilter(fc=fc)
     wan_access = fhf.get_wan_access_state(ip=ip_v4)
@@ -76,6 +79,10 @@ def update_hosts():
     for host in hosts:
 
         ip_v4 = host['ip']
+        if not ip_v4:
+            logger.warning('No IP from: %r', host)
+            continue
+
         try:
             wan_access = fhf.get_wan_access_state(ip=ip_v4)
         except FritzConnectionException as err:

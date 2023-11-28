@@ -93,6 +93,7 @@ class FritzHostFilter(AbstractLibraryBase):
 
         Needs authenticated login to FritzBox.
         """
+        assert ip
         raw_state = self._action('GetWANAccessByIP', NewIPv4Address=ip)
         state = raw_state['NewWANAccess']
         logger.info('GetWANAccessByIP: ip=%r has state=%r (Raw: %r)', ip, state, raw_state)
