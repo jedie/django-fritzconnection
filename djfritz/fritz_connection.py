@@ -1,16 +1,33 @@
+from __future__ import annotations
+
 import logging
 import tempfile
 import time
 from pathlib import Path
+from typing import Any
 
 from django.conf import settings
 from django.utils import timezone
-from fritzconnection import FritzConnection
+from fritzconnection import FritzConnection as OriginFritzConnection
 from fritzconnection.core.exceptions import FritzActionFailedError, FritzConnectionException
 from fritzconnection.lib.fritzbase import AbstractLibraryBase
 
 
 logger = logging.getLogger(__name__)
+
+
+class FritzConnection(OriginFritzConnection):
+    def call_action(
+        self, service_name: str, action_name: str, *, arguments: dict | None = None, **kwargs
+    ) -> dict[str, Any]:
+        logger.info(
+            'call_action: service_name=%r action_name=%r arguments=%r kwargs=%r',
+            service_name,
+            action_name,
+            arguments,
+            kwargs,
+        )
+        return super().call_action(service_name, action_name, arguments=arguments, **kwargs)
 
 
 class LazyFritzConnection:
