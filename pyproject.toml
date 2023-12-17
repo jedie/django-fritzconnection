@@ -96,6 +96,10 @@ include = ["djfritz*", "djfritz_project*"]
 version = {attr = "djfritz.__version__"}
 
 
+[tool.cli_base]
+version_module_name="djfritz"  # Used by update_readme_history()
+
+
 [tool.darker]
 src = ['.']
 revision = "origin/main..."
