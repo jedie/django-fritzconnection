@@ -18,7 +18,7 @@ dependencies = [
     "colorlog",  # https://github.com/borntyping/python-colorlog
     "gunicorn",  # https://github.com/benoimyproject.wsgitc/gunicorn
 
-    "django",
+    "django>=4.2,<4.3",  # TODO: Update to Django 5.0 !
     "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
@@ -44,6 +44,7 @@ dev = [
     "safety",  # https://github.com/pyupio/safety
     "mypy",  # https://github.com/python/mypy
     "twine",  # https://github.com/pypa/twine
+    "pre-commit",  # https://github.com/pre-commit/pre-commit
 
     # https://github.com/akaihola/darker
     # https://github.com/ikamensh/flynt
@@ -94,6 +95,10 @@ include = ["djfritz*", "djfritz_project*"]
 
 [tool.setuptools.dynamic]
 version = {attr = "djfritz.__version__"}
+
+
+[tool.cli_base]
+version_module_name="djfritz"  # Used by update_readme_history()
 
 
 [tool.darker]
@@ -188,3 +193,6 @@ package_description = "Web based FritzBox management using Python/Django."
 package_url = "https://github.com/jedie/django-fritzconnection"
 license = "GPL-3.0-or-later"
 _template = "https://github.com/jedie/cookiecutter_templates/"
+applied_migrations = [
+    "22ca323", # 2023-12-17T11:56:15+01:00
+]

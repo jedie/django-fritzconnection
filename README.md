@@ -105,6 +105,12 @@ See also git tags: https://github.com/jedie/manageprojects/tags
 
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
+* [**dev**](https://github.com/jedie/django-fritzconnection/compare/v0.3.0...main)
+  * 2023-12-17 - Use "update-readme-history" pre-commit hook
+  * 2023-12-17 - Use cli_base.cli_tools.git_history.update_readme_history()
+  * 2023-12-17 - Update requirements TODO: Switch to Django 5.0
+  * 2023-12-17 - Apply manageprojects migrations
+  * 2023-11-28 - Update README.md
 * [v0.3.0](https://github.com/jedie/django-fritzconnection/compare/v0.2.0...v0.3.0)
   * 2023-11-28 - fix CI and activate PYTHONWARNINGS only for the tests
   * 2023-11-28 - fix tox config
@@ -139,6 +145,9 @@ See also git tags: https://github.com/jedie/manageprojects/tags
   * 2022-04-08 - Handle updating not existing host
   * 2022-04-08 - Set v0.1.0.rc0
   * 2022-04-08 - Bugfix adding new hosts without a group
+
+<details><summary>Expand older history entries ...</summary>
+
 * [v0.0.3](https://github.com/jedie/django-fritzconnection/compare/v0.0.2...v0.0.3)
   * 2022-04-08 - NEW: 'Manage host WAN access via host-groups'
   * 2022-04-08 - NEW: Group host entries
@@ -148,9 +157,6 @@ See also git tags: https://github.com/jedie/manageprojects/tags
   * 2022-04-08 - set v0.0.3.rc0
   * 2022-04-07 - NEW: 'List "last connect" information about hosts' view
   * 2022-04-07 - Fix typo in URL
-
-<details><summary>Expand older history entries ...</summary>
-
 * [v0.0.2](https://github.com/jedie/django-fritzconnection/compare/e9ef397...v0.0.2)
   * 2022-04-04 - Render tags under name in change list
   * 2022-04-04 - Reoder admin change list
