@@ -188,3 +188,6 @@ package_description = "Web based FritzBox management using Python/Django."
 package_url = "https://github.com/jedie/django-fritzconnection"
 license = "GPL-3.0-or-later"
 _template = "https://github.com/jedie/cookiecutter_templates/"
+applied_migrations = [
+    "22ca323", # 2023-12-17T11:56:15+01:00
+]
