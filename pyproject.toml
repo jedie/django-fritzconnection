@@ -18,7 +18,7 @@ dependencies = [
     "colorlog",  # https://github.com/borntyping/python-colorlog
     "gunicorn",  # https://github.com/benoimyproject.wsgitc/gunicorn
 
-    "django",
+    "django>=4.2,<4.3",  # TODO: Update to Django 5.0 !
     "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
