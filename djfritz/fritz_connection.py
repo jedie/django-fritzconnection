@@ -34,7 +34,7 @@ class LazyFritzConnection:
     fc = None
     last_connection = None
 
-    def __call__(self) -> FritzConnection:
+    def __call__(self) -> FritzConnection | None:
         if self.fc is None:
             cache_directory = Path(tempfile.gettempdir(), 'FritzConnectionCache')
             cache_directory.mkdir(exist_ok=True)

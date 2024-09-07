@@ -1,7 +1,8 @@
 """
-    created 24.03.2022 by Jens Diemer <opensource@jensdiemer.de>
-    :copyleft: 2022 by the django-fritzconnection team, see AUTHORS for more details.
-    :license: GNU GPL v3 or above, see LICENSE for more details.
+    "django-fritzconnection
+    Web based FritzBox management using Python/Django.
 """
 
-__version__ = "0.3.0"
+# See https://packaging.python.org/en/latest/specifications/version-specifiers/
+__version__ = '0.4.0'
+__author__ = 'Jens Diemer <django-fritzconnection@jensdiemer.de>'

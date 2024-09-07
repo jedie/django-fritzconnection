@@ -91,10 +91,15 @@ def update_hosts():
         else:
             logger.info('WAN access state for %r is: %r', ip_v4, wan_access)
 
+        mac_address = host['mac']
+        if not mac_address:
+            logger.error('No MAC from: %r', host)
+            continue
+
         with reversion.create_revision():
             result: CreateOrUpdateResult = create_or_update2(
                 ModelClass=HostModel,
-                lookup={'mac': host['mac']},
+                lookup={'mac': mac_address},
                 ip_v4=ip_v4,
                 name=host['name'],
                 last_status=host['status'],
