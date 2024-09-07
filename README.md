@@ -10,8 +10,6 @@ Web based FritzBox management using Python/Django and the great [fritzconnection
 
 The basic idea is to block/unblock Internet access to a group of devices as easily as possible.
 
-Current state: **early development stage**
-
 Existing features:
 
 * actions:
