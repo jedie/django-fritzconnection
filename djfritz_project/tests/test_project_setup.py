@@ -1,68 +1,27 @@
-import os
-import shutil
 import subprocess
 from pathlib import Path
+from unittest import TestCase
 
+from bx_py_utils.path import assert_is_dir, assert_is_file
 from django.conf import settings
-from django.core import checks
-from django.test import TestCase
+from django.core.cache import cache
+from django.core.management import call_command
+from manage_django_project.management.commands import code_style
+from manageprojects.test_utils.project_setup import check_editor_config, get_py_max_line_length
+from packaging.version import Version
 
-import djfritz
-
-
-PACKAGE_ROOT = Path(djfritz.__file__).parent.parent
-
-
-def assert_file_contains_string(file_path, string):
-    with file_path.open('r') as f:
-        for line in f:
-            if string in line:
-                return
-    raise AssertionError(f'File {file_path} does not contain {string!r} !')
+from djfritz import __version__
+from manage import BASE_PATH
 
 
-def test_version(package_root=None, version=None):
-    if package_root is None:
-        package_root = PACKAGE_ROOT
+class ProjectSetupTestCase(TestCase):
+    def test_project_path(self):
+        project_path = settings.BASE_PATH
+        assert_is_dir(project_path)
+        assert_is_dir(project_path / 'djfritz')
+        assert_is_dir(project_path / 'djfritz_project')
 
-    if version is None:
-        version = djfritz.__version__
-
-    if 'dev' not in version and 'rc' not in version:
-        version_string = f'v{version}'
-
-        assert_file_contains_string(
-            file_path=Path(package_root, 'README.md'), string=version_string
-        )
-
-    assert_file_contains_string(
-        file_path=Path(package_root, 'pyproject.toml'), string=f'version = "{version}"'
-    )
-
-
-def test_poetry_check(package_root=None):
-    if package_root is None:
-        package_root = PACKAGE_ROOT
-
-    poerty_bin = shutil.which('poetry')
-
-    output = subprocess.check_output(
-        [poerty_bin, 'check'],
-        universal_newlines=True,
-        env=os.environ,
-        stderr=subprocess.STDOUT,
-        cwd=str(package_root),
-    )
-    print(output)
-    assert output == 'All set!\n'
-
-
-class ProjectSettingsTestCase(TestCase):
-    def test_base_path(self):
-        base_path = settings.BASE_PATH
-        assert base_path.is_dir()
-        assert Path(base_path, 'djfritz').is_dir()
-        assert Path(base_path, 'djfritz_project').is_dir()
+        self.assertEqual(project_path, BASE_PATH)
 
     def test_template_dirs(self):
         assert len(settings.TEMPLATES) == 1
@@ -71,16 +30,54 @@ class ProjectSettingsTestCase(TestCase):
         template_path = Path(dirs[0]).resolve()
         assert template_path.is_dir()
 
-    def test_manage_check(self):
-        all_issues = checks.run_checks(
-            app_configs=None,
-            tags=None,
-            include_deployment_checks=True,
-            databases=None,
-        )
-        if all_issues:
-            print('=' * 100)
-            for issue in all_issues:
-                print(issue)
-            print('=' * 100)
-            raise AssertionError('There are check issues!')
+    def test_cache(self):
+        # django cache should work in tests, because some tests "depends" on it
+        cache_key = 'a-cache-key'
+        self.assertIs(cache.get(cache_key), None)
+        cache.set(cache_key, 'the cache content', timeout=1)
+        self.assertEqual(cache.get(cache_key), 'the cache content', f'Check: {settings.CACHES=}')
+        cache.delete(cache_key)
+        self.assertIs(cache.get(cache_key), None)
+
+    def test_settings(self):
+        self.assertEqual(settings.SETTINGS_MODULE, 'djfritz_project.settings.tests')
+        middlewares = [entry.rsplit('.', 1)[-1] for entry in settings.MIDDLEWARE]
+        assert 'AlwaysLoggedInAsSuperUserMiddleware' not in middlewares
+        assert 'DebugToolbarMiddleware' not in middlewares
+
+    def test_version(self):
+        self.assertIsNotNone(__version__)
+
+        version = Version(__version__)  # Will raise InvalidVersion() if wrong formatted
+        self.assertEqual(str(version), __version__)
+
+        manage_bin = BASE_PATH / 'manage.py'
+        assert_is_file(manage_bin)
+
+        output = subprocess.check_output([manage_bin, 'version'], text=True)
+        self.assertIn(__version__, output)
+
+    def test_manage(self):
+        manage_bin = BASE_PATH / 'manage.py'
+        assert_is_file(manage_bin)
+
+        output = subprocess.check_output([manage_bin, 'project_info'], text=True)
+        self.assertIn('djfritz_project', output)
+        self.assertIn('djfritz_project.settings.local', output)
+        self.assertIn('djfritz_project.settings.tests', output)
+        self.assertIn(__version__, output)
+
+        output = subprocess.check_output([manage_bin, 'check'], text=True)
+        self.assertIn('System check identified no issues (0 silenced).', output)
+
+        output = subprocess.check_output([manage_bin, 'makemigrations'], text=True)
+        self.assertIn("No changes detected", output)
+
+    def test_code_style(self):
+        call_command(code_style.Command())
+
+    def test_check_editor_config(self):
+        check_editor_config(package_root=BASE_PATH)
+
+        max_line_length = get_py_max_line_length(package_root=BASE_PATH)
+        self.assertEqual(max_line_length, 119)

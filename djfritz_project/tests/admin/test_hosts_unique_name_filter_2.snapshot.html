@@ -23,7 +23,7 @@
   <div class="module filtered" id="changelist">
    <div class="changelist-form-container">
     <div id="toolbar">
-     <form id="changelist-search" method="get">
+     <form id="changelist-search" method="get" role="search">
       <div>
        <!-- DIV needed for valid HTML -->
        <label for="searchbar">
@@ -82,7 +82,7 @@
          <th class="action-checkbox-column" scope="col">
           <div class="text">
            <span>
-            <input id="action-toggle" type="checkbox"/>
+            <input aria-label="Select all objects on this page for an action" id="action-toggle" type="checkbox"/>
            </span>
           </div>
           <div class="clear">
@@ -174,7 +174,7 @@
        <tbody>
         <tr>
          <td class="action-checkbox">
-          <input class="action-select" name="_selected_action" type="checkbox" value="00000000-1111-0000-0000-000000000002"/>
+          <input aria-label='Select this object for an action - Host "unique_name2" (AB:CD:EF:12:00:02)' class="action-select" name="_selected_action" type="checkbox" value="00000000-1111-0000-0000-000000000002"/>
          </td>
          <th class="field-verbose_name">
           <a href="/admin/djfritz/hostmodel/00000000-1111-0000-0000-000000000002/change/?_changelist_filters=uniqueness%3Dyes">
@@ -205,7 +205,7 @@
         </tr>
         <tr>
          <td class="action-checkbox">
-          <input class="action-select" name="_selected_action" type="checkbox" value="00000000-1111-0000-0000-000000000001"/>
+          <input aria-label='Select this object for an action - Host "unique_name1" (AB:CD:EF:12:00:01)' class="action-select" name="_selected_action" type="checkbox" value="00000000-1111-0000-0000-000000000001"/>
          </td>
          <th class="field-verbose_name">
           <a href="/admin/djfritz/hostmodel/00000000-1111-0000-0000-000000000001/change/?_changelist_filters=uniqueness%3Dyes">
@@ -242,15 +242,22 @@
      </p>
     </form>
    </div>
-   <div id="changelist-filter">
-    <h2>
+   <nav aria-labelledby="changelist-filter-header" id="changelist-filter">
+    <h2 id="changelist-filter-header">
      Filter
     </h2>
-    <h3 id="changelist-filter-clear">
-     <a href="?">
-      ✖ Clear all filters
-     </a>
-    </h3>
+    <div id="changelist-filter-extra-actions">
+     <h3>
+      <a class="viewlink" href="?_facets=True&amp;uniqueness=yes">
+       Show counts
+      </a>
+     </h3>
+     <h3>
+      <a href="?">
+       ✖ Clear all filters
+      </a>
+     </h3>
+    </div>
     <details data-filter-title="Last Status" open="">
      <summary>
       By Last Status
@@ -361,7 +368,7 @@
       </li>
      </ul>
     </details>
-   </div>
+   </nav>
   </div>
  </div>
  <br class="clear"/>

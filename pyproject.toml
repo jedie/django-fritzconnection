@@ -7,7 +7,7 @@ readme = "README.md"
 authors = [
     {name = 'Jens Diemer', email = 'django-fritzconnection@jensdiemer.de'}
 ]
-requires-python = ">=3.9,<4" # Keep Python 3.9 until Yunohost contains a newer Python Version ;)
+requires-python = ">=3.11"
 dependencies = [
     "django",  # https://www.djangoproject.com/download/
     "fritzconnection",  # https://github.com/kbr/fritzconnection
@@ -18,18 +18,16 @@ dependencies = [
     "colorlog",  # https://github.com/borntyping/python-colorlog
     "gunicorn",  # https://github.com/benoimyproject.wsgitc/gunicorn
 
-    "django>=4.2,<4.3",  # TODO: Update to Django 5.0 !
-    "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
     "bx_py_utils",  # https://github.com/boxine/bx_py_utils
     "bx_django_utils",  # https://github.com/boxine/bx_django_utils
-    "django-axes",  # https://github.com/jazzband/django-axes
 ]
 [project.optional-dependencies]
 dev = [
     "cmd2-ext-test",  # https://github.com/python-cmd2/cmd2/tree/master/plugins/ext_test
     "beautifulsoup4",  # https://pypi.org/project/beautifulsoup4/
 
-    "manage_django_project>=0.6.4",  # https://github.com/jedie/manage_django_project
+    "django-debug-toolbar",  # http://django-debug-toolbar.readthedocs.io/en/stable/changes.html
+    "manage_django_project",  # https://github.com/jedie/manage_django_project
     "tblib",   # https://github.com/ionelmc/python-tblib
     "pip-tools",  # https://github.com/jazzband/pip-tools/
     "tox",  # https://github.com/tox-dev/tox
@@ -41,9 +39,10 @@ dev = [
     "pyflakes",  # https://github.com/PyCQA/pyflakes
     "codespell",  # https://github.com/codespell-project/codespell
     "EditorConfig",  # https://github.com/editorconfig/editorconfig-core-py
-    "safety",  # https://github.com/pyupio/safety
+    "pip-audit",  # https://github.com/pypa/pip-audit
     "mypy",  # https://github.com/python/mypy
     "twine",  # https://github.com/pypa/twine
+    "typeguard",  # https://github.com/agronholm/typeguard/
     "pre-commit",  # https://github.com/pre-commit/pre-commit
 
     # https://github.com/akaihola/darker
@@ -52,18 +51,14 @@ dev = [
     # https://github.com/pygments/pygments
     "darker[flynt, isort, color]",
 
-    "tomli",  # https://github.com/hukkin/tomli
-    # tomli only needed for Python <3.11, but see bug:
-    # https://github.com/pypa/pip/issues/9644#issuecomment-1456583402
-    #"tomli;python_version<\"3.11\"",  # https://github.com/hukkin/tomli
-
-    # Work-a-round for:
-    # https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
-    "typing-extensions>=3.10",
-
     "model_bakery",  # https://github.com/model-bakers/model_bakery
     "requests-mock",
     "django-override-storage",  # https://github.com/danifus/django-override-storage
+
+    # Work-a-round for: https://github.com/jazzband/pip-tools/issues/1866
+    # see also: https://github.com/jazzband/pip-tools/issues/994#issuecomment-1321226661
+    # backports.tarfile is needed for python <3.12
+    'backports.tarfile', # via jaraco-context -> keyring -> twine
 ]
 
 [project.urls]
@@ -85,6 +80,20 @@ local_settings='djfritz_project.settings.local'
 test_settings='djfritz_project.settings.tests'
 
 
+[tool.cli_base]
+version_module_name = "djfritz"  # Used by update_readme_history()
+
+
+[tool.cli_base.pip_audit]
+requirements=["requirements.dev.txt"]
+strict=true
+require_hashes=true
+ignore-vuln=[
+#    "CVE-2019-8341", # Jinja2: Side Template Injection (SSTI)
+]
+
+
+
 [build-system]
 requires = ["setuptools>=61.0", "setuptools_scm>=7.1"]
 build-backend = "setuptools.build_meta"
@@ -97,22 +106,16 @@ include = ["djfritz*", "djfritz_project*"]
 version = {attr = "djfritz.__version__"}
 
 
-[tool.cli_base]
-version_module_name="djfritz"  # Used by update_readme_history()
-
-
 [tool.darker]
 src = ['.']
 revision = "origin/main..."
 line_length = 119
-verbose = true
 color = true
 skip_string_normalization = true
 diff = false
 check = false
 stdout = false
 isort = true
-flynt = true
 lint = [
     "flake8",
 ]
@@ -124,12 +127,12 @@ log_level = "INFO"
 atomic=true
 profile='black'
 skip_glob=['.*', '*/htmlcov/*','*/migrations/*']
-known_first_party=['django_fritzconnection']
+known_first_party=['djfritz']
 line_length=119
 lines_after_imports=2
 
 
-[tool.coverage.run]
+[tool.coverage.run]  # https://coverage.readthedocs.io/en/latest/config.html#run
 branch = true
 parallel = true
 concurrency = ["multiprocessing"]
@@ -153,17 +156,18 @@ exclude_lines = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310,39}
+envlist = py{312,311}
 skip_missing_interpreters = True
 
 [testenv]
 passenv = *
 skip_install = true
 commands_pre =
+    pip install -U pip
     pip install -U pip-tools
     pip-sync requirements.dev.txt
 commands =
-    {envpython} -m coverage run --context='{envname}' -m djfritz_project test --buffer --shuffle --parallel
+    {envpython} -m coverage run --context='{envname}'
 """
 
 
@@ -181,13 +185,16 @@ initial_revision = "de04870"
 initial_date = 2023-11-26T21:01:51+01:00
 cookiecutter_template = "https://github.com/jedie/cookiecutter_templates/"
 cookiecutter_directory = "managed-django-project"
+applied_migrations = [
+    "6fa011a", # 2024-09-07T11:11:40+02:00
+]
 
 [manageprojects.cookiecutter_context.cookiecutter]
 full_name = "Jens Diemer"
 github_username = "jedie"
 author_email = "django-fritzconnection@jensdiemer.de"
 project_name = "django-fritzconnection"
-package_name = "django_fritzconnection"
+package_name = "djfritz"
 package_version = "0.3.0rc1"
 package_description = "Web based FritzBox management using Python/Django."
 package_url = "https://github.com/jedie/django-fritzconnection"

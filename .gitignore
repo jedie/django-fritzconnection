@@ -2,6 +2,7 @@
 *.egg-info
 __pycache__
 /dist/
+/build/
 /coverage.*
 *.orig
 
@@ -10,11 +11,8 @@ __pycache__
 !.flake8
 !.gitignore
 !.pre-commit-config.yaml
+!.pre-commit-hooks.yaml
 !.gitkeep
-
-# for django-dbbackup
-/backups/
-!/backups/.gitkeep
 
 # from test projects:
 /static/
@@ -26,6 +24,8 @@ __pycache__
 !**/fixtures/*.json
 
 # Django
+# Include all test snapshot files:
+!**/*.snapshot.*
 secret.txt
 
 *.sh

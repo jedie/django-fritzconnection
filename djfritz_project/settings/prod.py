@@ -23,7 +23,7 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 
 # Serve static/media files by Django?
-# In production Caddy should serve this!
+# In production the Webserver should serve this!
 SERVE_FILES = False
 
 
@@ -33,14 +33,15 @@ if not __SECRET_FILE.is_file():
     print(f'Generate {__SECRET_FILE}')
     from secrets import token_urlsafe as __token_urlsafe
 
-    __SECRET_FILE.open('w').write(__token_urlsafe(128))
+    __SECRET_FILE.write_text(__token_urlsafe(128))
 
-SECRET_KEY = __SECRET_FILE.open('r').read().strip()
+SECRET_KEY = __SECRET_FILE.read_text().strip()
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -77,22 +78,30 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 ]
 
+__TEMPLATE_DIR = __Path(BASE_PATH, 'djfritz_project', 'templates')
+assert __TEMPLATE_DIR.is_dir(), f'Directory not exists: {__TEMPLATE_DIR}'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(__Path(BASE_PATH, 'djfritz_project', 'templates'))],
+        "DIRS": [str(__TEMPLATE_DIR)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.template.context_processors.media',
+                'django.template.context_processors.csrf',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.static',
                 'djfritz.context_processors.djfritz_version_string',
             ],
         },
     },
 ]
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
@@ -197,7 +206,6 @@ LOGGING = {
     'loggers': {
         '': {'handlers': ['console'], 'level': 'DEBUG', 'propagate': False},
         'django': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
-        'axes': {'handlers': ['console'], 'level': 'WARNING', 'propagate': False},
         'django_tools': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
         'djfritz': {'handlers': ['console'], 'level': 'DEBUG', 'propagate': False},
     },

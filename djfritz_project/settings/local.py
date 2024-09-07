@@ -4,6 +4,7 @@
     Django settings for local development
 """
 
+import os as __os
 import sys as __sys
 
 from djfritz_project.settings.prod import *  # noqa
@@ -46,14 +47,11 @@ SECURE_HSTS_SECONDS = 0
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 
 # _____________________________________________________________________________
-# AlwaysLoggedInAsSuperUser
 
-DEFAULT_USERNAME = 'local-test-superuser'
-DEFAULT_USERPASS = 'test'
-DEFAULT_USEREMAIL = 'nobody@local.intranet'
-
-MIDDLEWARE = MIDDLEWARE.copy()
-MIDDLEWARE.append('djfritz_project.tests.middleware.AlwaysLoggedInAsSuperUser')
+if __os.environ.get('AUTOLOGIN') != '0':
+    # Auto login for dev. server:
+    MIDDLEWARE = MIDDLEWARE.copy()
+    MIDDLEWARE += ['django_tools.middlewares.local_auto_login.AlwaysLoggedInAsSuperUserMiddleware']
 
 # _____________________________________________________________________________
 # Manage Django Project
@@ -63,7 +61,8 @@ INSTALLED_APPS.append('manage_django_project')
 # _____________________________________________________________________________
 # Django-Debug-Toolbar
 
-INSTALLED_APPS += ['debug_toolbar']
+
+INSTALLED_APPS.append('debug_toolbar')
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = True

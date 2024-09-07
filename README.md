@@ -105,7 +105,8 @@ See also git tags: https://github.com/jedie/manageprojects/tags
 
 [comment]: <> (✂✂✂ auto generated history start ✂✂✂)
 
-* [**dev**](https://github.com/jedie/django-fritzconnection/compare/v0.3.0...main)
+* [v0.4.0](https://github.com/jedie/django-fritzconnection/compare/v0.3.0...v0.4.0)
+  * 2024-09-07 - Apply manageprojects updates
   * 2023-12-17 - Use "update-readme-history" pre-commit hook
   * 2023-12-17 - Use cli_base.cli_tools.git_history.update_readme_history()
   * 2023-12-17 - Update requirements TODO: Switch to Django 5.0
