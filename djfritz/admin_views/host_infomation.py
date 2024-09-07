@@ -88,9 +88,7 @@ class LastConnectInfoView(AdminExtraViewMixin, DjangoAdminContextMixin, Template
             host = HostModel.objects.filter(mac=mac_address).first()
 
             # "last_connect" is a UNIX timestamp
-            last_connected_dt = datetime.datetime.fromtimestamp(
-                last_connected, tz=datetime.timezone.utc
-            )
+            last_connected_dt = datetime.datetime.fromtimestamp(last_connected, tz=datetime.UTC)
             data.append(
                 {
                     'host': host,
